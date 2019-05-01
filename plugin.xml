@@ -23,5 +23,7 @@
         </config-file>
 
         <source-file src="src/android/ListonicAds.java" target-dir="src/com/fitatu/ponegap/plugin/ListonicAds" />
+
+        <framework src="com.google.firebase:firebase-config:+" />
     </platform>
 </plugin>

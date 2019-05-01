@@ -19,6 +19,11 @@ import android.view.Gravity;
 
 import android.graphics.Color;
 
+import com.google.firebase.remoteconfig.FirebaseRemoteConfig;
+import com.google.firebase.remoteconfig.FirebaseRemoteConfigInfo;
+import com.google.firebase.remoteconfig.FirebaseRemoteConfigSettings;
+import com.google.firebase.remoteconfig.FirebaseRemoteConfigValue;
+
 public class ListonicAds extends CordovaPlugin {
 
     private RelativeLayout adViewLayout = null;
