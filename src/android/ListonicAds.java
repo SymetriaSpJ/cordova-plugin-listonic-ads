@@ -15,11 +15,9 @@ import android.widget.RelativeLayout;
 import android.widget.LinearLayout;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.Gravity
+import android.view.Gravity;
 
 import android.graphics.Color;
-
-//Activity activity = cordova.getActivity();
 
 public class ListonicAds extends CordovaPlugin {
 
