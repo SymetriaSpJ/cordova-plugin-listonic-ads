@@ -60,8 +60,12 @@ public class ListonicAds extends CordovaPlugin {
                 }
 
                 adViewLayout.bringToFront();
+
+                Toast.makeText(webView.getContext(), "1111111", Toast.LENGTH_LONG).show();
             }
         });
+
+        Toast.makeText(webView.getContext(), "2", Toast.LENGTH_LONG).show();
     }
 
     @Override
