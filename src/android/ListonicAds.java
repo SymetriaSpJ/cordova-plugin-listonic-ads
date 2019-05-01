@@ -12,6 +12,7 @@ import android.widget.Toast;
 
 import android.app.Activity;
 import android.widget.RelativeLayout;
+import android.widget.LinearLayout;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -34,7 +35,7 @@ public class ListonicAds extends CordovaPlugin {
     	cordova.getActivity().runOnUiThread(new Runnable() {
             @Override
             public void run() {
-
+/*
                 RelativeLayout.LayoutParams params2 = new RelativeLayout.LayoutParams(
                         RelativeLayout.LayoutParams.MATCH_PARENT,
                         RelativeLayout.LayoutParams.WRAP_CONTENT);
@@ -60,12 +61,40 @@ public class ListonicAds extends CordovaPlugin {
                 }
 
                 adViewLayout.bringToFront();
+*/
 
-                Toast.makeText(webView.getContext(), "1111111", Toast.LENGTH_LONG).show();
+                ViewGroup wvParentView = (ViewGroup) webView.getClass().getMethod("getView").invoke(webView).getParent();
+
+                if (parentView == null) {
+                    parentView = new LinearLayout(webView.getContext());
+                }
+                if (wvParentView != null && wvParentView != parentView) {
+                    ViewGroup rootView = (ViewGroup)(getWebView().getParent());
+                    wvParentView.removeView(
+                            webView.getClass().getMethod("getView").invoke(webView)
+                    );
+                    ((LinearLayout) parentView).setOrientation(LinearLayout.VERTICAL);
+                    parentView.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT, 0.0F));
+
+                    webView.getClass().getMethod("getView").invoke(webView)
+                            .setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT, 1.0F));
+
+                    parentView.addView(
+                            webView.getClass().getMethod("getView").invoke(webView)
+                    );
+
+                    rootView.addView(parentView);
+                }
+
+
+                parentView.bringToFront();
+                parentView.requestLayout();
+                parentView.requestFocus();
+
             }
         });
 
-        Toast.makeText(webView.getContext(), "2", Toast.LENGTH_LONG).show();
+
     }
 
     @Override
