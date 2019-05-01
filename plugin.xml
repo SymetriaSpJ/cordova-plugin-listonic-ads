@@ -15,6 +15,7 @@
     </js-module>
 
     <platform name="android">
+
         <config-file target="config.xml" parent="/*">
             <feature name="ListonicAds">
                 <param name="android-package" value="com.fitatu.phonegap.plugin.ListonicAds" />
@@ -22,5 +23,7 @@
         </config-file>
 
         <source-file src="src/android/ListonicAds.java" target-dir="src/com/fitatu/ponegap/plugin/ListonicAds" />
+
+        <framework src="src/android/build.gradle" custom="true" type="gradleReference" />
     </platform>
 </plugin>

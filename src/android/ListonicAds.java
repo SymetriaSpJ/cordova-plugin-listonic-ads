@@ -8,7 +8,55 @@ import org.json.JSONException;
 import android.content.Context;
 import android.widget.Toast;
 
+import android.app.Activity;
+import android.widget.RelativeLayout;
+import android.view.View;
+import android.view.ViewGroup;
+
+//Activity activity = cordova.getActivity();
+
 public class ListonicAds extends CordovaPlugin {
+
+    private RelativeLayout adViewLayout = null;
+
+    private ViewGroup parentView;
+
+    @Override
+    public void initialize(CordovaInterface cordova, CordovaWebView webView) {
+    	super.initialize(cordova, webView);
+
+    	Activity activity = cordova.getActivity();
+
+    	cordova.getActivity().runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+
+                RelativeLayout.LayoutParams params2 = new RelativeLayout.LayoutParams(
+                        RelativeLayout.LayoutParams.MATCH_PARENT,
+                        RelativeLayout.LayoutParams.WRAP_CONTENT);
+                params2.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
+
+                if (adViewLayout == null) {
+                    adViewLayout = new RelativeLayout(cordova.getActivity());
+                    RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.MATCH_PARENT);
+                    try {
+                        ((ViewGroup) (((View) webView.getClass().getMethod("getView").invoke(webView)).getParent())).addView(adViewLayout, params);
+                    } catch (Exception e) {
+                        ((ViewGroup) webView).addView(adViewLayout, params);
+                    }
+                }
+
+                //adViewLayout.addView(adView, params2);
+                adViewLayout.bringToFront();
+
+
+                //adView.setVisibility(View.VISIBLE);
+                bannerVisible = true;
+
+            }
+        });
+    }
+
     @Override
     public boolean execute(String action, JSONArray args, CallbackContext callbackContext) throws JSONException {
         if ("show".equals(action)) {
