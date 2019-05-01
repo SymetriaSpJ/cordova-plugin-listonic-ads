@@ -125,8 +125,10 @@ public class ListonicAds extends CordovaPlugin {
         if (msg == null || msg.length() == 0) {
             callbackContext.error("Empty message!");
         } else {
+            FirebaseRemoteConfigValue value = FirebaseRemoteConfig.getInstance().getValue(msg)
+
             Toast.makeText(webView.getContext(), msg, Toast.LENGTH_LONG).show();
-            callbackContext.success(msg);
+            callbackContext.success(value.asString());
         }
     }
 }
