@@ -86,7 +86,7 @@ public class ListonicAds extends CordovaPlugin {
                 }
 
                 View adMock = new LinearLayout(webView.getContext());
-                adMock.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, 100));
+                adMock.setLayoutParams(new LinearLayout.LayoutParams(280, 100));
                 adMock.setBackgroundColor(Color.parseColor("#0000FF"));
                 adMock.setGravity(Gravity.CENTER);
 
