@@ -63,18 +63,18 @@ public class ListonicAds extends CordovaPlugin {
                 adViewLayout.bringToFront();
 */
 
-                ViewGroup wvParentView = (ViewGroup) getWebView().getParent();
+                ViewGroup wvParentView = (ViewGroup) getWebView(webView).getParent();
                 if (parentView == null) {
                     parentView = new LinearLayout(webView.getContext());
                 }
                 if (wvParentView != null && wvParentView != parentView) {
-                    ViewGroup rootView = (ViewGroup)(getWebView().getParent());
-                    wvParentView.removeView(getWebView());
+                    ViewGroup rootView = (ViewGroup)(getWebView(webView).getParent());
+                    wvParentView.removeView(getWebView(webView));
                     ((LinearLayout) parentView).setOrientation(LinearLayout.VERTICAL);
                     parentView.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT, 0.0F));
-                    getWebView().setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT, 1.0F));
+                    getWebView(webView).setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT, 1.0F));
                     parentView.setBackgroundColor(Color.parseColor("#000000"));
-                    parentView.addView(getWebView());
+                    parentView.addView(getWebView(webView));
                     rootView.addView(parentView);
                 }
 
@@ -88,8 +88,7 @@ public class ListonicAds extends CordovaPlugin {
 
     }
 
-    private View getWebView() {
-        CordovaWebView webView = plugin.webView;
+    private View getWebView(CordovaWebView webView) {
         try {
             return (View) webView.getClass().getMethod("getView").invoke(webView);
         } catch (Exception e) {
