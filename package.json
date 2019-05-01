@@ -1,0 +1,21 @@
+{
+  "name": "cordova-plugin-listonic-ads",
+  "version": "1.0.0",
+  "description": "Listonic Ads Plugin",
+  "cordova": {
+    "id": "cordova-plugin-listonic-ads",
+    "platforms": [
+      "android"
+    ]
+  },
+  "keywords": [
+    "android",
+    "cordova-android"
+  ],
+  "engines": [{
+    "name": "cordova",
+    "version": ">=3.0.0"
+  }],
+  "author": "",
+  "license": "Apache 2.0"
+}
