@@ -46,13 +46,7 @@ public class ListonicAds extends CordovaPlugin {
                     }
                 }
 
-                //adViewLayout.addView(adView, params2);
                 adViewLayout.bringToFront();
-
-
-                //adView.setVisibility(View.VISIBLE);
-                bannerVisible = true;
-
             }
         });
     }
