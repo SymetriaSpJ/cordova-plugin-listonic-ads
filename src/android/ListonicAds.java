@@ -34,6 +34,7 @@ public class ListonicAds extends CordovaPlugin {
     	cordova.getActivity().runOnUiThread(new Runnable() {
             @Override
             public void run() {
+                // code for full screen (PoC)
 /*
                 RelativeLayout.LayoutParams params2 = new RelativeLayout.LayoutParams(
                         RelativeLayout.LayoutParams.MATCH_PARENT,
