@@ -78,12 +78,6 @@ public class ListonicAds extends CordovaPlugin {
                     rootView.addView(parentView);
                 }
 
-
-                if (plugin.config.bannerAtTop) {
-                    parentView.addView(adView, 0);
-                } else {
-                    parentView.addView(adView);
-                }
                 parentView.bringToFront();
                 parentView.requestLayout();
                 parentView.requestFocus();
