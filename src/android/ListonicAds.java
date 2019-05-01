@@ -63,26 +63,17 @@ public class ListonicAds extends CordovaPlugin {
                 adViewLayout.bringToFront();
 */
 
-                ViewGroup wvParentView = (ViewGroup) webView.getClass().getMethod("getView").invoke(webView).getParent();
-
+                ViewGroup wvParentView = (ViewGroup) getWebView().getParent();
                 if (parentView == null) {
                     parentView = new LinearLayout(webView.getContext());
                 }
                 if (wvParentView != null && wvParentView != parentView) {
                     ViewGroup rootView = (ViewGroup)(getWebView().getParent());
-                    wvParentView.removeView(
-                            webView.getClass().getMethod("getView").invoke(webView)
-                    );
+                    wvParentView.removeView(getWebView());
                     ((LinearLayout) parentView).setOrientation(LinearLayout.VERTICAL);
                     parentView.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT, 0.0F));
-
-                    webView.getClass().getMethod("getView").invoke(webView)
-                            .setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT, 1.0F));
-
-                    parentView.addView(
-                            webView.getClass().getMethod("getView").invoke(webView)
-                    );
-
+                    getWebView().setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT, 1.0F));
+                    parentView.addView(getWebView());
                     rootView.addView(parentView);
                 }
 
@@ -95,6 +86,15 @@ public class ListonicAds extends CordovaPlugin {
         });
 
 
+    }
+
+    private View getWebView() {
+        CordovaWebView webView = plugin.webView;
+        try {
+            return (View) webView.getClass().getMethod("getView").invoke(webView);
+        } catch (Exception e) {
+            return (View) webView;
+        }
     }
 
     @Override
