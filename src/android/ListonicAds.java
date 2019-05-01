@@ -15,6 +15,8 @@ import android.widget.RelativeLayout;
 import android.view.View;
 import android.view.ViewGroup;
 
+import android.graphics.Color;
+
 //Activity activity = cordova.getActivity();
 
 public class ListonicAds extends CordovaPlugin {
@@ -36,13 +38,22 @@ public class ListonicAds extends CordovaPlugin {
                 RelativeLayout.LayoutParams params2 = new RelativeLayout.LayoutParams(
                         RelativeLayout.LayoutParams.MATCH_PARENT,
                         RelativeLayout.LayoutParams.WRAP_CONTENT);
+
                 params2.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
 
                 if (adViewLayout == null) {
                     adViewLayout = new RelativeLayout(cordova.getActivity());
-                    RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.MATCH_PARENT);
+                    adViewLayout.setBackgroundColor(Color.parseColor("#000000"));
+
+                    RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(
+                        RelativeLayout.LayoutParams.MATCH_PARENT,
+                        RelativeLayout.LayoutParams.MATCH_PARENT
+                    );
+
                     try {
-                        ((ViewGroup) (((View) webView.getClass().getMethod("getView").invoke(webView)).getParent())).addView(adViewLayout, params);
+                        ((ViewGroup) (((View) webView.getClass().getMethod("getView")
+                            .invoke(webView)).getParent()))
+                            .addView(adViewLayout, params);
                     } catch (Exception e) {
                         ((ViewGroup) webView).addView(adViewLayout, params);
                     }
