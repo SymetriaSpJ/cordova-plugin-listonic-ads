@@ -8,13 +8,13 @@ buildscript {
     repositories {
         jcenter()
         maven { url 'https://maven.fabric.io/public' }
-        maven {
-            url "https://artif.listonic.com/artifactory/ListonicAndroidRepository"
-            credentials {
-                username = fitatu
-                password = 1234567890
-            }
-        }
+//        maven {
+//            url "https://artif.listonic.com/artifactory/ListonicAndroidRepository"
+//            credentials {
+//                username = fitatu
+//                password = 1234567890
+//            }
+//        }
     }
 
     dependencies {
