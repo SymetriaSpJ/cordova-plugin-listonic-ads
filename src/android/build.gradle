@@ -8,15 +8,19 @@ buildscript {
     repositories {
         jcenter()
         maven { url 'https://maven.fabric.io/public' }
+        maven {
+            url "https://artif.listonic.com/artifactory/ListonicAndroidRepository"
+            credentials {
+                username = fitatu
+                password = 1234567890
+            }
+        }
     }
 
     dependencies {
         classpath 'com.android.tools.build:gradle:3.4.0'
         classpath 'com.google.gms:google-services:4.1.0'
         classpath 'io.fabric.tools:gradle:1.27.0'
+        implementation 'com.listonic.ad:companion:2.4.1'
     }
-}
-
-repositories {
-    maven { url 'https://maven.fabric.io/public' }
 }
