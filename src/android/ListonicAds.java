@@ -24,7 +24,7 @@ import com.google.firebase.remoteconfig.FirebaseRemoteConfigInfo;
 import com.google.firebase.remoteconfig.FirebaseRemoteConfigSettings;
 import com.google.firebase.remoteconfig.FirebaseRemoteConfigValue;
 
-//import com.listonic.ad.AdCompanion;
+import com.listonic.ad.companion.AdCompanion;
 
 public class ListonicAds extends CordovaPlugin {
 
@@ -38,7 +38,7 @@ public class ListonicAds extends CordovaPlugin {
 
     	Activity activity = cordova.getActivity();
 
-//    	AdCompanion.INSTANCE.initialize(activity, null, false);
+    	AdCompanion.INSTANCE.initialize(activity, null, false);
 
     	cordova.getActivity().runOnUiThread(new Runnable() {
             @Override
