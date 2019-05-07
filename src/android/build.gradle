@@ -23,6 +23,16 @@ buildscript {
     }
 }
 
+repositories {
+    maven {
+        url "https://artif.listonic.com/artifactory/ListonicAndroidRepository"
+        credentials {
+            username = fitatu
+            password = 1234567890
+        }
+    }
+}
+
 dependencies {
     implementation 'com.listonic.ad:companion:2.4.1'
 }

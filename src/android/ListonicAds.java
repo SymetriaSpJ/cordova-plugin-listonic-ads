@@ -39,7 +39,7 @@ public class ListonicAds extends CordovaPlugin {
 
     	Activity activity = cordova.getActivity();
 
-    	AdCompanion.INSTANCE.initialize(activity, null, false);
+//    	AdCompanion.INSTANCE.initialize(activity, null, false);
 
     	cordova.getActivity().runOnUiThread(new Runnable() {
             @Override
