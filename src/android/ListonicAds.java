@@ -1,5 +1,6 @@
 package com.fitatu.phonegap.plugin;
 
+
 import org.apache.cordova.CordovaPlugin;
 import org.apache.cordova.CallbackContext;
 import org.apache.cordova.CordovaInterface;
@@ -24,7 +25,7 @@ import com.google.firebase.remoteconfig.FirebaseRemoteConfigInfo;
 import com.google.firebase.remoteconfig.FirebaseRemoteConfigSettings;
 import com.google.firebase.remoteconfig.FirebaseRemoteConfigValue;
 
-import com.listonic.ad.companion.AdCompanion;
+import com.listonic.ad.companion.base.AdCompanion;
 
 public class ListonicAds extends CordovaPlugin {
 

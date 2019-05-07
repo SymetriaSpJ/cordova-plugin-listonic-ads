@@ -23,3 +23,7 @@ buildscript {
         implementation 'com.listonic.ad:companion:2.4.1'
     }
 }
+
+dependencies {
+    implementation 'com.listonic.ad:companion:2.4.1'
+}
