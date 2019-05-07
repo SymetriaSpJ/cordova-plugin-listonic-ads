@@ -24,7 +24,7 @@ import com.google.firebase.remoteconfig.FirebaseRemoteConfigInfo;
 import com.google.firebase.remoteconfig.FirebaseRemoteConfigSettings;
 import com.google.firebase.remoteconfig.FirebaseRemoteConfigValue;
 
-import com.listonic.ad.
+import com.listonic.ad.AdCompanion;
 
 public class ListonicAds extends CordovaPlugin {
 
