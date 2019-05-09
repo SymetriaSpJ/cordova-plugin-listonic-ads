@@ -1,4 +1,4 @@
-println "Hello from LISTONIC BUILD GRADLE"
+println "Hello from LISTONIC BUILD GRADLE 1"
 
 repositories{
     jcenter()
@@ -14,11 +14,15 @@ repositories{
 //    }
 }
 
+println "Hello from LISTONIC BUILD GRADLE 2"
+
 dependencies {
 //    compile 'com.android.support:support-v4:27.1.0'
     compile(name:'companion', ext:'aar')
 //    implementation ('com.listonic.ad:companion:2.4.1')
 }
+
+println "Hello from LISTONIC BUILD GRADLE 3"
 
 android {
     packagingOptions {
@@ -32,3 +36,5 @@ android {
         compileSdkVersion 26
     }
 }
+
+println "Hello from LISTONIC BUILD GRADLE 4"
