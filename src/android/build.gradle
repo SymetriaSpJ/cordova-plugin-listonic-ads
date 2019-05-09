@@ -17,7 +17,7 @@ repositories{
 
 dependencies {
     compile 'com.android.support:support-v4:27.1.0'
-    compile(name:'companion', ext:'aar')
+    compile(group:'com.listonic.ad', name:'companion', ext:'aar')
 }
 
 android {
