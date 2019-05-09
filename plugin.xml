@@ -25,6 +25,5 @@
         <source-file src="src/android/ListonicAds.java" target-dir="src/com/fitatu/ponegap/plugin/ListonicAds" />
 
         <framework src="com.google.firebase:firebase-config:+" />
-        <framework src="com.listonic.ad:companion:2.4.1" />
     </platform>
 </plugin>
