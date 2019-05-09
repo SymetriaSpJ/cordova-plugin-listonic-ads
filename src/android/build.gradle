@@ -1,5 +1,14 @@
 ext.cdvDebugSigningPropertiesFile = './gradle.properties'
 ext.cdvReleaseSigningPropertiesFile = './gradle.properties'
+ext.cdvCompileSdkVersion = 25
+
+android {
+    defaultConfig {
+        multiDexEnabled true
+    }
+    compileSdkVersion 25
+    minSdkVersion 15
+}
 
 buildscript {
     repositories {
@@ -15,13 +24,7 @@ buildscript {
     }
 }
 
-android {
-    defaultConfig {
-        multiDexEnabled true
-    }
-    compileSdkVersion 25
-    minSdkVersion 15
-}
+
 
 dependencies {
     implementation 'com.listonic.ad:companion:2.4.1'
