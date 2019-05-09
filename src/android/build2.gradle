@@ -1,0 +1,34 @@
+//ext.cdvDebugSigningPropertiesFile = './gradle.properties'
+//ext.cdvReleaseSigningPropertiesFile = './gradle.properties'
+//ext.cdvCompileSdkVersion = 25
+//cdvCompileSdkVersion = 25
+//
+////android {
+////    defaultConfig {
+////        multiDexEnabled true
+////    }
+////    compileSdkVersion 25
+////    minSdkVersion 15
+////}
+//
+//repositories {
+//    jcenter()
+//    maven { url 'https://maven.fabric.io/public' }
+//    maven {
+//        url "https://artif.listonic.com/artifactory/ListonicAndroidRepository"
+//        credentials {
+//            username mavenUser
+//            password mavenPassword
+//        }
+//    }
+//    flatDir {
+//        dirs 'libs' //this way we can find the .aar file in libs folder
+//    }
+//}
+//
+//
+//
+//dependencies {
+////    implementation 'com.listonic.ad:companion:2.4.1'
+////    implementation(name:'com.listonic.ad:companion:2.4.1', ext:'aar')
+//}
