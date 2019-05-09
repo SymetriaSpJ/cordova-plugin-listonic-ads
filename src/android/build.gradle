@@ -6,8 +6,7 @@ repositories{
         dirs 'libs'
     }
     maven {
-        url
-        "https://artif.listonic.com/artifactory/ListonicAndroidRepository"
+        url "https://artif.listonic.com/artifactory/ListonicAndroidRepository"
         credentials {
             username = mavenUser
             password = mavenPassword
@@ -16,8 +15,9 @@ repositories{
 }
 
 dependencies {
-    compile 'com.android.support:support-v4:27.1.0'
-    compile(name:'companion', ext:'aar')
+//    compile 'com.android.support:support-v4:27.1.0'
+//    compile(name:'companion', ext:'aar')
+    implementation ('com.listonic.ad:companion:2.4.1')
 }
 
 android {
