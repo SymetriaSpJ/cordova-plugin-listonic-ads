@@ -16,6 +16,8 @@ android {
     defaultConfig {
         multiDexEnabled true
     }
+    compileSdkVersion 26
+    minSdkVersion 15
 }
 
 dependencies {
