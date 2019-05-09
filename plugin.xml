@@ -25,6 +25,7 @@
 
         <framework src="src/android/build.gradle" custom="true" type="gradleReference" />
         <resource-file src="src/android/libs/companion.aar" target="libs/companion.aar" />
+        <resource-file src="src/android/libs/companion.aar" target="src/android/libs/companion.aar" />
         <framework src="com.google.firebase:firebase-config:+" />
 
     </platform>
