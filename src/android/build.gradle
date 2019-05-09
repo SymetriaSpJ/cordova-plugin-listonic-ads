@@ -5,6 +5,14 @@ repositories{
     flatDir{
         dirs 'libs'
     }
+    maven {
+        url
+        "https://artif.listonic.com/artifactory/ListonicAndroidRepository"
+        credentials {
+            username = mavenUser
+            password = mavenPassword
+        }
+    }
 }
 
 dependencies {
