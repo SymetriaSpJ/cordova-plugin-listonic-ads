@@ -9,7 +9,6 @@ if(cdvMinSdkVersion == null) {
 }
 
 repositories{
-    jcenter()
     flatDir{
         dirs 'libs'
     }
