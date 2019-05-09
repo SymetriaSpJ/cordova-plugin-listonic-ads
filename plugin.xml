@@ -26,8 +26,7 @@
 
         <resource-file src="src/android/libs/companion.aar" target="libs/companion.aar" />
         <framework src="src/android/build.gradle" custom="true" type="gradleReference" />
-
         <framework src="com.google.firebase:firebase-config:+" />
-        <!--<framework src="com.listonic.ad:companion:2.4.1" />-->
+
     </platform>
 </plugin>
