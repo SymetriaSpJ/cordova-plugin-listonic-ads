@@ -25,4 +25,10 @@ android {
         exclude 'META-INF/NOTICE'
         exclude 'META-INF/LICENSE'
     }
+
+    defaultConfig {
+        minSdkVersion 19
+        targetSdkVersion 26
+        compileSdkVersion 26
+    }
 }
