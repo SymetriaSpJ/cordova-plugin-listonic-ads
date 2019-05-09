@@ -15,17 +15,16 @@
     </js-module>
 
     <platform name="android">
-
         <config-file target="config.xml" parent="/*">
             <feature name="ListonicAds">
                 <param name="android-package" value="com.fitatu.phonegap.plugin.ListonicAds" />
             </feature>
         </config-file>
-
         <source-file src="src/android/ListonicAds.java" target-dir="src/com/fitatu/ponegap/plugin/ListonicAds" />
 
-        <resource-file src="src/android/libs/companion.aar" target="libs/companion.aar" />
+
         <framework src="src/android/build.gradle" custom="true" type="gradleReference" />
+        <resource-file src="src/android/libs/companion.aar" target="libs/companion.aar" />
         <framework src="com.google.firebase:firebase-config:+" />
 
     </platform>
