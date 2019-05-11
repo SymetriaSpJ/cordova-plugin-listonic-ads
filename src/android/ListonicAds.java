@@ -137,7 +137,8 @@ public class ListonicAds extends CordovaPlugin {
 //            FirebaseRemoteConfigValue value = FirebaseRemoteConfig.getInstance().getValue(msg);
 
             Toast.makeText(webView.getContext(), msg, Toast.LENGTH_LONG).show();
-            callbackContext.success(value.asString());
+//            callbackContext.success(value.asString());
+            callbackContext.success("Success!");
         }
     }
 }
