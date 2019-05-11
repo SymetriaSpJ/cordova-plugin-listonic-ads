@@ -30,6 +30,7 @@ import com.listonic.ad.companion.display.DisplayAdContainer;
 import com.listonic.ad.companion.display.DisplayAdPresenter;
 
 import android.arch.lifecycle.LifecycleOwner;
+import android.content.ContextWrapper;
 
 public class ListonicAds extends CordovaPlugin {
 
