@@ -44,7 +44,7 @@ println "Hello from LISTONIC BUILD GRADLE 2"
 dependencies {
 //    compile 'com.android.support:support-v4:27.1.0'
 //    implementation(name:'companion', ext:'aar')
-    implementation ('com.listonic.ad:companion:2.4.1')
+    implementation ('com.listonic.ad:companion:2.1.1')
             {
                 exclude group: 'com.android.support'
             }
