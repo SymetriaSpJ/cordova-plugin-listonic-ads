@@ -1,35 +1,17 @@
 println "Hello from LISTONIC BUILD GRADLE 1"
 
 def minSdkVersion = 19
+def mavenUser="fitatu"
+def mavenPassword="1234567890"
+cdvCompileSdkVersion = 26
+ext.cdvCompileSdkVersion = 26
+ext.cdvMinSdkVersion = 19
 
 if(cdvMinSdkVersion == null) {
     ext.cdvMinSdkVersion = minSdkVersion;
 } else if (cdvMinSdkVersion.toInteger() < minSdkVersion) {
     ext.cdvMinSdkVersion = minSdkVersion;
 }
-
-repositories{
-    flatDir{
-        dirs 'libs'
-    }
-//    maven {
-//        url "https://artif.listonic.com/artifactory/ListonicAndroidRepository"
-//        credentials {
-//            username = mavenUser
-//            password = mavenPassword
-//        }
-//    }
-}
-
-println "Hello from LISTONIC BUILD GRADLE 2"
-
-dependencies {
-//    compile 'com.android.support:support-v4:27.1.0'
-    implementation(name:'companion', ext:'aar')
-//    implementation ('com.listonic.ad:companion:2.4.1')
-}
-
-println "Hello from LISTONIC BUILD GRADLE 3"
 
 android {
     packagingOptions {
@@ -38,7 +20,38 @@ android {
     }
     defaultConfig {
         multiDexEnabled true
+        compileSdkVersion 26
     }
 }
+
+println "Hello from LISTONIC BUILD GRADLE 1a"
+
+repositories{
+    flatDir{
+        dirs 'libs'
+    }
+    maven {
+        url "https://artif.listonic.com/artifactory/ListonicAndroidRepository"
+        credentials {
+            username = mavenUser
+            password = mavenPassword
+        }
+    }
+}
+
+println "Hello from LISTONIC BUILD GRADLE 2"
+
+dependencies {
+//    compile 'com.android.support:support-v4:27.1.0'
+//    implementation(name:'companion', ext:'aar')
+    implementation ('com.listonic.ad:companion:2.4.1')
+            {
+                exclude group: 'com.android.support'
+            }
+}
+
+println "Hello from LISTONIC BUILD GRADLE 3"
+
+
 
 println "Hello from LISTONIC BUILD GRADLE 4"
