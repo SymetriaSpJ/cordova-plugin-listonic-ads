@@ -20,10 +20,10 @@ import android.view.Gravity;
 
 import android.graphics.Color;
 
-import com.google.firebase.remoteconfig.FirebaseRemoteConfig;
-import com.google.firebase.remoteconfig.FirebaseRemoteConfigInfo;
-import com.google.firebase.remoteconfig.FirebaseRemoteConfigSettings;
-import com.google.firebase.remoteconfig.FirebaseRemoteConfigValue;
+//import com.google.firebase.remoteconfig.FirebaseRemoteConfig;
+//import com.google.firebase.remoteconfig.FirebaseRemoteConfigInfo;
+//import com.google.firebase.remoteconfig.FirebaseRemoteConfigSettings;
+//import com.google.firebase.remoteconfig.FirebaseRemoteConfigValue;
 
 import com.listonic.ad.companion.base.AdCompanion;
 
@@ -132,9 +132,9 @@ public class ListonicAds extends CordovaPlugin {
         if (msg == null || msg.length() == 0) {
             callbackContext.error("Empty message!");
         } else {
-            FirebaseRemoteConfig.getInstance().fetch(0);
-            FirebaseRemoteConfig.getInstance().activateFetched();
-            FirebaseRemoteConfigValue value = FirebaseRemoteConfig.getInstance().getValue(msg);
+//            FirebaseRemoteConfig.getInstance().fetch(0);
+//            FirebaseRemoteConfig.getInstance().activateFetched();
+//            FirebaseRemoteConfigValue value = FirebaseRemoteConfig.getInstance().getValue(msg);
 
             Toast.makeText(webView.getContext(), msg, Toast.LENGTH_LONG).show();
             callbackContext.success(value.asString());
