@@ -102,7 +102,7 @@ public class ListonicAds extends CordovaPlugin {
                 DisplayAdPresenter presenter = new DisplayAdPresenter(
                         "home_page",
                         listonicAd,
-                        cordova.getActivity().getApplicationContext()
+                        getLifecycleOwner(cordova.getActivity().getApplicationContext())
                 );
 
 
@@ -152,5 +152,12 @@ public class ListonicAds extends CordovaPlugin {
 //            callbackContext.success(value.asString());
             callbackContext.success("Success!");
         }
+    }
+
+    private LifecycleOwner getLifecycleOwner(Context context) {
+        while (!(context instanceof LifecycleOwner)) {
+            context = ((ContextWrapper) context).getBaseContext();
+        }
+        return (LifecycleOwner) context;
     }
 }
