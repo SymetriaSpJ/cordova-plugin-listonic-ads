@@ -26,6 +26,8 @@ import android.graphics.Color;
 //import com.google.firebase.remoteconfig.FirebaseRemoteConfigValue;
 
 import com.listonic.ad.companion.base.AdCompanion;
+import com.listonic.ad.companion.display.DisplayAdContainer
+import com.listonic.ad.companion.display.DisplayAdPresenter
 
 public class ListonicAds extends CordovaPlugin {
 
@@ -94,13 +96,21 @@ public class ListonicAds extends CordovaPlugin {
                     rootView.addView(parentView);
                 }
 
-                View adMock = new LinearLayout(webView.getContext());
-                LinearLayout.LayoutParams adMockParams = new LinearLayout.LayoutParams(280, 100);
-                adMockParams.gravity = Gravity.CENTER;
-                adMock.setLayoutParams(adMockParams);
-                adMock.setBackgroundColor(Color.parseColor("#0000FF"));
+                DisplayAdContainer listonicAd = new DisplayAdContainer(webView.getContext());
+                DisplayAdPresenter presenter = new DisplayAdPresenter(
+                        "home_page",
+                        listonicAd,
+                        this
+                );
 
-                parentView.addView(adMock);
+
+//                View adMock = new LinearLayout(webView.getContext());
+//                LinearLayout.LayoutParams adMockParams = new LinearLayout.LayoutParams(280, 100);
+//                adMockParams.gravity = Gravity.CENTER;
+//                adMock.setLayoutParams(adMockParams);
+//                adMock.setBackgroundColor(Color.parseColor("#0000FF"));
+
+                parentView.addView(listonicAd);
                 parentView.bringToFront();
                 parentView.requestLayout();
                 parentView.requestFocus();

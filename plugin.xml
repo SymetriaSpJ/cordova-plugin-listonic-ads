@@ -21,10 +21,10 @@
             </feature>
         </config-file>
         <source-file src="src/android/ListonicAds.java" target-dir="src/com/fitatu/ponegap/plugin/ListonicAds" />
-p
+
 
         <framework src="src/android/build.gradle" custom="true" type="gradleReference" />
-        <framework src="com.google.firebase:firebase-config:+" />
+
 
     </platform>
 </plugin>
