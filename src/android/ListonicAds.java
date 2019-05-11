@@ -34,14 +34,14 @@ public class ListonicAds extends CordovaPlugin {
     private ViewGroup parentView;
 
     @Override
-    public void initialize(CordovaInterface cordova, CordovaWebView webView) {
-    	super.initialize(cordova, webView);
+    public void initialize(CordovaInterface cordova, final CordovaWebView webView) {
+        super.initialize(cordova, webView);
 
-    	Activity activity = cordova.getActivity();
+        Activity activity = cordova.getActivity();
 
 //    	AdCompanion.INSTANCE.initialize(activity, null, false);
 
-    	cordova.getActivity().runOnUiThread(new Runnable() {
+        cordova.getActivity().runOnUiThread(new Runnable() {
             @Override
             public void run() {
                 // code for full screen (PoC)
@@ -73,7 +73,9 @@ public class ListonicAds extends CordovaPlugin {
                 adViewLayout.bringToFront();
 */
 
-                ViewGroup wvParentView = (ViewGroup) getWebView(webView).getParent();
+                final CordovaWebView wv = webView;
+
+                ViewGroup wvParentView = (ViewGroup) getWebView(wv).getParent();
                 if (parentView == null) {
                     parentView = new LinearLayout(webView.getContext());
                 }

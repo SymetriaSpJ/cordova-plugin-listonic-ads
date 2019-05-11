@@ -36,6 +36,9 @@ android {
         exclude 'META-INF/NOTICE'
         exclude 'META-INF/LICENSE'
     }
+    defaultConfig {
+        multiDexEnabled true
+    }
 }
 
 println "Hello from LISTONIC BUILD GRADLE 4"
