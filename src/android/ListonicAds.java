@@ -29,6 +29,8 @@ import com.listonic.ad.companion.base.AdCompanion;
 import com.listonic.ad.companion.display.DisplayAdContainer;
 import com.listonic.ad.companion.display.DisplayAdPresenter;
 
+import android.arch.lifecycle.LifecycleOwner;
+
 public class ListonicAds extends CordovaPlugin {
 
     private RelativeLayout adViewLayout = null;
