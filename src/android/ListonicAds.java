@@ -26,8 +26,8 @@ import android.graphics.Color;
 //import com.google.firebase.remoteconfig.FirebaseRemoteConfigValue;
 
 import com.listonic.ad.companion.base.AdCompanion;
-import com.listonic.ad.companion.display.DisplayAdContainer
-import com.listonic.ad.companion.display.DisplayAdPresenter
+import com.listonic.ad.companion.display.DisplayAdContainer;
+import com.listonic.ad.companion.display.DisplayAdPresenter;
 
 public class ListonicAds extends CordovaPlugin {
 
