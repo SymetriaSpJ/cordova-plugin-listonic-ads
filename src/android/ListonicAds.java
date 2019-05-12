@@ -42,9 +42,15 @@ public class ListonicAds extends CordovaPlugin {
     public void initialize(CordovaInterface cordova, final CordovaWebView webView) {
         super.initialize(cordova, webView);
 
+        System.out.println("#debug ListonicAds initialize start");
+
         Activity activity = cordova.getActivity();
 
+        System.out.println("#debug ListonicAds initialize 2");
+
         AdCompanion.INSTANCE.initialize(activity.getApplication(), null, false);
+
+        System.out.println("#debug ListonicAds initialize 3 (before ui thread)");
 
         cordova.getActivity().runOnUiThread(new Runnable() {
             @Override
@@ -78,12 +84,19 @@ public class ListonicAds extends CordovaPlugin {
                 adViewLayout.bringToFront();
 */
 
+                System.out.println("#debug ListonicAds initialize 4");
+
                 final CordovaWebView wv = webView;
 
+                System.out.println("#debug ListonicAds initialize 5");
+
                 ViewGroup wvParentView = (ViewGroup) getWebView(wv).getParent();
+
+                System.out.println("#debug ListonicAds initialize 6");
                 if (parentView == null) {
                     parentView = new LinearLayout(webView.getContext());
                 }
+                System.out.println("#debug ListonicAds initialize 7");
                 if (wvParentView != null && wvParentView != parentView) {
                     ViewGroup rootView = (ViewGroup)(getWebView(webView).getParent());
 
@@ -98,28 +111,33 @@ public class ListonicAds extends CordovaPlugin {
                     parentView.addView(getWebView(webView));
                     rootView.addView(parentView);
                 }
-
+                System.out.println("#debug ListonicAds initialize 8");
                 DisplayAdContainer listonicAd = new DisplayAdContainer(webView.getContext());
+                System.out.println("#debug ListonicAds initialize 9");
                 DisplayAdPresenter presenter = new DisplayAdPresenter(
                         "home_page",
                         listonicAd,
                         getLifecycleOwner(cordova.getActivity().getApplicationContext())
                 );
-
+                System.out.println("#debug ListonicAds initialize 10");
 
 //                View adMock = new LinearLayout(webView.getContext());
 //                LinearLayout.LayoutParams adMockParams = new LinearLayout.LayoutParams(280, 100);
 //                adMockParams.gravity = Gravity.CENTER;
 //                adMock.setLayoutParams(adMockParams);
 //                adMock.setBackgroundColor(Color.parseColor("#0000FF"));
-
+                System.out.println("#debug ListonicAds initialize 11");
                 parentView.addView(listonicAd);
+                System.out.println("#debug ListonicAds initialize 12");
                 parentView.bringToFront();
+                System.out.println("#debug ListonicAds initialize 13");
                 parentView.requestLayout();
+                System.out.println("#debug ListonicAds initialize 14");
                 parentView.requestFocus();
+                System.out.println("#debug ListonicAds initialize 15");
             }
         });
-
+        System.out.println("#debug ListonicAds initialize end (after ui thread)");
 
     }
 
