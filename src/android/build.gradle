@@ -55,3 +55,5 @@ println "Hello from LISTONIC BUILD GRADLE 3"
 
 
 println "Hello from LISTONIC BUILD GRADLE 4"
+
+apply plugin: 'com.google.gms.google-services'
