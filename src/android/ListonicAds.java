@@ -55,34 +55,7 @@ public class ListonicAds extends CordovaPlugin {
         cordova.getActivity().runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                // code for full screen (PoC)
-/*
-                RelativeLayout.LayoutParams params2 = new RelativeLayout.LayoutParams(
-                        RelativeLayout.LayoutParams.MATCH_PARENT,
-                        RelativeLayout.LayoutParams.WRAP_CONTENT);
 
-                params2.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
-
-                if (adViewLayout == null) {
-                    adViewLayout = new RelativeLayout(cordova.getActivity());
-                    adViewLayout.setBackgroundColor(Color.parseColor("#000000"));
-
-                    RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(
-                        RelativeLayout.LayoutParams.MATCH_PARENT,
-                        RelativeLayout.LayoutParams.MATCH_PARENT
-                    );
-
-                    try {
-                        ((ViewGroup) (((View) webView.getClass().getMethod("getView")
-                            .invoke(webView)).getParent()))
-                            .addView(adViewLayout, params);
-                    } catch (Exception e) {
-                        ((ViewGroup) webView).addView(adViewLayout, params);
-                    }
-                }
-
-                adViewLayout.bringToFront();
-*/
 
                 System.out.println("#debug ListonicAds initialize 4");
 
@@ -117,7 +90,8 @@ public class ListonicAds extends CordovaPlugin {
                 DisplayAdPresenter presenter = new DisplayAdPresenter(
                         "home_page",
                         listonicAd,
-                        getLifecycleOwner(cordova.getActivity().getApplicationContext())
+//                        getLifecycleOwner(cordova.getActivity().getApplicationContext())
+                        cordova.getActivity()
                 );
                 System.out.println("#debug ListonicAds initialize 10");
 
@@ -126,6 +100,7 @@ public class ListonicAds extends CordovaPlugin {
 //                adMockParams.gravity = Gravity.CENTER;
 //                adMock.setLayoutParams(adMockParams);
 //                adMock.setBackgroundColor(Color.parseColor("#0000FF"));
+
                 System.out.println("#debug ListonicAds initialize 11");
                 parentView.addView(listonicAd);
                 System.out.println("#debug ListonicAds initialize 12");
@@ -180,3 +155,35 @@ public class ListonicAds extends CordovaPlugin {
         return (LifecycleOwner) context;
     }
 }
+
+
+
+
+// code for full screen (PoC)
+/*
+                RelativeLayout.LayoutParams params2 = new RelativeLayout.LayoutParams(
+                        RelativeLayout.LayoutParams.MATCH_PARENT,
+                        RelativeLayout.LayoutParams.WRAP_CONTENT);
+
+                params2.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
+
+                if (adViewLayout == null) {
+                    adViewLayout = new RelativeLayout(cordova.getActivity());
+                    adViewLayout.setBackgroundColor(Color.parseColor("#000000"));
+
+                    RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(
+                        RelativeLayout.LayoutParams.MATCH_PARENT,
+                        RelativeLayout.LayoutParams.MATCH_PARENT
+                    );
+
+                    try {
+                        ((ViewGroup) (((View) webView.getClass().getMethod("getView")
+                            .invoke(webView)).getParent()))
+                            .addView(adViewLayout, params);
+                    } catch (Exception e) {
+                        ((ViewGroup) webView).addView(adViewLayout, params);
+                    }
+                }
+
+                adViewLayout.bringToFront();
+*/
