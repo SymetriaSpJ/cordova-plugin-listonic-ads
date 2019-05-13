@@ -1,16 +1,15 @@
-println "Hello from LISTONIC BUILD GRADLE 1"
-
-def minSdkVersion = 19
 def mavenUser="fitatu"
 def mavenPassword="1234567890"
-cdvCompileSdkVersion = 26
-ext.cdvCompileSdkVersion = 26
-ext.cdvMinSdkVersion = 19
 
-if(cdvMinSdkVersion == null) {
-    ext.cdvMinSdkVersion = minSdkVersion;
-} else if (cdvMinSdkVersion.toInteger() < minSdkVersion) {
-    ext.cdvMinSdkVersion = minSdkVersion;
+buildscript {
+    repositories {
+        google()
+        jcenter()
+    }
+    dependencies {
+        classpath 'com.android.tools.build:gradle:3.3.1'
+        classpath 'com.google.gms:google-services:4.0.1'
+    }
 }
 
 android {
@@ -24,12 +23,7 @@ android {
     }
 }
 
-println "Hello from LISTONIC BUILD GRADLE 1a"
-
 repositories{
-    flatDir{
-        dirs 'libs'
-    }
     maven {
         url "https://artif.listonic.com/artifactory/ListonicAndroidRepository"
         credentials {
@@ -39,21 +33,12 @@ repositories{
     }
 }
 
-println "Hello from LISTONIC BUILD GRADLE 2"
 
 dependencies {
-//    compile 'com.android.support:support-v4:27.1.0'
-//    implementation(name:'companion', ext:'aar')
+    implementation 'com.google.firebase:firebase-core:16.0.1'
+    implementation 'com.google.firebase:firebase-config:16.0.0'
     implementation ('com.listonic.ad:companion:2.4.1')
-            {
-                exclude group: 'com.android.support'
-            }
+    {
+        exclude group: 'com.android.support'
+    }
 }
-
-println "Hello from LISTONIC BUILD GRADLE 3"
-
-
-
-println "Hello from LISTONIC BUILD GRADLE 4"
-
-apply plugin: 'com.google.gms.google-services'
