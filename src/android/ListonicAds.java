@@ -27,10 +27,12 @@ import android.graphics.Color;
 
 import com.listonic.ad.companion.base.AdCompanion;
 import com.listonic.ad.companion.display.DisplayAdContainer;
-import com.listonic.ad.companion.display.DisplayAdPresenter;
+import com.listonic.ad.companion.display.LegacyDisplayAdPresenter;
 
 import android.arch.lifecycle.LifecycleOwner;
 import android.content.ContextWrapper;
+
+import java.util.HashMap;
 
 public class ListonicAds extends CordovaPlugin {
 
@@ -87,13 +89,17 @@ public class ListonicAds extends CordovaPlugin {
                 System.out.println("#debug ListonicAds initialize 8");
                 DisplayAdContainer listonicAd = new DisplayAdContainer(webView.getContext());
                 System.out.println("#debug ListonicAds initialize 9");
-                DisplayAdPresenter presenter = new DisplayAdPresenter(
+
+                LegacyDisplayAdPresenter presenter = new LegacyDisplayAdPresenter(
                         "home_page",
                         listonicAd,
-//                        getLifecycleOwner(cordova.getActivity().getApplicationContext())
-                        cordova.getActivity().getApplicationContext()
-//                        cordova.getActivity()
+                        new HashMap<String, String>(),
+                        null
                 );
+
+                presenter.onCreate();
+                presenter.onStart();
+
                 System.out.println("#debug ListonicAds initialize 10");
 
 //                View adMock = new LinearLayout(webView.getContext());
@@ -147,13 +153,6 @@ public class ListonicAds extends CordovaPlugin {
 //            callbackContext.success(value.asString());
             callbackContext.success("Success!");
         }
-    }
-
-    private LifecycleOwner getLifecycleOwner(Context context) {
-        while (!(context instanceof LifecycleOwner)) {
-            context = context.getBaseContext();
-        }
-        return (LifecycleOwner) context;
     }
 }
 
