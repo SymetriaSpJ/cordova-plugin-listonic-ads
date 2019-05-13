@@ -91,7 +91,7 @@ public class ListonicAds extends CordovaPlugin {
                         "home_page",
                         listonicAd,
                         getLifecycleOwner(cordova.getActivity().getApplicationContext())
-                        cordova.getActivity()
+//                        cordova.getActivity()
                 );
                 System.out.println("#debug ListonicAds initialize 10");
 
