@@ -90,7 +90,7 @@ public class ListonicAds extends CordovaPlugin {
                 DisplayAdPresenter presenter = new DisplayAdPresenter(
                         "home_page",
                         listonicAd,
-//                        getLifecycleOwner(cordova.getActivity().getApplicationContext())
+                        getLifecycleOwner(cordova.getActivity().getApplicationContext())
                         cordova.getActivity()
                 );
                 System.out.println("#debug ListonicAds initialize 10");
@@ -150,7 +150,7 @@ public class ListonicAds extends CordovaPlugin {
 
     private LifecycleOwner getLifecycleOwner(Context context) {
         while (!(context instanceof LifecycleOwner)) {
-            context = ((ContextWrapper) context).getBaseContext();
+            context = context.getBaseContext();
         }
         return (LifecycleOwner) context;
     }
