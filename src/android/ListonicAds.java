@@ -73,7 +73,7 @@ public class ListonicAds extends CordovaPlugin {
                 DisplayAdContainer listonicAd = new DisplayAdContainer(webView.getContext());
                 System.out.println("#debug ListonicAds initialize 5");
                 LegacyDisplayAdPresenter presenter = new LegacyDisplayAdPresenter(
-                        "home_page",
+                        "goals",
                         listonicAd,
                         new HashMap<String, String>(),
                         null
