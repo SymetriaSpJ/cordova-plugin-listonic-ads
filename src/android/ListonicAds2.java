@@ -63,7 +63,10 @@ public class ListonicAds extends CordovaPlugin {
                     rootView.addView(parentView);
                 }
                 DisplayAdContainer listonicAd = new DisplayAdContainer(webView.getContext());
-                listonicAd.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, 200, 0.0F));
+                LinearLayout.LayoutParams listonicAdParams = new LinearLayout.LayoutParams(280, 100);
+                listonicAdParams.gravity = Gravity.CENTER;
+                listonicAd.setLayoutParams(listonicAdParams);
+                listonicAd.setBackgroundColor(Color.parseColor("#0000FF"));
 
 
                 LegacyDisplayAdPresenter presenter = new LegacyDisplayAdPresenter(
