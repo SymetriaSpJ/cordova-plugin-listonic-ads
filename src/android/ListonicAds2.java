@@ -37,24 +37,17 @@ public class ListonicAds extends CordovaPlugin {
 
         Activity activity = cordova.getActivity();
 
-        System.out.println("#debug ListonicAds initialize start");
-
         AdCompanion.INSTANCE.initialize(activity.getApplication(), null, false);
 
         activity.runOnUiThread(new Runnable() {
             @Override
             public void run() {
-
-                System.out.println("#debug ListonicAds initialize 1");
-
                 final CordovaWebView wv = webView;
                 ViewGroup wvParentView = (ViewGroup) getWebView(wv).getParent();
 
-                System.out.println("#debug ListonicAds initialize 2");
                 if (parentView == null) {
                     parentView = new LinearLayout(webView.getContext());
                 }
-                System.out.println("#debug ListonicAds initialize 3");
                 if (wvParentView != null && wvParentView != parentView) {
                     ViewGroup rootView = (ViewGroup)(getWebView(webView).getParent());
 
@@ -69,30 +62,28 @@ public class ListonicAds extends CordovaPlugin {
                     parentView.addView(getWebView(webView));
                     rootView.addView(parentView);
                 }
-                System.out.println("#debug ListonicAds initialize 4");
                 DisplayAdContainer listonicAd = new DisplayAdContainer(webView.getContext());
-                System.out.println("#debug ListonicAds initialize 5");
+
                 LegacyDisplayAdPresenter presenter = new LegacyDisplayAdPresenter(
                         "home_page",
                         listonicAd,
                         new HashMap<String, String>(),
                         null
                 );
-                System.out.println("#debug ListonicAds initialize 6");
+
                 presenter.onCreate();
                 presenter.onStart();
-                System.out.println("#debug ListonicAds initialize 7");
+
 //                View adMock = new LinearLayout(webView.getContext());
 //                LinearLayout.LayoutParams adMockParams = new LinearLayout.LayoutParams(280, 100);
 //                adMockParams.gravity = Gravity.CENTER;
 //                adMock.setLayoutParams(adMockParams);
 //                adMock.setBackgroundColor(Color.parseColor("#0000FF"));
-                System.out.println("#debug ListonicAds initialize 8");
+
                 parentView.addView(listonicAd);
                 parentView.bringToFront();
                 parentView.requestLayout();
                 parentView.requestFocus();
-                System.out.println("#debug ListonicAds initialize 9");
             }
         });
     }
