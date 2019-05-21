@@ -73,7 +73,7 @@ public class ListonicAds extends CordovaPlugin {
                 DisplayAdContainer listonicAd = new DisplayAdContainer(webView.getContext());
                 System.out.println("#debug ListonicAds initialize 5");
                 LegacyDisplayAdPresenter presenter = new LegacyDisplayAdPresenter(
-                        "goals",
+                        "future_diary",
                         listonicAd,
                         new HashMap<String, String>(),
                         null
@@ -123,7 +123,7 @@ public class ListonicAds extends CordovaPlugin {
 //            FirebaseRemoteConfig.getInstance().activateFetched();
 //            FirebaseRemoteConfigValue value = FirebaseRemoteConfig.getInstance().getValue(msg);
 
-            Toast.makeText(webView.getContext(), msg, Toast.LENGTH_LONG).show();
+//            Toast.makeText(webView.getContext(), msg, Toast.LENGTH_LONG).show();
 //            callbackContext.success(value.asString());
             callbackContext.success("Success!");
         }
