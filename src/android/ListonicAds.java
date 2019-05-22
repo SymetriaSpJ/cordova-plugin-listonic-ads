@@ -31,30 +31,47 @@ public class ListonicAds extends CordovaPlugin {
 
     private Activity activity;
 
+    private LegacyDisplayAdPresenter presenter;
+
+    CordovaInterface cordovaInstance;
+
+    @Override
+    public boolean execute(String action, JSONArray args, CallbackContext callbackContext) throws JSONException {
+        if ("show".equals(action)) {
+            show(args, callbackContext);
+            return true;
+        } else if ("hide".equals(action)) {
+            hide(args, callbackContext);
+            return true;
+        }
+
+        return false;
+    }
+
     @Override
     public void initialize(CordovaInterface cordova, final CordovaWebView webView) {
         super.initialize(cordova, webView);
-
-        Activity activity = cordova.getActivity();
-
-        System.out.println("#debug ListonicAds initialize start");
+        cordovaInstance = cordova;
 
         AdCompanion.INSTANCE.initialize(activity.getApplication(), null, false);
 
-        activity.runOnUiThread(new Runnable() {
+        initializeBannerView(webView);
+    }
+
+    private View initializeBannerView(CordovaWebView webView) {
+        cordovaInstance.getActivity().runOnUiThread(new Runnable() {
             @Override
             public void run() {
-
-                System.out.println("#debug ListonicAds initialize 1");
+                System.out.println("#debug ListonicAds initializeBannerView 1");
 
                 final CordovaWebView wv = webView;
                 ViewGroup wvParentView = (ViewGroup) getWebView(wv).getParent();
 
-                System.out.println("#debug ListonicAds initialize 2");
+                System.out.println("#debug ListonicAds initializeBannerView 2");
                 if (parentView == null) {
                     parentView = new LinearLayout(webView.getContext());
                 }
-                System.out.println("#debug ListonicAds initialize 3");
+                System.out.println("#debug ListonicAds initializeBannerView 3");
                 if (wvParentView != null && wvParentView != parentView) {
                     ViewGroup rootView = (ViewGroup)(getWebView(webView).getParent());
 
@@ -68,36 +85,21 @@ public class ListonicAds extends CordovaPlugin {
                     parentView.addView(getWebView(webView));
                     rootView.addView(parentView);
                 }
-                System.out.println("#debug ListonicAds initialize 4");
+
+                System.out.println("#debug ListonicAds initializeBannerView 4");
 
                 DisplayAdContainer listonicAd = new DisplayAdContainer(webView.getContext());
-//                LinearLayout.LayoutParams listonicAdParams = new LinearLayout.LayoutParams(280, 100);
-//                listonicAdParams.gravity = Gravity.CENTER;
-//                listonicAd.setLayoutParams(listonicAdParams);
-//                listonicAd.setBackgroundColor(Color.parseColor("#0000FF"));
+                LinearLayout.LayoutParams listonicAdParams = new LinearLayout.LayoutParams(280, 100);
+                listonicAdParams.gravity = Gravity.CENTER;
+                listonicAd.setLayoutParams(listonicAdParams);
+                listonicAd.setBackgroundColor(Color.parseColor("#0000FF"));
 
-                System.out.println("#debug ListonicAds initialize 5");
-                LegacyDisplayAdPresenter presenter = new LegacyDisplayAdPresenter(
-                        "future_diary",
-                        listonicAd,
-                        new HashMap<String, String>(),
-                        null
-                );
-                System.out.println("#debug ListonicAds initialize 6");
-                presenter.onCreate();
-                presenter.onStart();
-                System.out.println("#debug ListonicAds initialize 7");
-//                View adMock = new LinearLayout(webView.getContext());
-//                LinearLayout.LayoutParams adMockParams = new LinearLayout.LayoutParams(280, 100);
-//                adMockParams.gravity = Gravity.CENTER;
-//                adMock.setLayoutParams(adMockParams);
-//                adMock.setBackgroundColor(Color.parseColor("#0000FF"));
-                System.out.println("#debug ListonicAds initialize 8");
-                parentView.addView(listonicAd);
+                System.out.println("#debug ListonicAds initializeBannerView 5");
+
                 parentView.bringToFront();
                 parentView.requestLayout();
                 parentView.requestFocus();
-                System.out.println("#debug ListonicAds initialize 9");
+                System.out.println("#debug ListonicAds initializeBannerView 6");
             }
         });
     }
@@ -110,27 +112,33 @@ public class ListonicAds extends CordovaPlugin {
         }
     }
 
-    @Override
-    public boolean execute(String action, JSONArray args, CallbackContext callbackContext) throws JSONException {
-        if ("show".equals(action)) {
-            show(args.getString(0), callbackContext);
-            return true;
-        }
+    private void show(JSONArray args, CallbackContext callbackContext) {
+        presenter = new LegacyDisplayAdPresenter(
+                "goals",
+                listonicAd,
+                new HashMap<String, String>(),
+                null
+        );
+        presenter.onCreate();
+        presenter.onStart();
 
-        return false;
+        parentView.addView(listonicAd);
+
+        callbackContext.success("Success!");
     }
 
-    private void show(String msg, CallbackContext callbackContext) {
-        if (msg == null || msg.length() == 0) {
-            callbackContext.error("Empty message!");
-        } else {
-//            FirebaseRemoteConfig.getInstance().fetch(0);
-//            FirebaseRemoteConfig.getInstance().activateFetched();
-//            FirebaseRemoteConfigValue value = FirebaseRemoteConfig.getInstance().getValue(msg);
+    private void hide(JSONArray args, CallbackContext callbackContext) {
+        presenter.onDestroy();
+        parentView.removeView(listonicAd);
 
-//            Toast.makeText(webView.getContext(), msg, Toast.LENGTH_LONG).show();
-//            callbackContext.success(value.asString());
-            callbackContext.success("Success!");
-        }
+        callbackContext.success("Success!");
     }
 }
+
+
+
+//                View adMock = new LinearLayout(webView.getContext());
+//                LinearLayout.LayoutParams adMockParams = new LinearLayout.LayoutParams(280, 100);
+//                adMockParams.gravity = Gravity.CENTER;
+//                adMock.setLayoutParams(adMockParams);
+//                adMock.setBackgroundColor(Color.parseColor("#0000FF"));
