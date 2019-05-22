@@ -60,7 +60,7 @@ public class ListonicAds extends CordovaPlugin {
         initializeBannerView(webView);
     }
 
-    private View initializeBannerView(CordovaWebView webView) {
+    private void initializeBannerView(CordovaWebView webView) {
         cordovaInstance.getActivity().runOnUiThread(new Runnable() {
             @Override
             public void run() {
