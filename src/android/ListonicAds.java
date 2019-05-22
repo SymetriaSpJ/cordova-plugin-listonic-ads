@@ -35,6 +35,8 @@ public class ListonicAds extends CordovaPlugin {
 
     CordovaInterface cordovaInstance;
 
+    DisplayAdContainer listonicAd;
+
     @Override
     public boolean execute(String action, JSONArray args, CallbackContext callbackContext) throws JSONException {
         if ("show".equals(action)) {
@@ -88,7 +90,7 @@ public class ListonicAds extends CordovaPlugin {
 
                 System.out.println("#debug ListonicAds initializeBannerView 4");
 
-                DisplayAdContainer listonicAd = new DisplayAdContainer(webView.getContext());
+                listonicAd = new DisplayAdContainer(webView.getContext());
                 LinearLayout.LayoutParams listonicAdParams = new LinearLayout.LayoutParams(280, 100);
                 listonicAdParams.gravity = Gravity.CENTER;
                 listonicAd.setLayoutParams(listonicAdParams);
