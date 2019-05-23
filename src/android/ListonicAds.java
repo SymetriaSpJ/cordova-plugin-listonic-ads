@@ -125,14 +125,19 @@ public class ListonicAds extends CordovaPlugin {
     }
 
     private void show(JSONObject options, CallbackContext callbackContext) {
+        System.out.println("#debug ListonicAds show start");
         cordovaInstance.getActivity().runOnUiThread(new Runnable() {
             @Override
             public void run() {
+                System.out.println("#debug ListonicAds show 1");
                 String zone = "";
 
                 try {
                     zone = options.getString("zone");
-                } catch(JSONException e) {}
+                    System.out.println("#debug ListonicAds show zone try" + zone);
+                } catch(JSONException e) {
+                    System.out.println("#debug ListonicAds show json error");
+                }
 
                 System.out.println("#debug ListonicAds show zone" + zone);
 //                System.out.println("#debug ListonicAds show options.zone", options.getString("zone"));
