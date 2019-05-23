@@ -38,15 +38,15 @@ public class ListonicAds extends CordovaPlugin {
     DisplayAdContainer listonicAd;
 
     @Override
-    public boolean execute(String action, JSONArray args, CallbackContext callbackContext) throws JSONException {
+    public boolean execute(String action, JSONObject options, CallbackContext callbackContext) throws JSONException {
         if ("show".equals(action)) {
-            show(args, callbackContext);
+            show(options, callbackContext);
             return true;
         } else if ("hide".equals(action)) {
-            hide(args, callbackContext);
+            hide(options, callbackContext);
             return true;
         } else if ("prepare".equals(action)) {
-            prepare(args, callbackContext);
+            prepare(options, callbackContext);
             return true;
         }
 
@@ -95,10 +95,10 @@ public class ListonicAds extends CordovaPlugin {
                 System.out.println("#debug ListonicAds initializeBannerView 4");
 
                 listonicAd = new DisplayAdContainer(webView.getContext());
-                LinearLayout.LayoutParams listonicAdParams = new LinearLayout.LayoutParams(280, 100);
-                listonicAdParams.gravity = Gravity.CENTER;
-                listonicAd.setLayoutParams(listonicAdParams);
-                listonicAd.setBackgroundColor(Color.parseColor("#0000FF"));
+//                LinearLayout.LayoutParams listonicAdParams = new LinearLayout.LayoutParams(280, 100);
+//                listonicAdParams.gravity = Gravity.CENTER;
+//                listonicAd.setLayoutParams(listonicAdParams);
+//                listonicAd.setBackgroundColor(Color.parseColor("#0000FF"));
 
                 System.out.println("#debug ListonicAds initializeBannerView 5");
 
@@ -118,17 +118,19 @@ public class ListonicAds extends CordovaPlugin {
         }
     }
 
-    private void prepare(JSONArray args, CallbackContext callbackContext) {
+    private void prepare(JSONObject options, CallbackContext callbackContext) {
         System.out.println("#debug ListonicAds prepare start");
     }
 
-    private void show(JSONArray args, CallbackContext callbackContext) {
+    private void show(JSONObject options, CallbackContext callbackContext) {
         cordovaInstance.getActivity().runOnUiThread(new Runnable() {
             @Override
             public void run() {
                 System.out.println("#debug ListonicAds show start");
+                System.out.println("#debug ListonicAds show options", options);
+                System.out.println("#debug ListonicAds show options.zone", options.zone);
                 presenter = new LegacyDisplayAdPresenter(
-                        "goals",
+                        options.zone,
                         listonicAd,
                         new HashMap<String, String>(),
                         null
@@ -147,7 +149,7 @@ public class ListonicAds extends CordovaPlugin {
         });
     }
 
-    private void hide(JSONArray args, CallbackContext callbackContext) {
+    private void hide(JSONObject options, CallbackContext callbackContext) {
         cordovaInstance.getActivity().runOnUiThread(new Runnable() {
             @Override
             public void run() {
