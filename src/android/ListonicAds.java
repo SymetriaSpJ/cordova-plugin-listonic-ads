@@ -129,7 +129,7 @@ public class ListonicAds extends CordovaPlugin {
             @Override
             public void run() {
                 System.out.println("#debug ListonicAds show start");
-                System.out.println("#debug ListonicAds show options.zone", options.getString("zone"));
+//                System.out.println("#debug ListonicAds show options.zone", options.getString("zone"));
                 presenter = new LegacyDisplayAdPresenter(
                         options.getString("zone"),
                         listonicAd,
