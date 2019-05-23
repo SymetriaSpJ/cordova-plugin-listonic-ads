@@ -41,29 +41,6 @@ public class ListonicAds extends CordovaPlugin {
     public boolean execute(String action, JSONArray args, CallbackContext callbackContext) throws JSONException {
         JSONObject options = args.optJSONObject(0);
 
-        try {
-            options.getString("zone");
-        }
-        catch(Exception e) {
-            System.out.println("#debug ListonicAds options.getString error");
-        }
-
-        try {
-            System.out.println(options);
-        }
-        catch(Exception e) {
-            System.out.println("#debug ListonicAds options print");
-        }
-
-
-        try {
-            System.out.println(args);
-        }
-        catch(Exception e) {
-            System.out.println("#debug ListonicAds options args");
-        }
-
-
         if ("show".equals(action)) {
             show(options, callbackContext);
             return true;
@@ -151,11 +128,17 @@ public class ListonicAds extends CordovaPlugin {
         cordovaInstance.getActivity().runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                System.out.println("#debug ListonicAds show start");
+                String zone;
+
+                try {
+                    zone = options.getString("zone");
+                } catch(JSONException e) {}
+
+                System.out.println("#debug ListonicAds show zone" + zone);
 //                System.out.println("#debug ListonicAds show options.zone", options.getString("zone"));
                 presenter = new LegacyDisplayAdPresenter(
-//                        options.getString("zone"),
-                        "home_page"
+//                        "home_page"
+                        zone
                         listonicAd,
                         new HashMap<String, String>(),
                         null
