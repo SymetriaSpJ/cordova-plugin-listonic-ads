@@ -128,7 +128,7 @@ public class ListonicAds extends CordovaPlugin {
         cordovaInstance.getActivity().runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                String zone;
+                String zone = "";
 
                 try {
                     zone = options.getString("zone");
