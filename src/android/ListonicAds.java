@@ -138,7 +138,7 @@ public class ListonicAds extends CordovaPlugin {
 //                System.out.println("#debug ListonicAds show options.zone", options.getString("zone"));
                 presenter = new LegacyDisplayAdPresenter(
 //                        "home_page"
-                        zone
+                        zone,
                         listonicAd,
                         new HashMap<String, String>(),
                         null
