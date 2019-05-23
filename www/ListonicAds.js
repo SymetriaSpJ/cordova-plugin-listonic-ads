@@ -4,6 +4,19 @@ var ListonicAds = function() {
     console.log('ListonicAds instanced');
 };
 
+ListonicAds.prototype.initialize = function(onSuccess, onError) {
+    var errorCallback = function(obj) {
+        onError(obj);
+    };
+
+    var successCallback = function(obj) {
+        onSuccess(obj);
+    };
+
+    exec(successCallback, errorCallback, 'ListonicAds', 'initialize', []);
+};
+
+
 ListonicAds.prototype.show = function(onSuccess, onError) {
     var errorCallback = function(obj) {
         onError(obj);

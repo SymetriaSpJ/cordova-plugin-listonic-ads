@@ -54,10 +54,11 @@ public class ListonicAds extends CordovaPlugin {
     public void initialize(CordovaInterface cordova, final CordovaWebView webView) {
         super.initialize(cordova, webView);
         cordovaInstance = cordova;
-
+        System.out.println("#debug ListonicAds initialize start");
         AdCompanion.INSTANCE.initialize(activity.getApplication(), null, false);
-
+        System.out.println("#debug ListonicAds initialize 2");
         initializeBannerView(webView);
+        System.out.println("#debug ListonicAds initialize end");
     }
 
     private void initializeBannerView(CordovaWebView webView) {
@@ -115,23 +116,29 @@ public class ListonicAds extends CordovaPlugin {
     }
 
     private void show(JSONArray args, CallbackContext callbackContext) {
+        System.out.println("#debug ListonicAds show start");
         presenter = new LegacyDisplayAdPresenter(
                 "goals",
                 listonicAd,
                 new HashMap<String, String>(),
                 null
         );
+        System.out.println("#debug ListonicAds show 2");
         presenter.onCreate();
+        System.out.println("#debug ListonicAds show 3");
         presenter.onStart();
+        System.out.println("#debug ListonicAds show 4");
 
         parentView.addView(listonicAd);
+        System.out.println("#debug ListonicAds show end");
 
         callbackContext.success("Success!");
     }
 
     private void hide(JSONArray args, CallbackContext callbackContext) {
-        presenter.onDestroy();
+        System.out.println("#debug ListonicAds hide start");
         parentView.removeView(listonicAd);
+        System.out.println("#debug ListonicAds hide end");
 
         callbackContext.success("Success!");
     }
