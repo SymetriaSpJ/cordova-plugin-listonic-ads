@@ -38,7 +38,9 @@ public class ListonicAds extends CordovaPlugin {
     DisplayAdContainer listonicAd;
 
     @Override
-    public boolean execute(String action, JSONObject options, CallbackContext callbackContext) throws JSONException {
+    public boolean execute(String action, JSONArray args, CallbackContext callbackContext) throws JSONException {
+        JSONObject options = args.optJSONObject(0);
+
         if ("show".equals(action)) {
             show(options, callbackContext);
             return true;
