@@ -41,6 +41,29 @@ public class ListonicAds extends CordovaPlugin {
     public boolean execute(String action, JSONArray args, CallbackContext callbackContext) throws JSONException {
         JSONObject options = args.optJSONObject(0);
 
+        try {
+            options.getString("zone");
+        }
+        catch(Exception e) {
+            System.out.println("#debug ListonicAds options.getString error");
+        }
+
+        try {
+            System.out.println(options);
+        }
+        catch(Exception e) {
+            System.out.println("#debug ListonicAds options print");
+        }
+
+
+        try {
+            System.out.println(args);
+        }
+        catch(Exception e) {
+            System.out.println("#debug ListonicAds options args");
+        }
+
+
         if ("show".equals(action)) {
             show(options, callbackContext);
             return true;
