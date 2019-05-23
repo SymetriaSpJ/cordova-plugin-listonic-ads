@@ -123,31 +123,41 @@ public class ListonicAds extends CordovaPlugin {
     }
 
     private void show(JSONArray args, CallbackContext callbackContext) {
-        System.out.println("#debug ListonicAds show start");
-        presenter = new LegacyDisplayAdPresenter(
-                "goals",
-                listonicAd,
-                new HashMap<String, String>(),
-                null
-        );
-        System.out.println("#debug ListonicAds show 2");
-        presenter.onCreate();
-        System.out.println("#debug ListonicAds show 3");
-        presenter.onStart();
-        System.out.println("#debug ListonicAds show 4");
+        cordovaInstance.getActivity().runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                System.out.println("#debug ListonicAds show start");
+                presenter = new LegacyDisplayAdPresenter(
+                        "goals",
+                        listonicAd,
+                        new HashMap<String, String>(),
+                        null
+                );
+                System.out.println("#debug ListonicAds show 2");
+                presenter.onCreate();
+                System.out.println("#debug ListonicAds show 3");
+                presenter.onStart();
+                System.out.println("#debug ListonicAds show 4");
 
-        parentView.addView(listonicAd);
-        System.out.println("#debug ListonicAds show end");
+                parentView.addView(listonicAd);
+                System.out.println("#debug ListonicAds show end");
 
-        callbackContext.success("Success!");
+                callbackContext.success("Success!");
+            }
+        });
     }
 
     private void hide(JSONArray args, CallbackContext callbackContext) {
-        System.out.println("#debug ListonicAds hide start");
-        parentView.removeView(listonicAd);
-        System.out.println("#debug ListonicAds hide end");
+        cordovaInstance.getActivity().runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                System.out.println("#debug ListonicAds hide start");
+                parentView.removeView(listonicAd);
+                System.out.println("#debug ListonicAds hide end");
 
-        callbackContext.success("Success!");
+                callbackContext.success("Success!");
+            }
+        });
     }
 }
 
