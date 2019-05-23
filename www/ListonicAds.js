@@ -4,7 +4,7 @@ var ListonicAds = function() {
     console.log('ListonicAds instanced');
 };
 
-ListonicAds.prototype.initialize = function(onSuccess, onError) {
+ListonicAds.prototype.prepare = function(onSuccess, onError) {
     var errorCallback = function(obj) {
         onError(obj);
     };
@@ -13,7 +13,7 @@ ListonicAds.prototype.initialize = function(onSuccess, onError) {
         onSuccess(obj);
     };
 
-    exec(successCallback, errorCallback, 'ListonicAds', 'initialize', []);
+    exec(successCallback, errorCallback, 'ListonicAds', 'prepare', []);
 };
 
 
