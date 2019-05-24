@@ -4,7 +4,7 @@ var ListonicAds = function() {
     console.log('ListonicAds instanced');
 };
 
-ListonicAds.prototype.prepare = function(onSuccess, onError) {
+ListonicAds.prototype.prepare = function(options, onSuccess, onError) {
     var errorCallback = function(obj) {
         onError(obj);
     };
@@ -13,11 +13,11 @@ ListonicAds.prototype.prepare = function(onSuccess, onError) {
         onSuccess(obj);
     };
 
-    exec(successCallback, errorCallback, 'ListonicAds', 'prepare', []);
+    exec(successCallback, errorCallback, 'ListonicAds', 'prepare', [options]);
 };
 
 
-ListonicAds.prototype.show = function(onSuccess, onError) {
+ListonicAds.prototype.show = function(options, onSuccess, onError) {
     var errorCallback = function(obj) {
         onError(obj);
     };
@@ -26,10 +26,10 @@ ListonicAds.prototype.show = function(onSuccess, onError) {
         onSuccess(obj);
     };
 
-    exec(successCallback, errorCallback, 'ListonicAds', 'show', []);
+    exec(successCallback, errorCallback, 'ListonicAds', 'show', [options]);
 };
 
-ListonicAds.prototype.hide = function(onSuccess, onError) {
+ListonicAds.prototype.hide = function(options, onSuccess, onError) {
     var errorCallback = function(obj) {
         onError(obj);
     };
@@ -38,7 +38,7 @@ ListonicAds.prototype.hide = function(onSuccess, onError) {
         onSuccess(obj);
     };
 
-    exec(successCallback, errorCallback, 'ListonicAds', 'hide', []);
+    exec(successCallback, errorCallback, 'ListonicAds', 'hide', [options]);
 };
 
 if (typeof module != 'undefined' && module.exports) {
