@@ -23,6 +23,10 @@ import com.listonic.ad.companion.base.AdCompanion;
 import com.listonic.ad.companion.display.DisplayAdContainer;
 import com.listonic.ad.companion.display.LegacyDisplayAdPresenter;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+import java.io.IOError;
+
 public class ListonicAds extends CordovaPlugin {
 
     private RelativeLayout adViewLayout = null;
@@ -137,6 +141,7 @@ public class ListonicAds extends CordovaPlugin {
                     System.out.println("#debug ListonicAds show zone try" + zone);
                 } catch(JSONException e) {
                     System.out.println("#debug ListonicAds show json error");
+                    throw new IOError(e);
                 }
 
                 System.out.println("#debug ListonicAds show zone" + zone);
