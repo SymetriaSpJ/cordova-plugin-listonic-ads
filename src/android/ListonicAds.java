@@ -140,7 +140,7 @@ public class ListonicAds extends CordovaPlugin {
             Integer height = (int)(options.getInt("height") * factor);
             LinearLayout.LayoutParams listonicAdParams = new LinearLayout.LayoutParams(width, height);
 
-            Gravity myGravity;
+            Integer myGravity;
 
             if (options.getString("gravity").equals("CENTER")) {
                 myGravity = Gravity.CENTER;
