@@ -38,6 +38,8 @@ ListonicAds.prototype.setOptions = function(options, onSuccess, onError) {
         onSuccess(obj);
     };
 
+    options.width = screen.width || document.querySelector('body').clientWidth || 320;
+
     exec(successCallback, errorCallback, 'ListonicAds', 'setOptions', [options]);
 };
 
