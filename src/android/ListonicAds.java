@@ -93,10 +93,22 @@ public class ListonicAds extends CordovaPlugin {
                     wvParentView.removeView(getWebView(webView));
 
                     ((LinearLayout) parentView).setOrientation(LinearLayout.VERTICAL);
-                    parentView.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT, 0.0F));
-                    getWebView(webView).setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT, 1.0F));
+                    parentView.setLayoutParams(
+                        new LinearLayout.LayoutParams(
+                            ViewGroup.LayoutParams.MATCH_PARENT,
+                            ViewGroup.LayoutParams.MATCH_PARENT,
+                            0.0F
+                        )
+                    );
+                    getWebView(webView).setLayoutParams(
+                            new LinearLayout.LayoutParams(
+                                    ViewGroup.LayoutParams.MATCH_PARENT,
+                                    ViewGroup.LayoutParams.MATCH_PARENT,
+                                    1.0F
+                            )
+                    );
+
                     parentView.setBackgroundColor(Color.parseColor("#F7F8F9"));
-                    parentView.setGravity(Gravity.CENTER | Gravity.CENTER_VERTICAL);
 
                     parentView.addView(getWebView(webView));
                     rootView.addView(parentView);
@@ -138,18 +150,17 @@ public class ListonicAds extends CordovaPlugin {
             float factor = cordovaInstance.getActivity().getApplication().getBaseContext().getResources().getDisplayMetrics().density;
             Integer width = (int)(options.getInt("width") * factor);
             Integer height = (int)(options.getInt("height") * factor);
-            LinearLayout.LayoutParams listonicAdParams = new LinearLayout.LayoutParams(width, height);
+            Integer myGravity;
 
-//            Integer myGravity;
+            if (options.getString("gravity").equals("CENTER")) {
+                myGravity = Gravity.CENTER;
+            } else if (options.getString("gravity").equals("CENTER_VERTICAL")) {
+                myGravity = Gravity.CENTER_VERTICAL;
+            } else {
+                myGravity = Gravity.CENTER | Gravity.CENTER_VERTICAL;
+            }
 
-//            if (options.getString("gravity").equals("CENTER")) {
-//                myGravity = Gravity.CENTER;
-//            } else if (options.getString("gravity").equals("CENTER_VERTICAL")) {
-//                myGravity = Gravity.CENTER_VERTICAL;
-//            } else {
-//                myGravity = Gravity.CENTER | Gravity.CENTER_VERTICAL;
-//            }
-
+            LinearLayout.LayoutParams listonicAdParams = new LinearLayout.LayoutParams(width, height, myGravity);
 
 
             cordovaInstance.getActivity().runOnUiThread(new Runnable() {
