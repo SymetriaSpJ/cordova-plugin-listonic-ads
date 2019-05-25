@@ -142,14 +142,20 @@ public class ListonicAds extends CordovaPlugin {
             System.out.println("#debug ListonicAds setOptions 2");
             LinearLayout.LayoutParams listonicAdParams = new LinearLayout.LayoutParams(width, height);
             System.out.println("#debug ListonicAds setOptions 3");
-            listonicAd.setLayoutParams(listonicAdParams);
-            System.out.println("#debug ListonicAds setOptions 4");
+            cordovaInstance.getActivity().runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    System.out.println("#debug ListonicAds setOptions 4 on uithread");
+                    listonicAd.setLayoutParams(listonicAdParams);
+                    System.out.println("#debug ListonicAds setOptions 5 on ui thread");
+                    callbackContext.success("Success!");
+                }
+            });
+
         } catch(JSONException e) {
             System.out.println("#debug ListonicAds setOptions json error");
             throw new IOError(e);
         }
-
-
     }
 
     private void show(JSONObject options, CallbackContext callbackContext) {
