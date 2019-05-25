@@ -126,22 +126,29 @@ public class ListonicAds extends CordovaPlugin {
 
     private void prepare(JSONObject options, CallbackContext callbackContext) {
         System.out.println("#debug ListonicAds prepare start");
+
     }
 
     private void setOptions(JSONObject options, CallbackContext callbackContext) {
         System.out.println("#debug ListonicAds setPresenterOptions start");
 
-        if (options.getInt("width") != null && options.getInt("height") != null) {
+        try {
+            System.out.println("#debug ListonicAds setOptions 1");
             float factor = cordovaInstance.getActivity().getApplication().getContext().getResources().getDisplayMetrics().density;
             Integer width = (int)(options.getInt("width") * factor);
             Integer height = (int)(options.getInt("height") * factor);
-
+            System.out.println("#debug ListonicAds setOptions 2");
             LinearLayout.LayoutParams listonicAdParams = new LinearLayout.LayoutParams(width, height);
-
+            System.out.println("#debug ListonicAds setOptions 3");
             listonicAd.setLayoutParams(listonicAdParams);
+            System.out.println("#debug ListonicAds setOptions 4");
+        } catch(JSONException e) {
+            System.out.println("#debug ListonicAds setOptions json error");
+            throw new IOError(e);
         }
-    }
 
+
+    }
 
     private void show(JSONObject options, CallbackContext callbackContext) {
         System.out.println("#debug ListonicAds show start");
