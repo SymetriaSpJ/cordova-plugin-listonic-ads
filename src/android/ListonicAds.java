@@ -135,7 +135,9 @@ public class ListonicAds extends CordovaPlugin {
         try {
             System.out.println("#debug ListonicAds setOptions 1");
             float factor = cordovaInstance.getActivity().getApplication().getContext().getResources().getDisplayMetrics().density;
+            System.out.println("#debug ListonicAds setOptions 1a");
             Integer width = (int)(options.getInt("width") * factor);
+            System.out.println("#debug ListonicAds setOptions 1b");
             Integer height = (int)(options.getInt("height") * factor);
             System.out.println("#debug ListonicAds setOptions 2");
             LinearLayout.LayoutParams listonicAdParams = new LinearLayout.LayoutParams(width, height);
