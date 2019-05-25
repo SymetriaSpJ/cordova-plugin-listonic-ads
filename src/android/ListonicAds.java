@@ -35,7 +35,7 @@ public class ListonicAds extends CordovaPlugin {
 
     private Activity activity;
 
-    private LegacyDisplayAdPresenter presenter;
+    private LegacyDisplayAdPresenter presenter = null;
 
     CordovaInterface cordovaInstance;
 
@@ -53,6 +53,9 @@ public class ListonicAds extends CordovaPlugin {
             return true;
         } else if ("prepare".equals(action)) {
             prepare(options, callbackContext);
+            return true;
+        } else if ("setOptions".equals(action)) {
+            setOptions(options, callbackContext);
             return true;
         }
 
@@ -101,13 +104,10 @@ public class ListonicAds extends CordovaPlugin {
                 System.out.println("#debug ListonicAds initializeBannerView 4");
 
                 listonicAd = new DisplayAdContainer(webView.getContext());
-//                LinearLayout.LayoutParams listonicAdParams = new LinearLayout.LayoutParams(280, 100);
-//                listonicAdParams.gravity = Gravity.CENTER;
-//                listonicAd.setLayoutParams(listonicAdParams);
-//                listonicAd.setBackgroundColor(Color.parseColor("#0000FF"));
 
                 System.out.println("#debug ListonicAds initializeBannerView 5");
 
+                parentView.addView(listonicAd);
                 parentView.bringToFront();
                 parentView.requestLayout();
                 parentView.requestFocus();
@@ -128,6 +128,21 @@ public class ListonicAds extends CordovaPlugin {
         System.out.println("#debug ListonicAds prepare start");
     }
 
+    private void setOptions(JSONObject options, CallbackContext callbackContext) {
+        System.out.println("#debug ListonicAds setPresenterOptions start");
+
+        if (options.getInt('width') != null && options.getInt('height') != null) {
+            float factor = cordovaInstance.getActivity().getApplication().getContext().getResources().getDisplayMetrics().density;
+            Integer width = (int)(options.getInt('width') * factor);
+            Integer height = (int)(options.getInt('height') * factor);
+
+            LinearLayout.LayoutParams listonicAdParams = new LinearLayout.LayoutParams(width, height);
+
+            listonicAd.setLayoutParams(listonicAdParams);
+        }
+    }
+
+
     private void show(JSONObject options, CallbackContext callbackContext) {
         System.out.println("#debug ListonicAds show start");
         cordovaInstance.getActivity().runOnUiThread(new Runnable() {
@@ -142,6 +157,10 @@ public class ListonicAds extends CordovaPlugin {
                 } catch(JSONException e) {
                     System.out.println("#debug ListonicAds show json error");
                     throw new IOError(e);
+                }
+
+                if (presenter != null) {
+                    presenter.onDestroy();
                 }
 
                 System.out.println("#debug ListonicAds show zone" + zone);
@@ -159,7 +178,7 @@ public class ListonicAds extends CordovaPlugin {
                 presenter.onStart();
                 System.out.println("#debug ListonicAds show 4");
 
-                parentView.addView(listonicAd);
+
                 System.out.println("#debug ListonicAds show end");
 
                 callbackContext.success("Success!");
@@ -172,7 +191,8 @@ public class ListonicAds extends CordovaPlugin {
             @Override
             public void run() {
                 System.out.println("#debug ListonicAds hide start");
-                parentView.removeView(listonicAd);
+                    presenter.onStop();
+//                parentView.removeView(listonicAd);
                 System.out.println("#debug ListonicAds hide end");
 
                 callbackContext.success("Success!");
