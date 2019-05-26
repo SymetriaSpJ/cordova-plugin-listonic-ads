@@ -118,11 +118,18 @@ public class ListonicAds extends CordovaPlugin {
                 System.out.println("#debug ListonicAds initializeBannerView 4");
 
                 listonicAd = new DisplayAdContainer(webView.getContext());
-                listonicAd.setBackgroundColor(Color.parseColor("#F7F8F9"));
+//                listonicAd.setBackgroundColor(Color.parseColor("#F7F8F9"));
+//                listonicAd.setLayoutParams(
+//                        new LinearLayout.LayoutParams(
+//                                ViewGroup.LayoutParams.MATCH_PARENT,
+//                                ViewGroup.LayoutParams.WRAP_CONTENT
+//                        )
+//                );
+                listonicAd.setBackgroundColor(Color.parseColor("#FF0000"));
                 listonicAd.setLayoutParams(
                         new LinearLayout.LayoutParams(
-                                ViewGroup.LayoutParams.MATCH_PARENT,
-                                ViewGroup.LayoutParams.WRAP_CONTENT
+                                300,
+                                80
                         )
                 );
 
