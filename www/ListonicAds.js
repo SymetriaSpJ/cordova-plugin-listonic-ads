@@ -39,7 +39,7 @@ ListonicAds.prototype.setOptions = function(options, onSuccess, onError) {
     };
 
     if (!options.width) {
-    options.width = screen.width || document.querySelector('body').clientWidth || 320;
+        options.width = screen.width || document.querySelector('body').clientWidth || 320;
     }
 
     exec(successCallback, errorCallback, 'ListonicAds', 'setOptions', [options]);
