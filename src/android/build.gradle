@@ -40,7 +40,4 @@ dependencies {
     implementation 'com.google.firebase:firebase-config:16.0.0'
     implementation 'com.android.support.constraint:constraint-layout:1.0.2'
     implementation ('com.listonic.ad:companion:2.5.0RC1')
-    {
-        exclude group: 'com.android.support'
-    }
 }
