@@ -27,8 +27,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import java.io.IOError;
 
-import android.support.constraint.ConstraintLayout;
-
 public class ListonicAds extends CordovaPlugin {
 
     private RelativeLayout adViewLayout = null;
