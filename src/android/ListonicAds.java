@@ -41,6 +41,8 @@ public class ListonicAds extends CordovaPlugin {
 
     DisplayAdContainer listonicAd;
 
+    View adContainer;
+
     @Override
     public boolean execute(String action, JSONArray args, CallbackContext callbackContext) throws JSONException {
         JSONObject options = args.optJSONObject(0);
@@ -113,14 +115,30 @@ public class ListonicAds extends CordovaPlugin {
                     rootView.addView(parentView);
                 }
 
+                View adContainer = new LinearLayout(webView.getContext());
+                LinearLayout.LayoutParams adContainerParams = new LinearLayout.LayoutParams(
+                    ViewGroup.LayoutParams.MATCH_PARENT,
+                    ViewGroup.LayoutParams.WRAP_CONTENT
+                );
+                adContainerParams.gravity = Gravity.CENTER;
+                adContainer.setLayoutParams(adContainerParams);
+                adContainer.setBackgroundColor(Color.parseColor("#F7F8F9"));
+
                 System.out.println("#debug ListonicAds initializeBannerView 4");
 
                 listonicAd = new DisplayAdContainer(webView.getContext());
                 listonicAd.setBackgroundColor(Color.parseColor("#F7F8F9"));
+                listonicAd.setLayoutParams(
+                        new LinearLayout.LayoutParams(
+                                ViewGroup.LayoutParams.MATCH_PARENT,
+                                ViewGroup.LayoutParams.WRAP_CONTENT
+                        );
+                );
 
                 System.out.println("#debug ListonicAds initializeBannerView 5");
 
-                parentView.addView(listonicAd);
+                parentView.addView(adContainer);
+                adContainer.addView(listonicAd);
                 parentView.bringToFront();
                 parentView.requestLayout();
                 parentView.requestFocus();
@@ -173,13 +191,13 @@ public class ListonicAds extends CordovaPlugin {
                     System.out.println("#debug ListonicAds setOptions 4 on uithread");
 
                     if (layoutParams != null) {
-                        listonicAd.setLayoutParams(layoutParams);
+                        adContainer.setLayoutParams(layoutParams);
                     }
 
                     System.out.println("#debug ListonicAds setOptions 5 on uithread");
 
                     if (myGravity != null) {
-                        listonicAd.setGravity(myGravity);
+                        adContainer.setGravity(myGravity);
                     }
 
                     System.out.println("#debug ListonicAds setOptions 6 on ui thread");
