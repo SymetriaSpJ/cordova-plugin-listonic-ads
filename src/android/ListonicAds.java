@@ -155,8 +155,7 @@ public class ListonicAds extends CordovaPlugin {
 
     private void setOptions(JSONObject options, CallbackContext callbackContext) {
         System.out.println("#debug ListonicAds setPresenterOptions start");
-        Integer width = null;
-        Integer height = null;
+
 
 
             System.out.println("#debug ListonicAds setOptions 1");
@@ -164,6 +163,9 @@ public class ListonicAds extends CordovaPlugin {
                 cordovaInstance.getActivity().runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
+                        Integer width = null;
+                        Integer height = null;
+
                         try {
                         System.out.println("#debug ListonicAds setOptions 4 on uithread");
 
