@@ -144,13 +144,20 @@ public class ListonicAds extends CordovaPlugin {
 
     private void setOptions(JSONObject options, CallbackContext callbackContext) {
         System.out.println("#debug ListonicAds setPresenterOptions start");
+        Integer myGravity = null;
+        Integer width = null;
+        Integer height = null;
+        LinearLayout.LayoutParams layoutParams = null;
+
 
         try {
             System.out.println("#debug ListonicAds setOptions 1");
-            float factor = cordovaInstance.getActivity().getApplication().getBaseContext().getResources().getDisplayMetrics().density;
-            Integer width = (int)(options.getInt("width") * factor);
-            Integer height = (int)(options.getInt("height") * factor);
-            Integer myGravity;
+            if (options.has("width") && options.has("height")) {
+                float factor = cordovaInstance.getActivity().getApplication().getBaseContext().getResources().getDisplayMetrics().density;
+                width = (int)(options.getInt("width") * factor);
+                height = (int)(options.getInt("height") * factor);
+                layoutParams = new LinearLayout.LayoutParams(width, height);
+            }
 
             if (options.has("gravity")) {
                 if (options.getString("gravity").equals("CENTER")) {
@@ -162,16 +169,20 @@ public class ListonicAds extends CordovaPlugin {
                 }
             }
 
-            LinearLayout.LayoutParams listonicAdParams = new LinearLayout.LayoutParams(width, height);
+
 
 
             cordovaInstance.getActivity().runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
                     System.out.println("#debug ListonicAds setOptions 4 on uithread");
-                    listonicAd.setLayoutParams(listonicAdParams);
-                    System.out.println("#debug ListonicAds setOptions 5 on ui thread");
-                    parentView.setGravity(myGravity);
+                    if (layoutParams != null) {
+                        listonicAd.setLayoutParams(layoutParams);
+                    }
+                    System.out.println("#debug ListonicAds setOptions 5 on uithread");
+                    if (myGravity != null) {
+                        listonicAd.setGravity(myGravity);
+                    }
                     System.out.println("#debug ListonicAds setOptions 6 on ui thread");
                     callbackContext.success("Success!");
                 }
