@@ -101,9 +101,16 @@ public class ListonicAds extends CordovaPlugin {
                         new ConstraintLayout.LayoutParams(
                             ConstraintLayout.LayoutParams.MATCH_PARENT,
                             ConstraintLayout.LayoutParams.MATCH_PARENT
-//                            0.0F
+                            0.0F
                         )
                     );
+                    ConstraintLayout.LayoutParams parentViewParams = new ConstraintLayout.LayoutParams(
+                            ConstraintLayout.LayoutParams.MATCH_PARENT,
+                            ConstraintLayout.LayoutParams.MATCH_PARENT
+                    );
+                    parentViewParams.verticalWeight = 0.0F;
+                    parentViewParams.orientation = ConstraintLayout.LayoutParams.VERTICAL;
+                    parentView.setLayoutParams(parentViewParams);
 
 
                     parentView.setBackgroundColor(Color.parseColor("#F7F8F9"));
