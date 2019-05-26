@@ -85,8 +85,8 @@ public class ListonicAds extends CordovaPlugin {
 
                 System.out.println("#debug ListonicAds initializeBannerView 2");
                 if (parentView == null) {
-//                    parentView = new LinearLayout(webView.getContext());
-                    parentView = new ConstraintLayout(webView.getContext());
+                    parentView = new LinearLayout(webView.getContext());
+//                    parentView = new ConstraintLayout(webView.getContext());
                 }
                 System.out.println("#debug ListonicAds initializeBannerView 3");
                 if (wvParentView != null && wvParentView != parentView) {
@@ -104,8 +104,8 @@ public class ListonicAds extends CordovaPlugin {
                     ((LinearLayout) parentView).setOrientation(LinearLayout.VERTICAL);
                     parentView.setLayoutParams(
                         new ConstraintLayout.LayoutParams(
-                            ConstraintLayout.LayoutParams.MATCH_PARENT,
-                            ConstraintLayout.LayoutParams.MATCH_PARENT,
+                            LinearLayout.LayoutParams.MATCH_PARENT,
+                            LinearLayout.LayoutParams.MATCH_PARENT,
                             0.0F
                         )
                     );
