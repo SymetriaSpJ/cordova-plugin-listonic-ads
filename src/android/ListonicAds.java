@@ -80,8 +80,8 @@ public class ListonicAds extends CordovaPlugin {
                 ViewGroup wvParentView = (ViewGroup) getWebView(wv).getParent();
 
                 if (parentView == null) {
-//                    parentView = new LinearLayout(webView.getContext());
-                    parentView = new ConstraintLayout(webView.getContext());
+                    parentView = new LinearLayout(webView.getContext());
+//                    parentView = new ConstraintLayout(webView.getContext());
                 }
 
                 if (wvParentView != null && wvParentView != parentView) {
@@ -96,21 +96,22 @@ public class ListonicAds extends CordovaPlugin {
                             1.0F
                         )
                     );
-//                    ((LinearLayout) parentView).setOrientation(LinearLayout.VERTICAL);
-//                    parentView.setLayoutParams(
-//                        new LinearLayout.LayoutParams(
-//                            LinearLayout.LayoutParams.MATCH_PARENT,
-//                            LinearLayout.LayoutParams.MATCH_PARENT
-//                            0.0F
-//                        )
-//                    );
-                    ConstraintLayout.LayoutParams parentViewParams = new ConstraintLayout.LayoutParams(
-                            ConstraintLayout.LayoutParams.MATCH_PARENT,
-                            ConstraintLayout.LayoutParams.MATCH_PARENT
+                    ((LinearLayout) parentView).setOrientation(LinearLayout.VERTICAL);
+                    parentView.setLayoutParams(
+                        new LinearLayout.LayoutParams(
+                            LinearLayout.LayoutParams.MATCH_PARENT,
+                            LinearLayout.LayoutParams.MATCH_PARENT
+                            0.0F
+                        )
                     );
-                    parentViewParams.verticalWeight = 0.0F;
-                    parentViewParams.orientation = ConstraintLayout.LayoutParams.VERTICAL;
-                    parentView.setLayoutParams(parentViewParams);
+
+//                    ConstraintLayout.LayoutParams parentViewParams = new ConstraintLayout.LayoutParams(
+//                            ConstraintLayout.LayoutParams.MATCH_PARENT,
+//                            ConstraintLayout.LayoutParams.MATCH_PARENT
+//                    );
+//                    parentViewParams.verticalWeight = 0.0F;
+//                    parentViewParams.orientation = ConstraintLayout.LayoutParams.VERTICAL;
+//                    parentView.setLayoutParams(parentViewParams);
 
 
                     parentView.setBackgroundColor(Color.parseColor("#F7F8F9"));
