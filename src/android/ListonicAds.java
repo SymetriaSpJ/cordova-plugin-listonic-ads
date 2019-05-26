@@ -156,7 +156,6 @@ public class ListonicAds extends CordovaPlugin {
         Integer myGravity = null;
         Integer width = null;
         Integer height = null;
-        LinearLayout.LayoutParams layoutParams = null;
 
         try {
             System.out.println("#debug ListonicAds setOptions 1");
@@ -164,39 +163,24 @@ public class ListonicAds extends CordovaPlugin {
                 float factor = cordovaInstance.getActivity().getApplication().getBaseContext().getResources().getDisplayMetrics().density;
                 width = (int)(options.getInt("width") * factor);
                 height = (int)(options.getInt("height") * factor);
-                layoutParams = new LinearLayout.LayoutParams(width, height);
-            }
+                final LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(width, height);
 
-//            if (options.has("gravity")) {
-//                if (options.getString("gravity").equals("CENTER")) {
-//                    myGravity = Gravity.CENTER;
-//                } else if (options.getString("gravity").equals("CENTER_VERTICAL")) {
-//                    myGravity = Gravity.CENTER_VERTICAL;
-//                } else {
-//                    myGravity = Gravity.CENTER | Gravity.CENTER_VERTICAL;
-//                }
-//            }
+                cordovaInstance.getActivity().runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        System.out.println("#debug ListonicAds setOptions 4 on uithread");
 
-            cordovaInstance.getActivity().runOnUiThread(new Runnable() {
-                @Override
-                public void run() {
-                    System.out.println("#debug ListonicAds setOptions 4 on uithread");
+                        if (layoutParams != null) {
+                            adContainer.setLayoutParams(layoutParams);
+                        }
 
-                    if (layoutParams != null) {
-                        adContainer.setLayoutParams(layoutParams);
+                        System.out.println("#debug ListonicAds setOptions 5 on uithread");
+
+                        System.out.println("#debug ListonicAds setOptions 6 on ui thread");
+                        callbackContext.success("Success!");
                     }
-
-                    System.out.println("#debug ListonicAds setOptions 5 on uithread");
-
-//                    if (myGravity != null) {
-//                        adContainer.setGravity(myGravity);
-//                    }
-
-                    System.out.println("#debug ListonicAds setOptions 6 on ui thread");
-                    callbackContext.success("Success!");
-                }
-            });
-
+                });
+            }
         } catch(JSONException e) {
             System.out.println("#debug ListonicAds setOptions json error");
             throw new IOError(e);
