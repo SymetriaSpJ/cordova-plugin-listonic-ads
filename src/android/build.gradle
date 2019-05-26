@@ -38,4 +38,7 @@ dependencies {
     implementation 'com.google.firebase:firebase-core:16.0.1'
     implementation 'com.google.firebase:firebase-config:16.0.0'
     implementation ('com.listonic.ad:companion:2.5.0RC1')
+    {
+        exclude group: 'com.android.support'
+    }
 }
