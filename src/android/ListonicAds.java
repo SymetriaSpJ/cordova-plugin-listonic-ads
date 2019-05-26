@@ -153,7 +153,6 @@ public class ListonicAds extends CordovaPlugin {
 
     private void setOptions(JSONObject options, CallbackContext callbackContext) {
         System.out.println("#debug ListonicAds setPresenterOptions start");
-        Integer myGravity = null;
         Integer width = null;
         Integer height = null;
 
@@ -163,7 +162,7 @@ public class ListonicAds extends CordovaPlugin {
                 float factor = cordovaInstance.getActivity().getApplication().getBaseContext().getResources().getDisplayMetrics().density;
                 width = (int)(options.getInt("width") * factor);
                 height = (int)(options.getInt("height") * factor);
-                final LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(width, height);
+                final LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(width, height, Gravity.CENTER);
 
                 cordovaInstance.getActivity().runOnUiThread(new Runnable() {
                     @Override
