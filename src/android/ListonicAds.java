@@ -175,15 +175,15 @@ public class ListonicAds extends CordovaPlugin {
                 layoutParams = new LinearLayout.LayoutParams(width, height);
             }
 
-            if (options.has("gravity")) {
-                if (options.getString("gravity").equals("CENTER")) {
-                    myGravity = Gravity.CENTER;
-                } else if (options.getString("gravity").equals("CENTER_VERTICAL")) {
-                    myGravity = Gravity.CENTER_VERTICAL;
-                } else {
-                    myGravity = Gravity.CENTER | Gravity.CENTER_VERTICAL;
-                }
-            }
+//            if (options.has("gravity")) {
+//                if (options.getString("gravity").equals("CENTER")) {
+//                    myGravity = Gravity.CENTER;
+//                } else if (options.getString("gravity").equals("CENTER_VERTICAL")) {
+//                    myGravity = Gravity.CENTER_VERTICAL;
+//                } else {
+//                    myGravity = Gravity.CENTER | Gravity.CENTER_VERTICAL;
+//                }
+//            }
 
             cordovaInstance.getActivity().runOnUiThread(new Runnable() {
                 @Override
@@ -196,9 +196,9 @@ public class ListonicAds extends CordovaPlugin {
 
                     System.out.println("#debug ListonicAds setOptions 5 on uithread");
 
-                    if (myGravity != null) {
-                        adContainer.setGravity(myGravity);
-                    }
+//                    if (myGravity != null) {
+//                        adContainer.setGravity(myGravity);
+//                    }
 
                     System.out.println("#debug ListonicAds setOptions 6 on ui thread");
                     callbackContext.success("Success!");
