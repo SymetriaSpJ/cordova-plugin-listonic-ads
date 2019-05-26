@@ -158,12 +158,13 @@ public class ListonicAds extends CordovaPlugin {
         Integer width = null;
         Integer height = null;
 
-        try {
+
             System.out.println("#debug ListonicAds setOptions 1");
             if (options.has("width") && options.has("height")) {
                 cordovaInstance.getActivity().runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
+                        try {
                         System.out.println("#debug ListonicAds setOptions 4 on uithread");
 
                         float factor = cordovaInstance.getActivity().getApplication().getBaseContext().getResources().getDisplayMetrics().density;
@@ -179,13 +180,15 @@ public class ListonicAds extends CordovaPlugin {
 
                         System.out.println("#debug ListonicAds setOptions 6 on ui thread");
                         callbackContext.success("Success!");
+
+                        } catch(JSONException e) {
+                            System.out.println("#debug ListonicAds setOptions json error");
+                            throw new IOError(e);
+                        }
                     }
                 });
             }
-        } catch(JSONException e) {
-            System.out.println("#debug ListonicAds setOptions json error");
-            throw new IOError(e);
-        }
+
     }
 
     private void show(JSONObject options, CallbackContext callbackContext) {
