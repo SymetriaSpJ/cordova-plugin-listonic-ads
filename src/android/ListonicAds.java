@@ -115,15 +115,6 @@ public class ListonicAds extends CordovaPlugin {
                     rootView.addView(parentView);
                 }
 
-                View adContainer = new LinearLayout(webView.getContext());
-                LinearLayout.LayoutParams adContainerParams = new LinearLayout.LayoutParams(
-                    ViewGroup.LayoutParams.MATCH_PARENT,
-                    ViewGroup.LayoutParams.WRAP_CONTENT
-                );
-                adContainerParams.gravity = Gravity.CENTER;
-                adContainer.setLayoutParams(adContainerParams);
-                adContainer.setBackgroundColor(Color.parseColor("#F7F8F9"));
-
                 System.out.println("#debug ListonicAds initializeBannerView 4");
 
                 listonicAd = new DisplayAdContainer(webView.getContext());
@@ -131,9 +122,11 @@ public class ListonicAds extends CordovaPlugin {
                 listonicAd.setLayoutParams(
                         new LinearLayout.LayoutParams(
                                 ViewGroup.LayoutParams.MATCH_PARENT,
-                                ViewGroup.LayoutParams.WRAP_CONTENT
+                                ViewGroup.LayoutParams.WRAP_CONTENT,
+                                Gravity.CENTER
                         )
                 );
+                listonicAd.setBackgroundColor(Color.parseColor("#F7F8F9"));
 
                 System.out.println("#debug ListonicAds initializeBannerView 5");
 
