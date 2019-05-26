@@ -132,7 +132,7 @@ public class ListonicAds extends CordovaPlugin {
                         new LinearLayout.LayoutParams(
                                 ViewGroup.LayoutParams.MATCH_PARENT,
                                 ViewGroup.LayoutParams.WRAP_CONTENT
-                        );
+                        )
                 );
 
                 System.out.println("#debug ListonicAds initializeBannerView 5");
