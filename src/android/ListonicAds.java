@@ -27,7 +27,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import java.io.IOError;
 
-import android.support.constraint.ConstraintLayout;
+import com.android.support.constraint.ConstraintLayout;
 
 public class ListonicAds extends CordovaPlugin {
 
@@ -68,28 +68,22 @@ public class ListonicAds extends CordovaPlugin {
     public void initialize(CordovaInterface cordova, final CordovaWebView webView) {
         super.initialize(cordova, webView);
         cordovaInstance = cordova;
-        System.out.println("#debug ListonicAds initialize start");
         AdCompanion.INSTANCE.initialize(cordovaInstance.getActivity().getApplication(), null, false);
-        System.out.println("#debug ListonicAds initialize 2");
         initializeBannerView(webView);
-        System.out.println("#debug ListonicAds initialize end");
     }
 
     private void initializeBannerView(CordovaWebView webView) {
         cordovaInstance.getActivity().runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                System.out.println("#debug ListonicAds initializeBannerView 1");
-
                 final CordovaWebView wv = webView;
                 ViewGroup wvParentView = (ViewGroup) getWebView(wv).getParent();
 
-                System.out.println("#debug ListonicAds initializeBannerView 2");
                 if (parentView == null) {
                     parentView = new LinearLayout(webView.getContext());
 //                    parentView = new ConstraintLayout(webView.getContext());
                 }
-                System.out.println("#debug ListonicAds initializeBannerView 3");
+
                 if (wvParentView != null && wvParentView != parentView) {
                     ViewGroup rootView = (ViewGroup)(getWebView(webView).getParent());
 
@@ -122,8 +116,6 @@ public class ListonicAds extends CordovaPlugin {
                     rootView.addView(parentView);
                 }
 
-                System.out.println("#debug ListonicAds initializeBannerView 4");
-
                 listonicAd = new DisplayAdContainer(webView.getContext());
                 listonicAd.setBackgroundColor(Color.parseColor("#F7F8F9"));
                 listonicAd.setLayoutParams(
@@ -133,13 +125,10 @@ public class ListonicAds extends CordovaPlugin {
                         )
                 );
 
-                System.out.println("#debug ListonicAds initializeBannerView 5");
-
                 parentView.addView(listonicAd);
                 parentView.bringToFront();
                 parentView.requestLayout();
                 parentView.requestFocus();
-                System.out.println("#debug ListonicAds initializeBannerView 6");
             }
         });
     }
@@ -166,11 +155,6 @@ public class ListonicAds extends CordovaPlugin {
     }
 
     private void setOptions(JSONObject options, CallbackContext callbackContext) {
-        System.out.println("#debug ListonicAds setPresenterOptions start");
-
-
-
-        System.out.println("#debug ListonicAds setOptions 1");
         if (options.has("width") && options.has("height")) {
             cordovaInstance.getActivity().runOnUiThread(new Runnable() {
                 @Override
@@ -179,24 +163,18 @@ public class ListonicAds extends CordovaPlugin {
                     Integer height = null;
 
                     try {
-                    System.out.println("#debug ListonicAds setOptions 4 on uithread");
+                        float factor = cordovaInstance.getActivity().getApplication().getBaseContext().getResources().getDisplayMetrics().density;
+                        width = (int)(options.getInt("width") * factor);
+                        height = (int)(options.getInt("height") * factor);
 
-                    float factor = cordovaInstance.getActivity().getApplication().getBaseContext().getResources().getDisplayMetrics().density;
-                    width = (int)(options.getInt("width") * factor);
-                    height = (int)(options.getInt("height") * factor);
+                        final LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(width, height);
+                        layoutParams.gravity = Gravity.CENTER;
 
-                    final LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(width, height);
-                    layoutParams.gravity = Gravity.CENTER;
+                        listonicAd.setLayoutParams(layoutParams);
 
-                    listonicAd.setLayoutParams(layoutParams);
-
-                    System.out.println("#debug ListonicAds setOptions 5 on uithread");
-
-                    System.out.println("#debug ListonicAds setOptions 6 on ui thread");
-                    callbackContext.success("Success!");
+                        callbackContext.success("Success!");
 
                     } catch(JSONException e) {
-                        System.out.println("#debug ListonicAds setOptions json error");
                         throw new IOError(e);
                     }
                 }
