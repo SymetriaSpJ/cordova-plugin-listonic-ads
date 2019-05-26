@@ -152,15 +152,17 @@ public class ListonicAds extends CordovaPlugin {
             Integer height = (int)(options.getInt("height") * factor);
             Integer myGravity;
 
-            if (options.getString("gravity").equals("CENTER")) {
-                myGravity = Gravity.CENTER;
-            } else if (options.getString("gravity").equals("CENTER_VERTICAL")) {
-                myGravity = Gravity.CENTER_VERTICAL;
-            } else {
-                myGravity = Gravity.CENTER | Gravity.CENTER_VERTICAL;
+            if (options.has("gravity")) {
+                if (options.getString("gravity").equals("CENTER")) {
+                    myGravity = Gravity.CENTER;
+                } else if (options.getString("gravity").equals("CENTER_VERTICAL")) {
+                    myGravity = Gravity.CENTER_VERTICAL;
+                } else {
+                    myGravity = Gravity.CENTER | Gravity.CENTER_VERTICAL;
+                }
             }
 
-            LinearLayout.LayoutParams listonicAdParams = new LinearLayout.LayoutParams(width, height, myGravity);
+            LinearLayout.LayoutParams listonicAdParams = new LinearLayout.LayoutParams(width, height);
 
 
             cordovaInstance.getActivity().runOnUiThread(new Runnable() {
@@ -169,7 +171,7 @@ public class ListonicAds extends CordovaPlugin {
                     System.out.println("#debug ListonicAds setOptions 4 on uithread");
                     listonicAd.setLayoutParams(listonicAdParams);
                     System.out.println("#debug ListonicAds setOptions 5 on ui thread");
-//                    parentView.setGravity(myGravity);
+                    parentView.setGravity(myGravity);
                     System.out.println("#debug ListonicAds setOptions 6 on ui thread");
                     callbackContext.success("Success!");
                 }
