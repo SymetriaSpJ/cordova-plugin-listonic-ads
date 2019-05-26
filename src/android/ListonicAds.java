@@ -103,7 +103,7 @@ public class ListonicAds extends CordovaPlugin {
                     );
                     ((LinearLayout) parentView).setOrientation(LinearLayout.VERTICAL);
                     parentView.setLayoutParams(
-                        new ConstraintLayout.LayoutParams(
+                        new LinearLayout.LayoutParams(
                             LinearLayout.LayoutParams.MATCH_PARENT,
                             LinearLayout.LayoutParams.MATCH_PARENT,
                             0.0F
