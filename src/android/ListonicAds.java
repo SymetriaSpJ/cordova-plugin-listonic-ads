@@ -41,8 +41,6 @@ public class ListonicAds extends CordovaPlugin {
 
     DisplayAdContainer listonicAd;
 
-    View adContainer;
-
     @Override
     public boolean execute(String action, JSONArray args, CallbackContext callbackContext) throws JSONException {
         JSONObject options = args.optJSONObject(0);
@@ -163,17 +161,14 @@ public class ListonicAds extends CordovaPlugin {
         try {
             System.out.println("#debug ListonicAds setOptions 1");
             if (options.has("width") && options.has("height")) {
-                System.out.println("#debug ListonicAds setOptions width" + options.getInt("width"));
-                System.out.println("#debug ListonicAds setOptions height" + options.getInt("height"));
-                float factor = cordovaInstance.getActivity().getApplication().getBaseContext().getResources().getDisplayMetrics().density;
-                width = (int)(options.getInt("width") * factor);
-                height = (int)(options.getInt("height") * factor);
-                System.out.println("#debug ListonicAds setOptions height final" + height);
-
                 cordovaInstance.getActivity().runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
                         System.out.println("#debug ListonicAds setOptions 4 on uithread");
+
+                        float factor = cordovaInstance.getActivity().getApplication().getBaseContext().getResources().getDisplayMetrics().density;
+                        width = (int)(options.getInt("width") * factor);
+                        height = (int)(options.getInt("height") * factor);
 
                         final LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(width, height);
                         layoutParams.gravity = Gravity.CENTER;
