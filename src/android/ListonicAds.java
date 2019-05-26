@@ -119,13 +119,6 @@ public class ListonicAds extends CordovaPlugin {
 
                 listonicAd = new DisplayAdContainer(webView.getContext());
                 listonicAd.setBackgroundColor(Color.parseColor("#F7F8F9"));
-//                listonicAd.setLayoutParams(
-//                        new LinearLayout.LayoutParams(
-//                                ViewGroup.LayoutParams.MATCH_PARENT,
-//                                ViewGroup.LayoutParams.WRAP_CONTENT,
-//                                Gravity.CENTER
-//                        )
-//                );
 
                 System.out.println("#debug ListonicAds initializeBannerView 5");
 
@@ -158,9 +151,12 @@ public class ListonicAds extends CordovaPlugin {
         try {
             System.out.println("#debug ListonicAds setOptions 1");
             if (options.has("width") && options.has("height")) {
+                System.out.println("#debug ListonicAds setOptions width" + options.getInt("width"));
+                System.out.println("#debug ListonicAds setOptions height" + options.getInt("height"));
                 float factor = cordovaInstance.getActivity().getApplication().getBaseContext().getResources().getDisplayMetrics().density;
                 width = (int)(options.getInt("width") * factor);
                 height = (int)(options.getInt("height") * factor);
+                System.out.println("#debug ListonicAds setOptions height final" + height);
                 final LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(width, height);
 
                 cordovaInstance.getActivity().runOnUiThread(new Runnable() {
