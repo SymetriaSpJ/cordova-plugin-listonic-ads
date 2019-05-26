@@ -128,8 +128,8 @@ public class ListonicAds extends CordovaPlugin {
                 listonicAd.setBackgroundColor(Color.parseColor("#FF0000"));
                 listonicAd.setLayoutParams(
                         new LinearLayout.LayoutParams(
-                                300,
-                                80
+                                ViewGroup.LayoutParams.MATCH_PARENT,
+                                ViewGroup.LayoutParams.WRAP_CONTENT
                         )
                 );
 
