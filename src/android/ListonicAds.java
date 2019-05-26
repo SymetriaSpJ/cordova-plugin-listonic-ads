@@ -169,9 +169,7 @@ public class ListonicAds extends CordovaPlugin {
                     public void run() {
                         System.out.println("#debug ListonicAds setOptions 4 on uithread");
 
-                        if (layoutParams != null) {
-                            adContainer.setLayoutParams(layoutParams);
-                        }
+                        adContainer.setLayoutParams(layoutParams);
 
                         System.out.println("#debug ListonicAds setOptions 5 on uithread");
 
