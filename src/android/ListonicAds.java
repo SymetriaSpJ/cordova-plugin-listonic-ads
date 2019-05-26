@@ -130,8 +130,7 @@ public class ListonicAds extends CordovaPlugin {
 
                 System.out.println("#debug ListonicAds initializeBannerView 5");
 
-                parentView.addView(adContainer);
-                adContainer.addView(listonicAd);
+                parentView.addView(listonicAd);
                 parentView.bringToFront();
                 parentView.requestLayout();
                 parentView.requestFocus();
