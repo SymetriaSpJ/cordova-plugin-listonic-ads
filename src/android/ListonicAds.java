@@ -109,12 +109,14 @@ public class ListonicAds extends CordovaPlugin {
                         )
                     );
 
+
                     parentView.setBackgroundColor(Color.parseColor("#F7F8F9"));
                     parentView.setClipChildren(false);
                     parentView.setClipToPadding(false);
                     parentView.addView(getWebView(webView));
                     rootView.setClipChildren(false);
                     rootView.setClipToPadding(false);
+                    setAllParentsClip(parentView, false);
                     rootView.addView(parentView);
                 }
 
@@ -138,6 +140,15 @@ public class ListonicAds extends CordovaPlugin {
                 System.out.println("#debug ListonicAds initializeBannerView 6");
             }
         });
+    }
+
+    public static void setAllParentsClip(View v, boolean enabled) {
+        while (v.getParent() != null && v.getParent() instanceof ViewGroup) {
+            ViewGroup viewGroup = (ViewGroup) v.getParent();
+            viewGroup.setClipChildren(enabled);
+            viewGroup.setClipToPadding(enabled);
+            v = viewGroup;
+        }
     }
 
     private View getWebView(CordovaWebView webView) {
