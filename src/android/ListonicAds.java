@@ -11,6 +11,7 @@ import android.content.Context;
 import android.app.Activity;
 import android.widget.Toast;
 import android.widget.RelativeLayout;
+import android.support.constraint.ConstraintLayout;
 import android.widget.LinearLayout;
 import android.view.View;
 import android.view.ViewGroup;
@@ -84,7 +85,8 @@ public class ListonicAds extends CordovaPlugin {
 
                 System.out.println("#debug ListonicAds initializeBannerView 2");
                 if (parentView == null) {
-                    parentView = new LinearLayout(webView.getContext());
+//                    parentView = new LinearLayout(webView.getContext());
+                    parentView = new ConstraintLayout(webView.getContext());
                 }
                 System.out.println("#debug ListonicAds initializeBannerView 3");
                 if (wvParentView != null && wvParentView != parentView) {
@@ -101,14 +103,16 @@ public class ListonicAds extends CordovaPlugin {
                     );
                     ((LinearLayout) parentView).setOrientation(LinearLayout.VERTICAL);
                     parentView.setLayoutParams(
-                        new LinearLayout.LayoutParams(
-                            ViewGroup.LayoutParams.MATCH_PARENT,
-                            ViewGroup.LayoutParams.MATCH_PARENT,
+                        new ConstraintLayout.LayoutParams(
+                            ConstraintLayout.LayoutParams.MATCH_PARENT,
+                            ConstraintLayout.LayoutParams.MATCH_PARENT,
                             0.0F
                         )
                     );
 
                     parentView.setBackgroundColor(Color.parseColor("#F7F8F9"));
+                    parentView.setClipChildren(false);
+                    parentView.setClipToPadding(false);
                     parentView.addView(getWebView(webView));
                     rootView.addView(parentView);
                 }
