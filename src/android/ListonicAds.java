@@ -27,7 +27,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import java.io.IOError;
 
-import com.android.support.constraint.ConstraintLayout;
+import android.support.constraint.ConstraintLayout;
 
 public class ListonicAds extends CordovaPlugin {
 
