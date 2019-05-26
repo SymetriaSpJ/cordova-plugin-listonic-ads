@@ -94,19 +94,19 @@ public class ListonicAds extends CordovaPlugin {
 
                     wvParentView.removeView(getWebView(webView));
 
+                    getWebView(webView).setLayoutParams(
+                        new LinearLayout.LayoutParams(
+                            ViewGroup.LayoutParams.MATCH_PARENT,
+                            ViewGroup.LayoutParams.MATCH_PARENT,
+                            1.0F
+                        )
+                    );
                     ((LinearLayout) parentView).setOrientation(LinearLayout.VERTICAL);
                     parentView.setLayoutParams(
                         new LinearLayout.LayoutParams(
                             ViewGroup.LayoutParams.MATCH_PARENT,
                             ViewGroup.LayoutParams.WRAP_CENTENT,
                             0.0F
-                        )
-                    );
-                    getWebView(webView).setLayoutParams(
-                        new LinearLayout.LayoutParams(
-                            ViewGroup.LayoutParams.MATCH_PARENT,
-                            ViewGroup.LayoutParams.MATCH_PARENT,
-                            1.0F
                         )
                     );
 
@@ -119,14 +119,13 @@ public class ListonicAds extends CordovaPlugin {
 
                 listonicAd = new DisplayAdContainer(webView.getContext());
                 listonicAd.setBackgroundColor(Color.parseColor("#F7F8F9"));
-                listonicAd.setLayoutParams(
-                        new LinearLayout.LayoutParams(
-                                ViewGroup.LayoutParams.MATCH_PARENT,
-                                ViewGroup.LayoutParams.WRAP_CONTENT,
-                                Gravity.CENTER
-                        )
-                );
-                listonicAd.setBackgroundColor(Color.parseColor("#F7F8F9"));
+//                listonicAd.setLayoutParams(
+//                        new LinearLayout.LayoutParams(
+//                                ViewGroup.LayoutParams.MATCH_PARENT,
+//                                ViewGroup.LayoutParams.WRAP_CONTENT,
+//                                Gravity.CENTER
+//                        )
+//                );
 
                 System.out.println("#debug ListonicAds initializeBannerView 5");
 
