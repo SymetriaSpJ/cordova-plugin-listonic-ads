@@ -85,7 +85,6 @@ public class ListonicAds extends CordovaPlugin {
 
                 if (parentView == null) {
                     parentView = new LinearLayout(webView.getContext());
-//                    parentView = new ConstraintLayout(webView.getContext());
                 }
 
                 if (wvParentView != null && wvParentView != parentView) {
@@ -108,15 +107,6 @@ public class ListonicAds extends CordovaPlugin {
                             0.0F
                         )
                     );
-
-//                    ConstraintLayout.LayoutParams parentViewParams = new ConstraintLayout.LayoutParams(
-//                            ConstraintLayout.LayoutParams.MATCH_PARENT,
-//                            ConstraintLayout.LayoutParams.MATCH_PARENT
-//                    );
-//                    parentViewParams.verticalWeight = 0.0F;
-//                    parentViewParams.orientation = ConstraintLayout.LayoutParams.VERTICAL;
-//                    parentView.setLayoutParams(parentViewParams);
-
 
                     parentView.setBackgroundColor(Color.parseColor("#F7F8F9"));
                     parentView.setClipChildren(false);
@@ -202,18 +192,24 @@ public class ListonicAds extends CordovaPlugin {
                 System.out.println("#debug ListonicAds show start");
 
                 String zone = "";
+                String sex = "";
+                String age = "";
                 HashMap<String, String> map = new HashMap<>();
 
                 try {
                     zone = options.getString("zone");
-                    map.put("sex", options.getString("sex"));
-                    map.put("age", options.getString("age"));
+                    sex = options.getString("sex");
+                    age = options.getString("age");
+                    map.put("sex", sex);
+                    map.put("age", age);
                 } catch(JSONException e) {
                     throw new IOError(e);
                 }
 
                 System.out.println("#debug ListonicAds show isAdVisible " + isAdVisible);
                 System.out.println("#debug ListonicAds show currentZone " + currentZone);
+                System.out.println("#debug ListonicAds show sex " + sex);
+                System.out.println("#debug ListonicAds show age " + age);
 
                 if (isAdVisible == true && currentZone.equals(zone)) {
                     System.out.println("#debug ListonicAds show CANCELLING BECAUSE SAME ZONE AND VISIBLE");
@@ -257,8 +253,6 @@ public class ListonicAds extends CordovaPlugin {
                     System.out.println("#debug ListonicAds hide CHANGES REQUIRED, HIDING AD");
                 }
 
-
-
                 if (presenter != null) {
                     presenter.onStop();
                 }
@@ -270,11 +264,3 @@ public class ListonicAds extends CordovaPlugin {
         });
     }
 }
-
-
-
-//                View adMock = new LinearLayout(webView.getContext());
-//                LinearLayout.LayoutParams adMockParams = new LinearLayout.LayoutParams(280, 100);
-//                adMockParams.gravity = Gravity.CENTER;
-//                adMock.setLayoutParams(adMockParams);
-//                adMock.setBackgroundColor(Color.parseColor("#0000FF"));
