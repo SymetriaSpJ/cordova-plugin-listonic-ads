@@ -226,6 +226,7 @@ public class ListonicAds extends CordovaPlugin {
                     presenter.onDestroy();
                 }
 
+                isAdVisible = true;
                 currentZone = zone;
 
                 presenter = new LegacyDisplayAdPresenter(
