@@ -212,8 +212,8 @@ public class ListonicAds extends CordovaPlugin {
                     throw new IOError(e);
                 }
 
-                System.out.println("#debug ListonicAds show isAdVisible" + isAdVisible);
-                System.out.println("#debug ListonicAds show currentZone" + currentZone);
+                System.out.println("#debug ListonicAds show isAdVisible " + isAdVisible);
+                System.out.println("#debug ListonicAds show currentZone " + currentZone);
 
                 if (isAdVisible == true && currentZone.equals(zone)) {
                     System.out.println("#debug ListonicAds show CANCELLING BECAUSE SAME ZONE AND VISIBLE");
