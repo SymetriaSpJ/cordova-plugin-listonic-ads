@@ -43,6 +43,10 @@ public class ListonicAds extends CordovaPlugin {
 
     DisplayAdContainer listonicAd;
 
+    boolean isAdVisible = false;
+
+    String currentZone = null;
+
     @Override
     public boolean execute(String action, JSONArray args, CallbackContext callbackContext) throws JSONException {
         JSONObject options = args.optJSONObject(0);
@@ -203,9 +207,15 @@ public class ListonicAds extends CordovaPlugin {
                     throw new IOError(e);
                 }
 
+                if (isAdVisible == true && currentZone == zone) {
+                    return;
+                }
+
                 if (presenter != null) {
                     presenter.onDestroy();
                 }
+
+                currentZone = zone;
 
                 presenter = new LegacyDisplayAdPresenter(
                         zone,
@@ -223,9 +233,17 @@ public class ListonicAds extends CordovaPlugin {
     }
 
     private void hide(JSONObject options, CallbackContext callbackContext) {
+
+
         cordovaInstance.getActivity().runOnUiThread(new Runnable() {
             @Override
             public void run() {
+                if (isAdVisible == false) {
+                    return;
+                }
+
+                isAdVisible = false;
+
                 System.out.println("#debug ListonicAds hide start");
                 if (presenter != null) {
                     presenter.onStop();
