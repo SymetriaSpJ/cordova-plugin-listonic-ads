@@ -318,8 +318,8 @@ public class ListonicAds extends CordovaPlugin {
                 }
 
                 LegacyDisplayAdPresenter oldPresenter = cachedAds.get(zone);
+                oldPresenter.onStart();
 
-                oldPresenter.onDestroy();
                 cachedAds.remove(zone);
 
                 presenter = new LegacyDisplayAdPresenter(
@@ -330,7 +330,9 @@ public class ListonicAds extends CordovaPlugin {
                 );
 
                 presenter.onCreate();
+                oldPresenter.onStop();
                 presenter.onStart();
+                oldPresenter.onDestroy();
                 cachedAds.put(presenter);
 
                 isAdVisible = true;
