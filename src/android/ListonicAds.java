@@ -244,12 +244,9 @@ public class ListonicAds extends CordovaPlugin {
 
                 isAdVisible = false;
 
-                System.out.println("#debug ListonicAds hide start");
                 if (presenter != null) {
                     presenter.onStop();
                 }
-//                parentView.removeView(listonicAd);
-                System.out.println("#debug ListonicAds hide end");
 
                 callbackContext.success("Success!");
             }
