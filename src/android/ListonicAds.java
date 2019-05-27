@@ -307,19 +307,43 @@ public class ListonicAds extends CordovaPlugin {
 
                 listonicAd.setVisibility(View.VISIBLE);
 
-                if (presenter != null) {
-                    presenter.onDestroy();
-                }
 
-                presenter = new LegacyDisplayAdPresenter(
-                        zone,
-                        listonicAd,
-                        map,
-                        null
+//                if (presenter != null) {
+//                    presenter.onDestroy();
+//                }
+//
+//                presenter = new LegacyDisplayAdPresenter(
+//                        zone,
+//                        listonicAd,
+//                        map,
+//                        null
+//                );
+//
+//                presenter.onCreate();
+//                presenter.onStart();
+
+                System.out.println("#debug ListonicAds show X1");
+                LegacyDisplayAdPresenter oldPresenter = cachedAds.get(zone);
+                System.out.println("#debug ListonicAds show X2");
+                oldPresenter.onStart();
+                System.out.println("#debug ListonicAds show X3");
+                LegacyDisplayAdPresenter newPresenter = new LegacyDisplayAdPresenter(
+                    zone,
+                    listonicAd,
+                    map,
+                    null
                 );
+                System.out.println("#debug ListonicAds show X4");
+                newPresenter.onCreate();
+                System.out.println("#debug ListonicAds show X5");
+                oldPresenter.onStop();
+                System.out.println("#debug ListonicAds show X6");
+                oldPresenter.onDestroy();
+                System.out.println("#debug ListonicAds show X7");
+                newPresenter.onStart();
+                System.out.println("#debug ListonicAds show X8");
 
-                presenter.onCreate();
-                presenter.onStart();
+
 
                 isAdVisible = true;
                 currentZone = zone;
