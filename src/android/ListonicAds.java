@@ -199,6 +199,8 @@ public class ListonicAds extends CordovaPlugin {
         cordovaInstance.getActivity().runOnUiThread(new Runnable() {
             @Override
             public void run() {
+                System.out.println("#debug ListonicAds show start");
+
                 String zone = "";
                 HashMap<String, String> map = new HashMap<>();
 
@@ -242,8 +244,6 @@ public class ListonicAds extends CordovaPlugin {
     }
 
     private void hide(JSONObject options, CallbackContext callbackContext) {
-
-
         cordovaInstance.getActivity().runOnUiThread(new Runnable() {
             @Override
             public void run() {
