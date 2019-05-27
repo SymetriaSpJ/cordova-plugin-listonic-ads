@@ -331,7 +331,7 @@ public class ListonicAds extends CordovaPlugin {
                 oldPresenter.onStop();
                 presenter.onStart();
                 oldPresenter.onDestroy();
-                cachedAds.put(presenter);
+                cachedAds.put(zone, presenter);
 
                 isAdVisible = true;
                 currentZone = zone;
