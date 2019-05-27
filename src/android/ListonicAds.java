@@ -206,8 +206,8 @@ public class ListonicAds extends CordovaPlugin {
 
                 try {
                     zone = options.getString("zone");
-//                    map.put("sex", "extraValue1");
-//                    map.put("extraKey2", "extraValue2");
+                    map.put("sex", options.getString("sex"));
+                    map.put("age", options.getString("age"));
                 } catch(JSONException e) {
                     throw new IOError(e);
                 }
@@ -232,7 +232,7 @@ public class ListonicAds extends CordovaPlugin {
                 presenter = new LegacyDisplayAdPresenter(
                         zone,
                         listonicAd,
-                        new HashMap<String, String>(),
+                        map,
                         null
                 );
 
