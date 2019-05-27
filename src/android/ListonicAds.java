@@ -155,7 +155,7 @@ public class ListonicAds extends CordovaPlugin {
         }
     }
 
-    private void prepare(JSONObject options, CallbackContext callbackContext) {
+    private void prepare(final JSONObject options, final CallbackContext callbackContext) {
         System.out.println("#debug ListonicAds prepare start");
 
 //        Iterator<String> keys = options.keys();
