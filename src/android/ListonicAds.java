@@ -215,7 +215,7 @@ public class ListonicAds extends CordovaPlugin {
                 System.out.println("#debug ListonicAds show isAdVisible" + isAdVisible);
                 System.out.println("#debug ListonicAds show currentZone" + currentZone);
 
-                if (isAdVisible == true && currentZone == zone) {
+                if (isAdVisible == true && currentZone.equals(zone)) {
                     System.out.println("#debug ListonicAds show CANCELLING BECAUSE SAME ZONE AND VISIBLE");
                     return;
                 } else {
@@ -226,9 +226,6 @@ public class ListonicAds extends CordovaPlugin {
                     presenter.onDestroy();
                 }
 
-                isAdVisible = true;
-                currentZone = zone;
-
                 presenter = new LegacyDisplayAdPresenter(
                         zone,
                         listonicAd,
@@ -238,6 +235,9 @@ public class ListonicAds extends CordovaPlugin {
 
                 presenter.onCreate();
                 presenter.onStart();
+
+                isAdVisible = true;
+                currentZone = zone;
 
                 callbackContext.success("Success!");
             }
@@ -257,11 +257,13 @@ public class ListonicAds extends CordovaPlugin {
                     System.out.println("#debug ListonicAds hide CHANGES REQUIRED, HIDING AD");
                 }
 
-                isAdVisible = false;
+
 
                 if (presenter != null) {
                     presenter.onStop();
                 }
+
+                isAdVisible = false;
 
                 callbackContext.success("Success!");
             }
