@@ -1,8 +1,6 @@
 var exec = cordova.require('cordova/exec');
 
-var ListonicAds = function(options) {
-    console.log('ListonicAds instanced with options', options);
-};
+var ListonicAds = function() {};
 
 ListonicAds.prototype.prepare = function(options, onSuccess, onError) {
     var errorCallback = function(obj) {

@@ -200,9 +200,12 @@ public class ListonicAds extends CordovaPlugin {
             @Override
             public void run() {
                 String zone = "";
+                HashMap<String, String> map = new HashMap<>();
 
                 try {
                     zone = options.getString("zone");
+//                    map.put("sex", "extraValue1");
+//                    map.put("extraKey2", "extraValue2");
                 } catch(JSONException e) {
                     throw new IOError(e);
                 }
