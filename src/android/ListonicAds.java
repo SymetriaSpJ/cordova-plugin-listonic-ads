@@ -218,6 +218,8 @@ public class ListonicAds extends CordovaPlugin {
                     System.out.println("#debug ListonicAds show CHANGES REQUIRED, SHOWING NEW AD");
                 }
 
+                listonicAd.setVisibility(View.VISIBLE);
+
                 if (presenter != null) {
                     presenter.onDestroy();
                 }
@@ -254,6 +256,7 @@ public class ListonicAds extends CordovaPlugin {
                 }
 
                 if (presenter != null) {
+                    listonicAd.setVisibility(View.GONE);
                     presenter.onStop();
                 }
 
