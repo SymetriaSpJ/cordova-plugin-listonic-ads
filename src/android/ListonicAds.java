@@ -18,6 +18,7 @@ import android.view.Gravity;
 import android.graphics.Color;
 import android.content.ContextWrapper;
 import java.util.HashMap;
+import java.util.Iterator;
 
 import com.listonic.ad.companion.base.AdCompanion;
 import com.listonic.ad.companion.display.DisplayAdContainer;
@@ -46,6 +47,8 @@ public class ListonicAds extends CordovaPlugin {
     boolean isAdVisible = false;
 
     String currentZone = null;
+
+    HashMap<String, LegacyDisplayAdPresenter> cachedAds = new HashMap<String, LegacyDisplayAdPresenter>();
 
     @Override
     public boolean execute(String action, JSONArray args, CallbackContext callbackContext) throws JSONException {
@@ -154,6 +157,39 @@ public class ListonicAds extends CordovaPlugin {
 
     private void prepare(JSONObject options, CallbackContext callbackContext) {
         System.out.println("#debug ListonicAds prepare start");
+
+        Iterator<String> keys = options.keys();
+
+        while(keys.hasNext()) {
+            String zoneName = keys.next();
+
+            System.out.println("#debug ListonicAds prepare zoneName " + zoneName);
+
+            try {
+                String sex = "";
+                String age = "";
+                HashMap<String, String> map = new HashMap<>();
+                sex = options.getString("sex");
+                age = options.getString("age");
+                map.put("sex", sex);
+                map.put("age", age);
+
+                LegacyDisplayAdPresenter presenter = new LegacyDisplayAdPresenter(
+                        zone,
+                        listonicAd,
+                        map,
+                        null
+                );
+                presenter.onCreate();
+
+                cachedAds.put(
+                    zoneName,
+                    presenter
+                );
+            } catch(JSONException e) {
+                throw new IOError(e);
+            }
+        }
     }
 
     private void setOptions(JSONObject options, CallbackContext callbackContext) {
@@ -218,9 +254,20 @@ public class ListonicAds extends CordovaPlugin {
                     System.out.println("#debug ListonicAds show CHANGES REQUIRED, SHOWING NEW AD");
                 }
 
-                if (presenter != null) {
-                    presenter.onDestroy();
+                try {
+                    zone = options.getString("zone");
+                    sex = options.getString("sex");
+                    age = options.getString("age");
+                    map.put("sex", sex);
+                    map.put("age", age);
+                } catch(JSONException e) {
+                    throw new IOError(e);
                 }
+
+                LegacyDisplayAdPresenter oldPresenter = cachedAds.get(zone);
+
+                oldPresenter.onDestroy();
+                cachedAds.remove(zone);
 
                 presenter = new LegacyDisplayAdPresenter(
                         zone,
@@ -231,6 +278,7 @@ public class ListonicAds extends CordovaPlugin {
 
                 presenter.onCreate();
                 presenter.onStart();
+                cachedAds.put(presenter);
 
                 isAdVisible = true;
                 currentZone = zone;
