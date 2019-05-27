@@ -47,6 +47,8 @@ public class ListonicAds extends CordovaPlugin {
 
     String currentZone = null;
 
+    HashMap<String, LegacyDisplayAdPresenter> cachedAds = new HashMap<String, LegacyDisplayAdPresenter>();
+
     @Override
     public boolean execute(String action, JSONArray args, CallbackContext callbackContext) throws JSONException {
         JSONObject options = args.optJSONObject(0);
