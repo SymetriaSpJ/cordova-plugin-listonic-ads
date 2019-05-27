@@ -158,9 +158,7 @@ public class ListonicAds extends CordovaPlugin {
     private void prepare(JSONObject options, CallbackContext callbackContext) {
         System.out.println("#debug ListonicAds prepare start");
 
-        options.getJSONArray()
-
-        Iterator<String> keys = options.keys();
+//        Iterator<String> keys = options.keys();
 
 //        while(keys.hasNext()) {
 //            String zoneName = keys.next();
