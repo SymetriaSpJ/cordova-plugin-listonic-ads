@@ -158,38 +158,91 @@ public class ListonicAds extends CordovaPlugin {
     private void prepare(JSONObject options, CallbackContext callbackContext) {
         System.out.println("#debug ListonicAds prepare start");
 
+        options.getJSONArray()
+
         Iterator<String> keys = options.keys();
 
-        while(keys.hasNext()) {
-            String zoneName = keys.next();
+//        while(keys.hasNext()) {
+//            String zoneName = keys.next();
+//
+//            System.out.println("#debug ListonicAds prepare zoneName " + zoneName);
+//
+//            try {
+//                String sex = "";
+//                String age = "";
+//                HashMap<String, String> map = new HashMap<>();
+//                sex = options.getString("sex");
+//                age = options.getString("age");
+//
+//                map.put("sex", sex);
+//                map.put("age", age);
+//
+//                LegacyDisplayAdPresenter presenter = new LegacyDisplayAdPresenter(
+//                        zone,
+//                        listonicAd,
+//                        map,
+//                        null
+//                );
+//                presenter.onCreate();
+//
+//                cachedAds.put(
+//                    zoneName,
+//                    presenter
+//                );
+//            } catch(JSONException e) {
+//                throw new IOError(e);
+//            }
+//        }
 
-            System.out.println("#debug ListonicAds prepare zoneName " + zoneName);
 
-            try {
+        try {
                 String sex = "";
                 String age = "";
                 HashMap<String, String> map = new HashMap<>();
                 sex = options.getString("sex");
                 age = options.getString("age");
+
                 map.put("sex", sex);
                 map.put("age", age);
 
-                LegacyDisplayAdPresenter presenter = new LegacyDisplayAdPresenter(
-                        zone,
+                LegacyDisplayAdPresenter presenter1 = new LegacyDisplayAdPresenter(
+                        "start",
                         listonicAd,
                         map,
                         null
                 );
-                presenter.onCreate();
-
+                presenter1.onCreate();
                 cachedAds.put(
-                    zoneName,
-                    presenter
+                    "start",
+                    presenter1
                 );
-            } catch(JSONException e) {
+
+            LegacyDisplayAdPresenter presenter2 = new LegacyDisplayAdPresenter(
+                    "settings",
+                    listonicAd,
+                    map,
+                    null
+            );
+            presenter2.onCreate();
+            cachedAds.put(
+                    "settings",
+                    presenter2
+            );
+
+            LegacyDisplayAdPresenter presenter3 = new LegacyDisplayAdPresenter(
+                    "trainings",
+                    listonicAd,
+                    map,
+                    null
+            );
+            presenter3.onCreate();
+            cachedAds.put(
+                    "trainings",
+                    presenter3
+            );
+        } catch(JSONException e) {
                 throw new IOError(e);
             }
-        }
     }
 
     private void setOptions(JSONObject options, CallbackContext callbackContext) {
