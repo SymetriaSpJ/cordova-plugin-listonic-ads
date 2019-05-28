@@ -299,10 +299,10 @@ public class ListonicAds extends CordovaPlugin {
                 listonicAd = new DisplayAdContainer(webView.getContext());
                 listonicAd.setBackgroundColor(Color.parseColor("#F7F8F9"));
                 listonicAd.setLayoutParams(
-                        new LinearLayout.LayoutParams(
-                                ViewGroup.LayoutParams.MATCH_PARENT,
-                                ViewGroup.LayoutParams.WRAP_CONTENT
-                        )
+                    new LinearLayout.LayoutParams(
+                            ViewGroup.LayoutParams.MATCH_PARENT,
+                            ViewGroup.LayoutParams.WRAP_CONTENT
+                    )
                 );
 
                 listonicAd.setVisibility(View.VISIBLE);
@@ -314,10 +314,10 @@ public class ListonicAds extends CordovaPlugin {
                 }
 
                 presenter = new LegacyDisplayAdPresenter(
-                        zone,
-                        listonicAd,
-                        map,
-                        null
+                    zone,
+                    listonicAd,
+                    map,
+                    null
                 );
 
                 presenter.onCreate();
@@ -369,7 +369,7 @@ public class ListonicAds extends CordovaPlugin {
                     System.out.println("#debug ListonicAds hide CHANGES REQUIRED, HIDING AD");
                 }
 
-                if(listonicAd != null) {
+                if (listonicAd != null) {
                     listonicAd.setVisibility(View.GONE);
                 }
 
