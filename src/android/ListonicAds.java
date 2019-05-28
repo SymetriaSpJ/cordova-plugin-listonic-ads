@@ -120,16 +120,6 @@ public class ListonicAds extends CordovaPlugin {
                     rootView.addView(parentView);
                 }
 
-                listonicAd = new DisplayAdContainer(webView.getContext());
-                listonicAd.setBackgroundColor(Color.parseColor("#F7F8F9"));
-                listonicAd.setLayoutParams(
-                        new LinearLayout.LayoutParams(
-                                ViewGroup.LayoutParams.MATCH_PARENT,
-                                ViewGroup.LayoutParams.WRAP_CONTENT
-                        )
-                );
-
-                parentView.addView(listonicAd);
                 parentView.bringToFront();
                 parentView.requestLayout();
                 parentView.requestFocus();
@@ -293,11 +283,6 @@ public class ListonicAds extends CordovaPlugin {
                     throw new IOError(e);
                 }
 
-                System.out.println("#debug ListonicAds show isAdVisible " + isAdVisible);
-                System.out.println("#debug ListonicAds show currentZone " + currentZone);
-                System.out.println("#debug ListonicAds show sex " + sex);
-                System.out.println("#debug ListonicAds show age " + age);
-
                 if (isAdVisible == true && currentZone.equals(zone)) {
                     System.out.println("#debug ListonicAds show CANCELLING BECAUSE SAME ZONE AND VISIBLE");
                     return;
@@ -305,8 +290,20 @@ public class ListonicAds extends CordovaPlugin {
                     System.out.println("#debug ListonicAds show CHANGES REQUIRED, SHOWING NEW AD");
                 }
 
-                listonicAd.setVisibility(View.VISIBLE);
+                listonicAd.setVisibility(View.GONE);
+                parentView.removeView(listonicAd);
+                listonicAd = null;
+                listonicAd = new DisplayAdContainer(webView.getContext());
+                listonicAd.setBackgroundColor(Color.parseColor("#F7F8F9"));
+                listonicAd.setLayoutParams(
+                        new LinearLayout.LayoutParams(
+                                ViewGroup.LayoutParams.MATCH_PARENT,
+                                ViewGroup.LayoutParams.WRAP_CONTENT
+                        )
+                );
 
+                listonicAd.setVisibility(View.VISIBLE);
+                parentView.addView(listonicAd);
 
                 if (presenter != null) {
                     presenter.onDestroy();
