@@ -55,6 +55,18 @@ ListonicAds.prototype.hide = function(options, onSuccess, onError) {
     exec(successCallback, errorCallback, 'ListonicAds', 'hide', [options]);
 };
 
+ListonicAds.prototype.setDebugMode = function(options, onSuccess, onError) {
+    var errorCallback = function(obj) {
+        onError(obj);
+    };
+
+    var successCallback = function(obj) {
+        onSuccess(obj);
+    };
+
+    exec(successCallback, errorCallback, 'ListonicAds', 'setDebugMode', [options]);
+};
+
 if (typeof module != 'undefined' && module.exports) {
     module.exports = ListonicAds;
 }

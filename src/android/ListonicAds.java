@@ -65,6 +65,9 @@ public class ListonicAds extends CordovaPlugin {
         } else if ("setOptions".equals(action)) {
             setOptions(options, callbackContext);
             return true;
+        } else if ("setDebugMode".equals(action)) {
+            setDebugMode(options, callbackContext);
+            return true;
         }
 
         return false;
@@ -383,5 +386,22 @@ public class ListonicAds extends CordovaPlugin {
                 callbackContext.success("Success!");
             }
         });
+    }
+
+    private void setDebugMode(JSONObject options, CallbackContext callbackContext) {
+        Boolean isDebug = false;
+        try {
+            isDebug = options.getBoolean("isDebug");
+        } catch(JSONException e) {
+            throw new IOError(e);
+        }
+
+        if (isDebug) {
+            AdCompanion.INSTANCE.startLogging(cordovaInstance.getActivity().getApplication());
+        } else {
+            AdCompanion.INSTANCE.stopLogging(cordovaInstance.getActivity().getApplication());
+        }
+
+        callbackContext.success("Success!");
     }
 }
