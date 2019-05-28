@@ -290,9 +290,12 @@ public class ListonicAds extends CordovaPlugin {
                     System.out.println("#debug ListonicAds show CHANGES REQUIRED, SHOWING NEW AD");
                 }
 
-                listonicAd.setVisibility(View.GONE);
-                parentView.removeView(listonicAd);
-                listonicAd = null;
+                if (listonicAd != null) {
+                    listonicAd.setVisibility(View.GONE);
+                    parentView.removeView(listonicAd);
+                    listonicAd = null;
+                }
+
                 listonicAd = new DisplayAdContainer(webView.getContext());
                 listonicAd.setBackgroundColor(Color.parseColor("#F7F8F9"));
                 listonicAd.setLayoutParams(
