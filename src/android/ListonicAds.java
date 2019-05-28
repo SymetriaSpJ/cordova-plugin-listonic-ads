@@ -193,54 +193,54 @@ public class ListonicAds extends CordovaPlugin {
 //        }
 
 
-        try {
-            String sex = "";
-            String age = "";
-            HashMap<String, String> map = new HashMap<>();
-            sex = options.getString("sex");
-            age = options.getString("age");
-
-            map.put("sex", sex);
-            map.put("age", age);
-
-            LegacyDisplayAdPresenter presenter1 = new LegacyDisplayAdPresenter(
-                    "start",
-                    listonicAd,
-                    map,
-                    null
-            );
-            presenter1.onCreate();
-            cachedAds.put(
-                    "start",
-                    presenter1
-            );
-
-            LegacyDisplayAdPresenter presenter2 = new LegacyDisplayAdPresenter(
-                    "settings",
-                    listonicAd,
-                    map,
-                    null
-            );
-            presenter2.onCreate();
-            cachedAds.put(
-                    "settings",
-                    presenter2
-            );
-
-            LegacyDisplayAdPresenter presenter3 = new LegacyDisplayAdPresenter(
-                    "trainings",
-                    listonicAd,
-                    map,
-                    null
-            );
-            presenter3.onCreate();
-            cachedAds.put(
-                    "trainings",
-                    presenter3
-            );
-        } catch(JSONException e) {
-            throw new IOError(e);
-        }
+//        try {
+//            String sex = "";
+//            String age = "";
+//            HashMap<String, String> map = new HashMap<>();
+//            sex = options.getString("sex");
+//            age = options.getString("age");
+//
+//            map.put("sex", sex);
+//            map.put("age", age);
+//
+//            LegacyDisplayAdPresenter presenter1 = new LegacyDisplayAdPresenter(
+//                    "start",
+//                    listonicAd,
+//                    map,
+//                    null
+//            );
+//            presenter1.onCreate();
+//            cachedAds.put(
+//                    "start",
+//                    presenter1
+//            );
+//
+//            LegacyDisplayAdPresenter presenter2 = new LegacyDisplayAdPresenter(
+//                    "settings",
+//                    listonicAd,
+//                    map,
+//                    null
+//            );
+//            presenter2.onCreate();
+//            cachedAds.put(
+//                    "settings",
+//                    presenter2
+//            );
+//
+//            LegacyDisplayAdPresenter presenter3 = new LegacyDisplayAdPresenter(
+//                    "trainings",
+//                    listonicAd,
+//                    map,
+//                    null
+//            );
+//            presenter3.onCreate();
+//            cachedAds.put(
+//                    "trainings",
+//                    presenter3
+//            );
+//        } catch(JSONException e) {
+//            throw new IOError(e);
+//        }
     }
 
     private void setOptions(JSONObject options, CallbackContext callbackContext) {
@@ -308,40 +308,43 @@ public class ListonicAds extends CordovaPlugin {
                 listonicAd.setVisibility(View.VISIBLE);
 
 
-//                if (presenter != null) {
-//                    presenter.onDestroy();
-//                }
-//
-//                presenter = new LegacyDisplayAdPresenter(
-//                        zone,
-//                        listonicAd,
-//                        map,
-//                        null
-//                );
-//
-//                presenter.onCreate();
-//                presenter.onStart();
+                if (presenter != null) {
+                    presenter.onDestroy();
+                    presenter = null;
+                }
 
-                System.out.println("#debug ListonicAds show X1");
-                LegacyDisplayAdPresenter oldPresenter = cachedAds.get(zone);
-                System.out.println("#debug ListonicAds show X2");
-                oldPresenter.onStart();
-                System.out.println("#debug ListonicAds show X3");
-                LegacyDisplayAdPresenter newPresenter = new LegacyDisplayAdPresenter(
-                    zone,
-                    listonicAd,
-                    map,
-                    null
+                presenter = new LegacyDisplayAdPresenter(
+                        zone,
+                        listonicAd,
+                        map,
+                        null
                 );
-                System.out.println("#debug ListonicAds show X4");
-                newPresenter.onCreate();
-                System.out.println("#debug ListonicAds show X5");
-                oldPresenter.onStop();
-                System.out.println("#debug ListonicAds show X6");
-                oldPresenter.onDestroy();
-                System.out.println("#debug ListonicAds show X7");
-                newPresenter.onStart();
-                System.out.println("#debug ListonicAds show X8");
+
+                presenter.onCreate();
+                presenter.onStart();
+
+//                System.out.println("#debug ListonicAds show X1");
+//                LegacyDisplayAdPresenter oldPresenter = cachedAds.get(zone);
+//                cachedAds.remove(zone);
+//                System.out.println("#debug ListonicAds show X2");
+//                oldPresenter.onStart();
+//                System.out.println("#debug ListonicAds show X3");
+//                LegacyDisplayAdPresenter newPresenter = new LegacyDisplayAdPresenter(
+//                    zone,
+//                    listonicAd,
+//                    map,
+//                    null
+//                );
+//                System.out.println("#debug ListonicAds show X4");
+//                newPresenter.onCreate();
+//                System.out.println("#debug ListonicAds show X5");
+//                oldPresenter.onStop();
+//                System.out.println("#debug ListonicAds show X6");
+//                oldPresenter.onDestroy();
+//                System.out.println("#debug ListonicAds show X7");
+//                newPresenter.onStart();
+//                cachedAds.put(zone, newPresenter);
+//                System.out.println("#debug ListonicAds show X8");
 
 
 
@@ -366,9 +369,13 @@ public class ListonicAds extends CordovaPlugin {
                     System.out.println("#debug ListonicAds hide CHANGES REQUIRED, HIDING AD");
                 }
 
+                listonicAd.setVisibility(View.GONE);
+//                LegacyDisplayAdPresenter currentPresenter = cachedAds.get(currentZone);
+//                currentPresenter.onStop();
+
                 if (presenter != null) {
-                    listonicAd.setVisibility(View.GONE);
-                    presenter.onStop();
+                    presenter.onDestroy();
+                    presenter = null;
                 }
 
                 isAdVisible = false;
