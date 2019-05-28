@@ -366,9 +366,9 @@ public class ListonicAds extends CordovaPlugin {
                     System.out.println("#debug ListonicAds hide CHANGES REQUIRED, HIDING AD");
                 }
 
-                listonicAd.setVisibility(View.GONE);
-//                LegacyDisplayAdPresenter currentPresenter = cachedAds.get(currentZone);
-//                currentPresenter.onStop();
+                if(listonicAd != null) {
+                    listonicAd.setVisibility(View.GONE);
+                }
 
                 if (presenter != null) {
                     presenter.onDestroy();
