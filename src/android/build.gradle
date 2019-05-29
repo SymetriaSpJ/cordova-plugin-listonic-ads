@@ -11,7 +11,7 @@ buildscript {
         google()
         jcenter()
         flatDir {
-            dirs 'libs'
+            dirs 'src/main/libs'
         }
     }
     dependencies {
