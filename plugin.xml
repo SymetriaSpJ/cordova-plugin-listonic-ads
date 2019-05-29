@@ -26,5 +26,6 @@
 
         <framework src="src/android/build.gradle" custom="true" type="gradleReference" />
 
+        <resource-file src="src/android/libs/companion.aar" target="libs/companion.aar" />
     </platform>
 </plugin>
