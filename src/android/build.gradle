@@ -24,17 +24,6 @@ android {
     }
 }
 
-repositories{
-    maven {
-        url "https://artif.listonic.com/artifactory/ListonicAndroidRepository"
-        credentials {
-            username = mavenUser
-            password = mavenPassword
-        }
-    }
-}
-
-
 dependencies {
     implementation 'com.google.firebase:firebase-core:16.0.1'
     implementation 'com.google.firebase:firebase-config:16.0.0'
