@@ -1,8 +1,11 @@
 android {
+    compileSdkVersion 26
+
     defaultConfig {
         minSdkVersion 16
         targetSdkVersion 26
         compileSdkVersion 26
+        multiDexEnabled true
     }
 
     packagingOptions {
