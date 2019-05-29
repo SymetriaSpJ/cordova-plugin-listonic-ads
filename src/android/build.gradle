@@ -1,6 +1,3 @@
-def mavenUser="fitatu"
-def mavenPassword="1234567890"
-
 buildscript {
     repositories {
         google()
@@ -25,13 +22,6 @@ android {
 }
 
 repositories{
-    maven {
-        url "https://artif.listonic.com/artifactory/ListonicAndroidRepository"
-        credentials {
-            username = mavenUser
-            password = mavenPassword
-        }
-    }
     flatDir {
         dirs 'libs'
         dirs 'src/main/libs'
