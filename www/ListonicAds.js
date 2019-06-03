@@ -52,7 +52,7 @@ ListonicAds.prototype.hide = function(onSuccess, onError) {
         onSuccess(obj);
     };
 
-    exec(successCallback, errorCallback, 'ListonicAds', 'hide', [options]);
+    exec(successCallback, errorCallback, 'ListonicAds', 'hide', []);
 };
 
 ListonicAds.prototype.setDebugMode = function(options, onSuccess, onError) {
