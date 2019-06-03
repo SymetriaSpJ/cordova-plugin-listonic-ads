@@ -43,7 +43,7 @@ ListonicAds.prototype.setOptions = function(options, onSuccess, onError) {
     exec(successCallback, errorCallback, 'ListonicAds', 'setOptions', [options]);
 };
 
-ListonicAds.prototype.hide = function(options, onSuccess, onError) {
+ListonicAds.prototype.hide = function(onSuccess, onError) {
     var errorCallback = function(obj) {
         onError(obj);
     };
