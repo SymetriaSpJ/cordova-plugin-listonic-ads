@@ -25,7 +25,5 @@
         <framework src="com.android.support.constraint:constraint-layout:1.0.2" />
 
         <framework src="src/android/build.gradle" custom="true" type="gradleReference" />
-
-
     </platform>
 </plugin>
