@@ -1,0 +1,46 @@
+def mavenUser="publicuser"
+def mavenPassword="publicpassword"
+
+buildscript {
+    repositories {
+        google()
+        jcenter()
+    }
+    dependencies {
+        classpath 'com.android.tools.build:gradle:3.3.1'
+        classpath 'com.google.gms:google-services:4.0.1'
+        classpath 'com.android.support.constraint:constraint-layout:1.0.2'
+    }
+}
+
+android {
+    packagingOptions {
+        exclude 'META-INF/NOTICE'
+        exclude 'META-INF/LICENSE'
+    }
+    defaultConfig {
+        multiDexEnabled true
+        compileSdkVersion 26
+    }
+}
+
+repositories{
+    maven {
+        url "https://artif.listonic.com/artifactory/ListonicAndroidRepository"
+        credentials {
+            username = mavenUser
+            password = mavenPassword
+        }
+    }
+}
+
+
+dependencies {
+    implementation 'com.google.firebase:firebase-core:16.0.1'
+    implementation 'com.google.firebase:firebase-config:16.0.0'
+    implementation ('com.android.support.constraint:constraint-layout:1.0.2')
+    implementation ('com.listonic.ad:companion:2.5.1')
+    {
+        exclude group: 'com.android.support'
+    }
+}
