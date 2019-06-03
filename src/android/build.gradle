@@ -1,5 +1,5 @@
-def mavenUser="fitatu"
-def mavenPassword="1234567890"
+def mavenUser="publicuser"
+def mavenPassword="publicpassword"
 
 buildscript {
     repositories {
