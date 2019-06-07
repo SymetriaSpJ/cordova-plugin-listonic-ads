@@ -223,6 +223,7 @@ public class ListonicAds extends CordovaPlugin {
                 parentView.addView(listonicAd);
 
                 if (presenter != null) {
+                    presenter.onStop();
                     presenter.onDestroy();
                     presenter = null;
                 }
@@ -258,6 +259,7 @@ public class ListonicAds extends CordovaPlugin {
                 }
 
                 if (presenter != null) {
+                    presenter.onStop();
                     presenter.onDestroy();
                     presenter = null;
                 }
