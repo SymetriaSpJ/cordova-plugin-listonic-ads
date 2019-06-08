@@ -202,8 +202,6 @@ public class ListonicAds extends CordovaPlugin {
                     throw new IOError(e);
                 }
 
-                System.out.println("#debug ListonicAds show start for " + zone);
-
                 if (isAdVisible == true && currentZone.equals(zone)) {
                     return;
                 }
@@ -245,8 +243,6 @@ public class ListonicAds extends CordovaPlugin {
                 isAdVisible = true;
                 currentZone = zone;
 
-                System.out.println("#debug ListonicAds show end for " + zone);
-
                 callbackContext.success("Success!");
             }
         });
@@ -256,8 +252,6 @@ public class ListonicAds extends CordovaPlugin {
         cordovaInstance.getActivity().runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                System.out.println("#debug ListonicAds hide start");
-
                 if (isAdVisible == false) {
                     return;
                 }
@@ -273,7 +267,6 @@ public class ListonicAds extends CordovaPlugin {
                 }
 
                 isAdVisible = false;
-                System.out.println("#debug ListonicAds hide end");
                 callbackContext.success("Success!");
             }
         });
