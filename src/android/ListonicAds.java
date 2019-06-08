@@ -223,6 +223,7 @@ public class ListonicAds extends CordovaPlugin {
                 parentView.addView(listonicAd);
 
                 if (presenter != null) {
+                    presenter.onStop();
                     presenter.onDestroy();
                     presenter = null;
                 }
@@ -258,6 +259,7 @@ public class ListonicAds extends CordovaPlugin {
                 }
 
                 if (presenter != null) {
+                    presenter.onStop();
                     presenter.onDestroy();
                     presenter = null;
                 }
@@ -284,5 +286,23 @@ public class ListonicAds extends CordovaPlugin {
         }
 
         callbackContext.success("Success!");
+    }
+
+    @Override
+    public void onResume(boolean multitasking) {
+        super.onResume(multitasking);
+
+        if (presenter != null) {
+            presenter.onStart();
+        }
+    }
+
+    @Override
+    public void onPause(boolean multitasking) {
+        super.onPause(multitasking);
+
+        if (presenter != null) {
+            presenter.onStop();
+        }
     }
 }
