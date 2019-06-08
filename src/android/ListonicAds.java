@@ -292,7 +292,6 @@ public class ListonicAds extends CordovaPlugin {
     public void onResume(boolean multitasking) {
         super.onResume(multitasking);
 
-        System.out.println("#debug ListonicAds onResume");
         if (presenter != null) {
             presenter.onStart();
         }
@@ -301,28 +300,9 @@ public class ListonicAds extends CordovaPlugin {
     @Override
     public void onPause(boolean multitasking) {
         super.onPause(multitasking);
-        System.out.println("#debug ListonicAds onPause");
 
         if (presenter != null) {
             presenter.onStop();
         }
-    }
-
-    @Override
-    public void onStart() {
-        super.onStart();
-        System.out.println("#debug ListonicAds onStart");
-    }
-
-    @Override
-    public void onStop() {
-        super.onStop();
-        System.out.println("#debug ListonicAds onStop");
-    }
-
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-        System.out.println("#debug ListonicAds onDestroy");
     }
 }
