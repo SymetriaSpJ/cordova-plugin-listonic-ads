@@ -185,8 +185,6 @@ public class ListonicAds extends CordovaPlugin {
         cordovaInstance.getActivity().runOnUiThread(new Runnable() {
             @Override
             public void run() {
-
-
                 String zone = "";
                 String sex = "";
                 String age = "";
@@ -267,6 +265,7 @@ public class ListonicAds extends CordovaPlugin {
                 }
 
                 isAdVisible = false;
+
                 callbackContext.success("Success!");
             }
         });
