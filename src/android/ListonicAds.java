@@ -291,13 +291,21 @@ public class ListonicAds extends CordovaPlugin {
     @Override
     public void onResume(boolean multitasking) {
         super.onResume(multitasking);
+
         System.out.println("#debug ListonicAds onResume");
+        if (presenter != null) {
+            presenter.onStart();
+        }
     }
 
     @Override
     public void onPause(boolean multitasking) {
         super.onPause(multitasking);
         System.out.println("#debug ListonicAds onPause");
+
+        if (presenter != null) {
+            presenter.onStop();
+        }
     }
 
     @Override
