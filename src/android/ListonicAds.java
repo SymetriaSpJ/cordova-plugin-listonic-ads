@@ -29,6 +29,9 @@ import java.io.IOError;
 
 import android.support.constraint.ConstraintLayout;
 
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
+
 public class ListonicAds extends CordovaPlugin {
 
     private RelativeLayout adViewLayout = null;
@@ -48,6 +51,10 @@ public class ListonicAds extends CordovaPlugin {
     String currentZone = null;
 
     HashMap<String, LegacyDisplayAdPresenter> cachedAds = new HashMap<String, LegacyDisplayAdPresenter>();
+
+    public static final String ConsentStringKey = "IABConsent_ConsentString";
+    public static final String ParsedPurposeConsentKey = "IABConsent_ParsedPurposeConsents";
+    public static final String ParsedVendorConsentKey = "IABConsent_ParsedVendorConsents";
 
     @Override
     public boolean execute(String action, JSONArray args, CallbackContext callbackContext) throws JSONException {
@@ -293,9 +300,38 @@ public class ListonicAds extends CordovaPlugin {
     private void hasConsent(JSONObject options, CallbackContext callbackContext) {
         Boolean hasConsent = AdCompanion.INSTANCE.hasConsent(cordovaInstance.getActivity().getApplication());
 
+        String a = readStringFromSharedPreferences(ConsentStringKey, null);
+        String b = readStringFromSharedPreferences(ParsedPurposeConsentKey, null);
+        String c = readStringFromSharedPreferences(ParsedVendorConsentKey, null);
+
         System.out.println("#debug ListonicAds hasConsent " + hasConsent);
+        System.out.println("#debug ListonicAds ConsentStringKey " + a);
+        System.out.println("#debug ListonicAds ParsedPurposeConsentKey " + b);
+        System.out.println("#debug ListonicAds ParsedVendorConsentKey " + c);
 
         callbackContext.success("Success!");
+    }
+
+    private void updateGdprConsents(JSONObject options, CallbackContext callbackContext) {
+        String consentString = options.getString("consentString");
+        String preParsedVendorConsents = options.getString("preParsedVendorConsents");
+        String preParsedPurposeConsents = options.getString("preParsedPurposeConsents");
+
+        saveStringInSharedPreferences(ConsentStringKey, consentString);
+        saveStringInSharedPreferences(ParsedPurposeConsentKey,preParsedVendorConsents);
+        saveStringInSharedPreferences(ParsedVendorConsentKey, preParsedPurposeConsents);
+
+        callbackContext.success("Success!");
+    }
+
+    private void saveStringInSharedPreferences(String key, String string) {
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(
+            cordovaInstance.getActivity().getApplication().getBaseContext()
+        );
+
+        SharedPreferences.Editor editor = prefs.edit();
+        editor.putString(key, string);
+        editor.apply();
     }
 
     @Override

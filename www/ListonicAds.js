@@ -74,6 +74,18 @@ ListonicAds.prototype.hasConsent = function(onSuccess, onError) {
     exec(successCallback, errorCallback, 'ListonicAds', 'hasConsent', []);
 };
 
+ListonicAds.prototype.updateGdprConsentsData = function(options, onSuccess, onError) {
+    var errorCallback = function(obj) {
+        onError(obj);
+    };
+
+    var successCallback = function(obj) {
+        onSuccess(obj);
+    };
+
+    exec(successCallback, errorCallback, 'ListonicAds', 'updateGdprConsentsData', [options]);
+};
+
 if (typeof module != 'undefined' && module.exports) {
     module.exports = ListonicAds;
 }
