@@ -313,9 +313,17 @@ public class ListonicAds extends CordovaPlugin {
     }
 
     private void updateGdprConsents(JSONObject options, CallbackContext callbackContext) {
-        String consentString = options.getString("consentString");
-        String preParsedVendorConsents = options.getString("preParsedVendorConsents");
-        String preParsedPurposeConsents = options.getString("preParsedPurposeConsents");
+        String consentString;
+        String preParsedVendorConsents;
+        String preParsedPurposeConsents;
+
+        try {
+            consentString = options.getString("consentString");
+            preParsedVendorConsents = options.getString("preParsedVendorConsents");
+            preParsedPurposeConsents = options.getString("preParsedPurposeConsents");
+        } catch(JSONException e) {
+            throw new IOError(e);
+        }
 
         saveStringInSharedPreferences(ConsentStringKey, consentString);
         saveStringInSharedPreferences(ParsedPurposeConsentKey,preParsedVendorConsents);
