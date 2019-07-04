@@ -324,6 +324,14 @@ public class ListonicAds extends CordovaPlugin {
         callbackContext.success("Success!");
     }
 
+    private String readStringFromSharedPreferences(String key, String defaultValue) {
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(
+        cordovaInstance.getActivity().getApplication().getBaseContext()
+        );
+
+        return prefs.getString(key, defaultValue);
+    }
+
     private void saveStringInSharedPreferences(String key, String string) {
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(
             cordovaInstance.getActivity().getApplication().getBaseContext()
