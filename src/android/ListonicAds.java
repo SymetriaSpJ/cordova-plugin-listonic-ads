@@ -77,7 +77,9 @@ public class ListonicAds extends CordovaPlugin {
             return true;
         } else if ("hasConsent".equals(action)) {
             hasConsent(options, callbackContext);
-        }
+        } else if ("updateGdprConsents".equals(action)) {
+             updateGdprConsents(options, callbackContext);
+         }
 
         return false;
     }
