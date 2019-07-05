@@ -178,7 +178,10 @@ public class ListonicAds extends CordovaPlugin {
                 }
 
                 if (isAdVisible == true && currentZone.equals(zone)) {
+                    System.out.println("#debug ListonicAds show - ad visible, stop");
                     return;
+                } else {
+                    System.out.println("#debug ListonicAds show - switching to another ad");
                 }
 
                 if (listonicAd != null) {
