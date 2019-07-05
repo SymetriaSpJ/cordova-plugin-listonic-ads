@@ -85,17 +85,24 @@ public class ListonicAds extends CordovaPlugin {
 
         super.initialize(cordova, webView);
         cordovaInstance = cordova;
-        AdCompanion.INSTANCE.initialize(
-            cordovaInstance.getActivity().getApplication(),
-            new InterceptedUrlCallback() {
-                @Override
-                public boolean onUrlIntercepted(String s) {
-                    System.out.println("#debug ListonicAds onUrlIntercepted");
 
-                   return false;
-                }
-            }
-        , false);
+        try {
+            AdCompanion.INSTANCE.initialize(
+                cordovaInstance.getActivity().getApplication(),
+                new InterceptedUrlCallback() {
+                    @Override
+                    public boolean onUrlIntercepted(String s) {
+                        System.out.println("#debug ListonicAds onUrlIntercepted");
+
+                       return false;
+                    }
+                },
+                false
+            );
+        } catch (Throwable error) {
+            System.out.println("#debug ListonicAds creation error");
+        }
+
         initializeBannerView(webView);
     }
 
@@ -201,14 +208,18 @@ public class ListonicAds extends CordovaPlugin {
                     listonicAd = null;
                 }
 
-                listonicAd = new DisplayAdContainer(webView.getContext());
-                listonicAd.setBackgroundColor(Color.parseColor("#F7F8F9"));
-                listonicAd.setLayoutParams(
-                    new LinearLayout.LayoutParams(
-                            ViewGroup.LayoutParams.MATCH_PARENT,
-                            ViewGroup.LayoutParams.WRAP_CONTENT
-                    )
-                );
+                try {
+                    listonicAd = new DisplayAdContainer(webView.getContext());
+                    listonicAd.setBackgroundColor(Color.parseColor("#F7F8F9"));
+                    listonicAd.setLayoutParams(
+                        new LinearLayout.LayoutParams(
+                                ViewGroup.LayoutParams.MATCH_PARENT,
+                                ViewGroup.LayoutParams.WRAP_CONTENT
+                        )
+                    );
+                } catch (Throwable error) {
+                    System.out.println("#debug ListonicAds DisplayAdContainer error");
+                }
 
                 listonicAd.setVisibility(View.VISIBLE);
                 parentView.addView(listonicAd);
@@ -219,15 +230,19 @@ public class ListonicAds extends CordovaPlugin {
                     presenter = null;
                 }
 
-                presenter = new LegacyDisplayAdPresenter(
-                    zone,
-                    listonicAd,
-                    map,
-                    null
-                );
+                try {
+                    presenter = new LegacyDisplayAdPresenter(
+                        zone,
+                        listonicAd,
+                        map,
+                        null
+                    );
 
-                presenter.onCreate();
-                presenter.onStart();
+                    presenter.onCreate();
+                    presenter.onStart();
+                } catch (Throwable error) {
+                    System.out.println("#debug ListonicAds LegacyDisplayAdPresenter error");
+                }
 
                 isAdVisible = true;
                 currentZone = zone;
@@ -285,33 +300,33 @@ public class ListonicAds extends CordovaPlugin {
         Boolean hasConsent = AdCompanion.INSTANCE.hasConsent(cordovaInstance.getActivity().getApplication());
 
         String consentString = readStringFromSharedPreferences(ConsentStringKey, null);
-        String parsedPurposeConsent = readStringFromSharedPreferences(ParsedPurposeConsentKey, null);
-        String parsedVendorConsent = readStringFromSharedPreferences(ParsedVendorConsentKey, null);
+        String parsedPurposeConsentsString = readStringFromSharedPreferences(ParsedPurposeConsentKey, null);
+        String parsedVendorConsentsString = readStringFromSharedPreferences(ParsedVendorConsentKey, null);
 
         System.out.println("#debug ListonicAds hasConsent " + hasConsent);
         System.out.println("#debug ListonicAds ConsentStringKey " + consentString);
-        System.out.println("#debug ListonicAds ParsedPurposeConsentKey " + parsedPurposeConsent);
-        System.out.println("#debug ListonicAds ParsedVendorConsentKey " + parsedVendorConsent);
+        System.out.println("#debug ListonicAds ParsedPurposeConsentKey " + parsedPurposeConsentsString);
+        System.out.println("#debug ListonicAds ParsedVendorConsentKey " + parsedVendorConsentsString);
 
         callbackContext.success("Success!");
     }
 
     private void updateGdprConsentsData(JSONObject options, CallbackContext callbackContext) {
         String consentString;
-        String preParsedVendorConsents;
-        String preParsedPurposeConsents;
+        String parsedVendorConsentsString;
+        String parsedPurposeConsentsString;
 
         try {
             consentString = options.getString("consentString");
-            preParsedVendorConsents = options.getString("preParsedVendorConsents");
-            preParsedPurposeConsents = options.getString("preParsedPurposeConsents");
+            parsedVendorConsentsString = options.getString("parsedVendorConsentsString");
+            parsedPurposeConsentsString = options.getString("parsedPurposeConsentsString");
         } catch(JSONException e) {
             throw new IOError(e);
         }
 
         saveStringInSharedPreferences(ConsentStringKey, consentString);
-        saveStringInSharedPreferences(ParsedPurposeConsentKey,preParsedVendorConsents);
-        saveStringInSharedPreferences(ParsedVendorConsentKey, preParsedPurposeConsents);
+        saveStringInSharedPreferences(ParsedPurposeConsentKey,parsedPurposeConsentsString);
+        saveStringInSharedPreferences(ParsedVendorConsentKey, parsedVendorConsentsString);
 
         callbackContext.success("Success!");
     }
