@@ -81,22 +81,13 @@ public class ListonicAds extends CordovaPlugin {
 
     @Override
     public void initialize(CordovaInterface cordova, final CordovaWebView webView) {
-        System.out.println("#debug ListonicAds initialize");
-
         super.initialize(cordova, webView);
         cordovaInstance = cordova;
 
         try {
             AdCompanion.INSTANCE.initialize(
                 cordovaInstance.getActivity().getApplication(),
-                new InterceptedUrlCallback() {
-                    @Override
-                    public boolean onUrlIntercepted(String s) {
-                        System.out.println("#debug ListonicAds onUrlIntercepted");
-
-                       return false;
-                    }
-                },
+                null,
                 false
             );
         } catch (Throwable error) {
@@ -107,8 +98,6 @@ public class ListonicAds extends CordovaPlugin {
     }
 
     private void initializeBannerView(CordovaWebView webView) {
-        System.out.println("#debug ListonicAds initializeBannerView");
-
         cordovaInstance.getActivity().runOnUiThread(new Runnable() {
             @Override
             public void run() {
@@ -175,8 +164,6 @@ public class ListonicAds extends CordovaPlugin {
     }
 
     private void show(JSONObject options, CallbackContext callbackContext) {
-        System.out.println("#debug ListonicAds show");
-
         cordovaInstance.getActivity().runOnUiThread(new Runnable() {
             @Override
             public void run() {
@@ -196,10 +183,7 @@ public class ListonicAds extends CordovaPlugin {
                 }
 
                 if (isAdVisible == true && currentZone.equals(zone)) {
-                    System.out.println("#debug ListonicAds show - ad visible, stop");
                     return;
-                } else {
-                    System.out.println("#debug ListonicAds show - switching to another ad");
                 }
 
                 if (listonicAd != null) {
@@ -253,8 +237,6 @@ public class ListonicAds extends CordovaPlugin {
     }
 
     private void hide(JSONObject options, CallbackContext callbackContext) {
-        System.out.println("#debug ListonicAds hide");
-
         cordovaInstance.getActivity().runOnUiThread(new Runnable() {
             @Override
             public void run() {
@@ -351,8 +333,6 @@ public class ListonicAds extends CordovaPlugin {
 
     @Override
     public void onResume(boolean multitasking) {
-        System.out.println("#debug ListonicAds onResume");
-
         super.onResume(multitasking);
 
         if (presenter != null) {
@@ -362,8 +342,6 @@ public class ListonicAds extends CordovaPlugin {
 
     @Override
     public void onPause(boolean multitasking) {
-        System.out.println("#debug ListonicAds onPause");
-
         super.onPause(multitasking);
 
         if (presenter != null) {
