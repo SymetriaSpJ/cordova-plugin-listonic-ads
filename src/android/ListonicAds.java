@@ -66,12 +66,6 @@ public class ListonicAds extends CordovaPlugin {
         } else if ("hide".equals(action)) {
             hide(options, callbackContext);
             return true;
-        } else if ("prepare".equals(action)) {
-            prepare(options, callbackContext);
-            return true;
-        } else if ("setOptions".equals(action)) {
-            setOptions(options, callbackContext);
-            return true;
         } else if ("setDebugMode".equals(action)) {
             setDebugMode(options, callbackContext);
             return true;
@@ -86,6 +80,8 @@ public class ListonicAds extends CordovaPlugin {
 
     @Override
     public void initialize(CordovaInterface cordova, final CordovaWebView webView) {
+        System.out.println("#debug ListonicAds initialize");
+
         super.initialize(cordova, webView);
         cordovaInstance = cordova;
         AdCompanion.INSTANCE.initialize(cordovaInstance.getActivity().getApplication(), null, false);
@@ -93,6 +89,8 @@ public class ListonicAds extends CordovaPlugin {
     }
 
     private void initializeBannerView(CordovaWebView webView) {
+        System.out.println("#debug ListonicAds initializeBannerView");
+
         cordovaInstance.getActivity().runOnUiThread(new Runnable() {
             @Override
             public void run() {
@@ -158,41 +156,9 @@ public class ListonicAds extends CordovaPlugin {
         }
     }
 
-
-    private void prepare(final JSONObject options, final CallbackContext callbackContext) {
-        System.out.println("#debug ListonicAds prepare start");
-    }
-
-    private void setOptions(JSONObject options, CallbackContext callbackContext) {
-        if (options.has("width") && options.has("height")) {
-            cordovaInstance.getActivity().runOnUiThread(new Runnable() {
-                @Override
-                public void run() {
-                    Integer width = null;
-                    Integer height = null;
-
-                    try {
-                        float factor = cordovaInstance.getActivity().getApplication().getBaseContext().getResources().getDisplayMetrics().density;
-                        width = (int)(options.getInt("width") * factor);
-                        height = (int)(options.getInt("height") * factor);
-
-                        final LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(width, height);
-                        layoutParams.gravity = Gravity.CENTER;
-
-                        listonicAd.setLayoutParams(layoutParams);
-
-                        callbackContext.success("Success!");
-
-                    } catch(JSONException e) {
-                        throw new IOError(e);
-                    }
-                }
-            });
-        }
-
-    }
-
     private void show(JSONObject options, CallbackContext callbackContext) {
+        System.out.println("#debug ListonicAds show");
+
         cordovaInstance.getActivity().runOnUiThread(new Runnable() {
             @Override
             public void run() {
@@ -258,6 +224,8 @@ public class ListonicAds extends CordovaPlugin {
     }
 
     private void hide(JSONObject options, CallbackContext callbackContext) {
+        System.out.println("#debug ListonicAds hide");
+
         cordovaInstance.getActivity().runOnUiThread(new Runnable() {
             @Override
             public void run() {
@@ -302,14 +270,14 @@ public class ListonicAds extends CordovaPlugin {
     private void hasConsent(JSONObject options, CallbackContext callbackContext) {
         Boolean hasConsent = AdCompanion.INSTANCE.hasConsent(cordovaInstance.getActivity().getApplication());
 
-        String a = readStringFromSharedPreferences(ConsentStringKey, null);
-        String b = readStringFromSharedPreferences(ParsedPurposeConsentKey, null);
-        String c = readStringFromSharedPreferences(ParsedVendorConsentKey, null);
+        String consentString = readStringFromSharedPreferences(ConsentStringKey, null);
+        String parsedPurposeConsent = readStringFromSharedPreferences(ParsedPurposeConsentKey, null);
+        String parsedVendorConsent = readStringFromSharedPreferences(ParsedVendorConsentKey, null);
 
         System.out.println("#debug ListonicAds hasConsent " + hasConsent);
-        System.out.println("#debug ListonicAds ConsentStringKey " + a);
-        System.out.println("#debug ListonicAds ParsedPurposeConsentKey " + b);
-        System.out.println("#debug ListonicAds ParsedVendorConsentKey " + c);
+        System.out.println("#debug ListonicAds ConsentStringKey " + consentString);
+        System.out.println("#debug ListonicAds ParsedPurposeConsentKey " + parsedPurposeConsent);
+        System.out.println("#debug ListonicAds ParsedVendorConsentKey " + parsedVendorConsent);
 
         callbackContext.success("Success!");
     }
@@ -354,6 +322,8 @@ public class ListonicAds extends CordovaPlugin {
 
     @Override
     public void onResume(boolean multitasking) {
+        System.out.println("#debug ListonicAds onResume");
+
         super.onResume(multitasking);
 
         if (presenter != null) {
@@ -363,6 +333,8 @@ public class ListonicAds extends CordovaPlugin {
 
     @Override
     public void onPause(boolean multitasking) {
+        System.out.println("#debug ListonicAds onPause");
+
         super.onPause(multitasking);
 
         if (presenter != null) {
