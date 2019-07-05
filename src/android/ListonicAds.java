@@ -77,8 +77,8 @@ public class ListonicAds extends CordovaPlugin {
             return true;
         } else if ("hasConsent".equals(action)) {
             hasConsent(options, callbackContext);
-        } else if ("updateGdprConsents".equals(action)) {
-             updateGdprConsents(options, callbackContext);
+        } else if ("updateGdprConsentsData".equals(action)) {
+             updateGdprConsentsData(options, callbackContext);
          }
 
         return false;
@@ -314,7 +314,7 @@ public class ListonicAds extends CordovaPlugin {
         callbackContext.success("Success!");
     }
 
-    private void updateGdprConsents(JSONObject options, CallbackContext callbackContext) {
+    private void updateGdprConsentsData(JSONObject options, CallbackContext callbackContext) {
         String consentString;
         String preParsedVendorConsents;
         String preParsedPurposeConsents;
