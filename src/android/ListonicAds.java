@@ -22,7 +22,7 @@ import java.util.HashMap;
 import com.listonic.ad.companion.base.AdCompanion;
 import com.listonic.ad.companion.display.DisplayAdContainer;
 import com.listonic.ad.companion.display.LegacyDisplayAdPresenter;
-import com.list onic.ad.companion.base.InterceptedUrlCallback;
+import com.listonic.ad.companion.base.InterceptedUrlCallback;
 
 import org.json.JSONException;
 import org.json.JSONObject;
