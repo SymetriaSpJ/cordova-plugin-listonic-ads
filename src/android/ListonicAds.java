@@ -22,6 +22,7 @@ import java.util.HashMap;
 import com.listonic.ad.companion.base.AdCompanion;
 import com.listonic.ad.companion.display.DisplayAdContainer;
 import com.listonic.ad.companion.display.LegacyDisplayAdPresenter;
+import com.list onic.ad.companion.base.InterceptedUrlCallback;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -84,7 +85,17 @@ public class ListonicAds extends CordovaPlugin {
 
         super.initialize(cordova, webView);
         cordovaInstance = cordova;
-        AdCompanion.INSTANCE.initialize(cordovaInstance.getActivity().getApplication(), null, false);
+        AdCompanion.INSTANCE.initialize(
+            cordovaInstance.getActivity().getApplication(),
+            new InterceptedUrlCallback() {
+                @Override
+                public boolean onUrlIntercepted(String s) {
+                    System.out.println("#debug ListonicAds onUrlIntercepted");
+
+                   return false;
+                }
+            }
+        , false);
         initializeBannerView(webView);
     }
 
