@@ -233,7 +233,7 @@ public class ListonicAds extends CordovaPlugin {
 
                     presenter.onCreate();
                     System.out.println("#debug COMPANION ListonicAds LegacyDisplayAdPresenter show 6");
-                    presenter.onStart();
+
                     System.out.println("#debug COMPANION ListonicAds LegacyDisplayAdPresenter show 7");
                 } catch (Throwable error) {
                     System.out.println("#debug ListonicAds LegacyDisplayAdPresenter error");
