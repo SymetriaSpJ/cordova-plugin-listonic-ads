@@ -167,6 +167,7 @@ public class ListonicAds extends CordovaPlugin {
         cordovaInstance.getActivity().runOnUiThread(new Runnable() {
             @Override
             public void run() {
+            System.out.println("#debug COMPANION ListonicAds LegacyDisplayAdPresenter show 1");
                 String zone = "";
                 String sex = "";
                 String age = "";
@@ -192,6 +193,8 @@ public class ListonicAds extends CordovaPlugin {
                     listonicAd = null;
                 }
 
+                System.out.println("#debug COMPANION ListonicAds LegacyDisplayAdPresenter show 2");
+
                 try {
                     listonicAd = new DisplayAdContainer(webView.getContext());
                     listonicAd.setBackgroundColor(Color.parseColor("#F7F8F9"));
@@ -205,6 +208,8 @@ public class ListonicAds extends CordovaPlugin {
                     System.out.println("#debug ListonicAds DisplayAdContainer error");
                 }
 
+                System.out.println("#debug COMPANION ListonicAds LegacyDisplayAdPresenter show 3");
+
                 listonicAd.setVisibility(View.VISIBLE);
                 parentView.addView(listonicAd);
 
@@ -214,6 +219,8 @@ public class ListonicAds extends CordovaPlugin {
                     presenter = null;
                 }
 
+                System.out.println("#debug COMPANION ListonicAds LegacyDisplayAdPresenter show 4");
+
                 try {
                     presenter = new LegacyDisplayAdPresenter(
                         zone,
@@ -222,14 +229,20 @@ public class ListonicAds extends CordovaPlugin {
                         null
                     );
 
+                    System.out.println("#debug COMPANION ListonicAds LegacyDisplayAdPresenter show 5");
+
                     presenter.onCreate();
+                    System.out.println("#debug COMPANION ListonicAds LegacyDisplayAdPresenter show 6");
                     presenter.onStart();
+                    System.out.println("#debug COMPANION ListonicAds LegacyDisplayAdPresenter show 7");
                 } catch (Throwable error) {
                     System.out.println("#debug ListonicAds LegacyDisplayAdPresenter error");
                 }
 
                 isAdVisible = true;
                 currentZone = zone;
+
+                System.out.println("#debug COMPANION ListonicAds LegacyDisplayAdPresenter show 8");
 
                 callbackContext.success("Success!");
             }
@@ -240,6 +253,8 @@ public class ListonicAds extends CordovaPlugin {
         cordovaInstance.getActivity().runOnUiThread(new Runnable() {
             @Override
             public void run() {
+                System.out.println("#debug COMPANION ListonicAds LegacyDisplayAdPresenter hide 1");
+
                 if (isAdVisible == false) {
                     return;
                 }
@@ -248,13 +263,20 @@ public class ListonicAds extends CordovaPlugin {
                     listonicAd.setVisibility(View.GONE);
                 }
 
+                System.out.println("#debug COMPANION ListonicAds LegacyDisplayAdPresenter hide 2");
+
                 if (presenter != null) {
+                System.out.println("#debug COMPANION ListonicAds LegacyDisplayAdPresenter hide 3");
                     presenter.onStop();
+                    System.out.println("#debug COMPANION ListonicAds LegacyDisplayAdPresenter hide 4");
                     presenter.onDestroy();
+                    System.out.println("#debug COMPANION ListonicAds LegacyDisplayAdPresenter hide 5");
                     presenter = null;
                 }
 
                 isAdVisible = false;
+
+                System.out.println("#debug COMPANION ListonicAds LegacyDisplayAdPresenter hide 6");
 
                 callbackContext.success("Success!");
             }
