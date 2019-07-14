@@ -85,11 +85,11 @@ public class ListonicAds extends CordovaPlugin {
         cordovaInstance = cordova;
 
         try {
-            AdCompanion.INSTANCE.initialize(
-                cordovaInstance.getActivity().getApplication(),
-                null,
-                false
-            );
+            //AdCompanion.INSTANCE.initialize(
+            //    cordovaInstance.getActivity().getApplication(),
+            //    null,
+            //    false
+            //);
         } catch (Throwable error) {
             System.out.println("#debug ListonicAds creation error");
         }
