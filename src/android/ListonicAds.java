@@ -272,18 +272,24 @@ public class ListonicAds extends CordovaPlugin {
     }
 
     private void setDebugMode(JSONObject options, CallbackContext callbackContext) {
+        System.out.println("#debug ListonicAds setDebugMode start");
         Boolean isDebug = false;
         try {
-            isDebug = options.getBoolean("isDebug");
+           isDebug = options.getBoolean("isDebug");
         } catch(JSONException e) {
-            throw new IOError(e);
+           throw new IOError(e);
         }
+        System.out.println("#debug ListonicAds setDebugMode isDebug " + isDebug);
 
         if (isDebug) {
-            AdCompanion.INSTANCE.startLogging(cordovaInstance.getActivity().getApplication());
+           System.out.println("#debug ListonicAds setDebugMode log start");
+           AdCompanion.INSTANCE.startLogging(cordovaInstance.getActivity().getApplication());
         } else {
-            AdCompanion.INSTANCE.stopLogging(cordovaInstance.getActivity().getApplication());
+           System.out.println("#debug ListonicAds setDebugMode log stop");
+           AdCompanion.INSTANCE.stopLogging(cordovaInstance.getActivity().getApplication());
         }
+
+        System.out.println("#debug ListonicAds setDebugMode finish");
 
         callbackContext.success("Success!");
     }
