@@ -22,12 +22,16 @@ import java.util.HashMap;
 import com.listonic.ad.companion.base.AdCompanion;
 import com.listonic.ad.companion.display.DisplayAdContainer;
 import com.listonic.ad.companion.display.LegacyDisplayAdPresenter;
+import com.listonic.ad.companion.base.InterceptedUrlCallback;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 import java.io.IOError;
 
 import android.support.constraint.ConstraintLayout;
+
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 
 public class ListonicAds extends CordovaPlugin {
 
@@ -49,6 +53,10 @@ public class ListonicAds extends CordovaPlugin {
 
     HashMap<String, LegacyDisplayAdPresenter> cachedAds = new HashMap<String, LegacyDisplayAdPresenter>();
 
+    public static final String ConsentStringKey = "IABConsent_ConsentString";
+    public static final String ParsedPurposeConsentKey = "IABConsent_ParsedPurposeConsents";
+    public static final String ParsedVendorConsentKey = "IABConsent_ParsedVendorConsents";
+
     @Override
     public boolean execute(String action, JSONArray args, CallbackContext callbackContext) throws JSONException {
         JSONObject options = args.optJSONObject(0);
@@ -59,16 +67,14 @@ public class ListonicAds extends CordovaPlugin {
         } else if ("hide".equals(action)) {
             hide(options, callbackContext);
             return true;
-        } else if ("prepare".equals(action)) {
-            prepare(options, callbackContext);
-            return true;
-        } else if ("setOptions".equals(action)) {
-            setOptions(options, callbackContext);
-            return true;
         } else if ("setDebugMode".equals(action)) {
             setDebugMode(options, callbackContext);
             return true;
-        }
+        } else if ("hasConsent".equals(action)) {
+            hasConsent(options, callbackContext);
+        } else if ("updateGdprConsentsData".equals(action)) {
+             updateGdprConsentsData(options, callbackContext);
+         }
 
         return false;
     }
@@ -77,7 +83,17 @@ public class ListonicAds extends CordovaPlugin {
     public void initialize(CordovaInterface cordova, final CordovaWebView webView) {
         super.initialize(cordova, webView);
         cordovaInstance = cordova;
-        AdCompanion.INSTANCE.initialize(cordovaInstance.getActivity().getApplication(), null, false);
+
+        try {
+            AdCompanion.INSTANCE.initialize(
+                cordovaInstance.getActivity().getApplication(),
+                null,
+                false
+            );
+        } catch (Throwable error) {
+            System.out.println("#debug ListonicAds creation error");
+        }
+
         initializeBannerView(webView);
     }
 
@@ -147,40 +163,6 @@ public class ListonicAds extends CordovaPlugin {
         }
     }
 
-
-    private void prepare(final JSONObject options, final CallbackContext callbackContext) {
-        System.out.println("#debug ListonicAds prepare start");
-    }
-
-    private void setOptions(JSONObject options, CallbackContext callbackContext) {
-        if (options.has("width") && options.has("height")) {
-            cordovaInstance.getActivity().runOnUiThread(new Runnable() {
-                @Override
-                public void run() {
-                    Integer width = null;
-                    Integer height = null;
-
-                    try {
-                        float factor = cordovaInstance.getActivity().getApplication().getBaseContext().getResources().getDisplayMetrics().density;
-                        width = (int)(options.getInt("width") * factor);
-                        height = (int)(options.getInt("height") * factor);
-
-                        final LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(width, height);
-                        layoutParams.gravity = Gravity.CENTER;
-
-                        listonicAd.setLayoutParams(layoutParams);
-
-                        callbackContext.success("Success!");
-
-                    } catch(JSONException e) {
-                        throw new IOError(e);
-                    }
-                }
-            });
-        }
-
-    }
-
     private void show(JSONObject options, CallbackContext callbackContext) {
         cordovaInstance.getActivity().runOnUiThread(new Runnable() {
             @Override
@@ -210,14 +192,18 @@ public class ListonicAds extends CordovaPlugin {
                     listonicAd = null;
                 }
 
-                listonicAd = new DisplayAdContainer(webView.getContext());
-                listonicAd.setBackgroundColor(Color.parseColor("#F7F8F9"));
-                listonicAd.setLayoutParams(
-                    new LinearLayout.LayoutParams(
-                            ViewGroup.LayoutParams.MATCH_PARENT,
-                            ViewGroup.LayoutParams.WRAP_CONTENT
-                    )
-                );
+                try {
+                    listonicAd = new DisplayAdContainer(webView.getContext());
+                    listonicAd.setBackgroundColor(Color.parseColor("#F7F8F9"));
+                    listonicAd.setLayoutParams(
+                        new LinearLayout.LayoutParams(
+                                ViewGroup.LayoutParams.MATCH_PARENT,
+                                ViewGroup.LayoutParams.WRAP_CONTENT
+                        )
+                    );
+                } catch (Throwable error) {
+                    System.out.println("#debug ListonicAds DisplayAdContainer error");
+                }
 
                 listonicAd.setVisibility(View.VISIBLE);
                 parentView.addView(listonicAd);
@@ -228,15 +214,19 @@ public class ListonicAds extends CordovaPlugin {
                     presenter = null;
                 }
 
-                presenter = new LegacyDisplayAdPresenter(
-                    zone,
-                    listonicAd,
-                    map,
-                    null
-                );
+                try {
+                    presenter = new LegacyDisplayAdPresenter(
+                        zone,
+                        listonicAd,
+                        map,
+                        null
+                    );
 
-                presenter.onCreate();
-                presenter.onStart();
+                    presenter.onCreate();
+                    presenter.onStart();
+                } catch (Throwable error) {
+                    System.out.println("#debug ListonicAds LegacyDisplayAdPresenter error");
+                }
 
                 isAdVisible = true;
                 currentZone = zone;
@@ -286,6 +276,59 @@ public class ListonicAds extends CordovaPlugin {
         }
 
         callbackContext.success("Success!");
+    }
+
+    private void hasConsent(JSONObject options, CallbackContext callbackContext) {
+        Boolean hasConsent = AdCompanion.INSTANCE.hasConsent(cordovaInstance.getActivity().getApplication());
+
+        String consentString = readStringFromSharedPreferences(ConsentStringKey, null);
+        String parsedPurposeConsentsString = readStringFromSharedPreferences(ParsedPurposeConsentKey, null);
+        String parsedVendorConsentsString = readStringFromSharedPreferences(ParsedVendorConsentKey, null);
+
+        System.out.println("#debug ListonicAds hasConsent " + hasConsent);
+        System.out.println("#debug ListonicAds ConsentStringKey " + consentString);
+        System.out.println("#debug ListonicAds ParsedPurposeConsentKey " + parsedPurposeConsentsString);
+        System.out.println("#debug ListonicAds ParsedVendorConsentKey " + parsedVendorConsentsString);
+
+        callbackContext.success("Success!");
+    }
+
+    private void updateGdprConsentsData(JSONObject options, CallbackContext callbackContext) {
+        String consentString;
+        String parsedVendorConsentsString;
+        String parsedPurposeConsentsString;
+
+        try {
+            consentString = options.getString("consentString");
+            parsedVendorConsentsString = options.getString("parsedVendorConsentsString");
+            parsedPurposeConsentsString = options.getString("parsedPurposeConsentsString");
+        } catch(JSONException e) {
+            throw new IOError(e);
+        }
+
+        saveStringInSharedPreferences(ConsentStringKey, consentString);
+        saveStringInSharedPreferences(ParsedPurposeConsentKey,parsedPurposeConsentsString);
+        saveStringInSharedPreferences(ParsedVendorConsentKey, parsedVendorConsentsString);
+
+        callbackContext.success("Success!");
+    }
+
+    private String readStringFromSharedPreferences(String key, String defaultValue) {
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(
+        cordovaInstance.getActivity().getApplication().getBaseContext()
+        );
+
+        return prefs.getString(key, defaultValue);
+    }
+
+    private void saveStringInSharedPreferences(String key, String string) {
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(
+            cordovaInstance.getActivity().getApplication().getBaseContext()
+        );
+
+        SharedPreferences.Editor editor = prefs.edit();
+        editor.putString(key, string);
+        editor.apply();
     }
 
     @Override
