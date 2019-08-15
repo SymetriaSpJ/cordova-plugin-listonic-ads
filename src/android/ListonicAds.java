@@ -33,6 +33,9 @@ import android.support.constraint.ConstraintLayout;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 
+import java.io.PrintWriter;
+import java.io.StringWriter;
+
 public class ListonicAds extends CordovaPlugin {
 
     private RelativeLayout adViewLayout = null;
@@ -93,6 +96,32 @@ public class ListonicAds extends CordovaPlugin {
         } catch (Throwable error) {
             System.out.println("#debug ListonicAds creation error");
         }
+
+        cordovaInstance.getActivity().runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                Thread.currentThread().setUncaughtExceptionHandler(new Thread.UncaughtExceptionHandler() {
+                    public void uncaughtException(Thread t, Throwable e) {
+                        StringWriter sw = new StringWriter();
+                        e.printStackTrace(new PrintWriter(sw));
+                        String stacktrace = sw.toString();
+                        System.out.println("HERE ERROR UITHREAD");
+                        System.out.println(stacktrace);
+
+                    }
+                });
+            }
+        });
+
+        Thread.currentThread().setUncaughtExceptionHandler(new Thread.UncaughtExceptionHandler() {
+            public void uncaughtException(Thread t, Throwable e) {
+                StringWriter sw = new StringWriter();
+                e.printStackTrace(new PrintWriter(sw));
+                String stacktrace = sw.toString();
+                System.out.println("HERE ERROR MAIN THREAD");
+                System.out.println(stacktrace);
+            }
+        });
 
         initializeBannerView(webView);
     }
