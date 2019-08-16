@@ -70,8 +70,6 @@ public class ListonicAds extends CordovaPlugin {
         } else if ("setDebugMode".equals(action)) {
             setDebugMode(options, callbackContext);
             return true;
-        } else if ("hasConsent".equals(action)) {
-            hasConsent(options, callbackContext);
         } else if ("updateGdprConsentsData".equals(action)) {
              updateGdprConsentsData(options, callbackContext);
          }
@@ -274,21 +272,6 @@ public class ListonicAds extends CordovaPlugin {
         } else {
             AdCompanion.INSTANCE.stopLogging(cordovaInstance.getActivity().getApplication());
         }
-
-        callbackContext.success("Success!");
-    }
-
-    private void hasConsent(JSONObject options, CallbackContext callbackContext) {
-        Boolean hasConsent = AdCompanion.INSTANCE.hasConsent(cordovaInstance.getActivity().getApplication());
-
-        String consentString = readStringFromSharedPreferences(ConsentStringKey, null);
-        String parsedPurposeConsentsString = readStringFromSharedPreferences(ParsedPurposeConsentKey, null);
-        String parsedVendorConsentsString = readStringFromSharedPreferences(ParsedVendorConsentKey, null);
-
-        System.out.println("#debug ListonicAds hasConsent " + hasConsent);
-        System.out.println("#debug ListonicAds ConsentStringKey " + consentString);
-        System.out.println("#debug ListonicAds ParsedPurposeConsentKey " + parsedPurposeConsentsString);
-        System.out.println("#debug ListonicAds ParsedVendorConsentKey " + parsedVendorConsentsString);
 
         callbackContext.success("Success!");
     }
