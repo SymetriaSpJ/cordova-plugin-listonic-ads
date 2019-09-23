@@ -97,32 +97,6 @@ public class ListonicAds extends CordovaPlugin {
             System.out.println("#debug ListonicAds creation error");
         }
 
-        cordovaInstance.getActivity().runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                Thread.currentThread().setUncaughtExceptionHandler(new Thread.UncaughtExceptionHandler() {
-                    public void uncaughtException(Thread t, Throwable e) {
-                        StringWriter sw = new StringWriter();
-                        e.printStackTrace(new PrintWriter(sw));
-                        String stacktrace = sw.toString();
-                        System.out.println("HERE ERROR UITHREAD");
-                        System.out.println(stacktrace);
-
-                    }
-                });
-            }
-        });
-
-        Thread.currentThread().setUncaughtExceptionHandler(new Thread.UncaughtExceptionHandler() {
-            public void uncaughtException(Thread t, Throwable e) {
-                StringWriter sw = new StringWriter();
-                e.printStackTrace(new PrintWriter(sw));
-                String stacktrace = sw.toString();
-                System.out.println("HERE ERROR MAIN THREAD");
-                System.out.println(stacktrace);
-            }
-        });
-
         initializeBannerView(webView);
     }
 
