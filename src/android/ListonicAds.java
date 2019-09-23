@@ -309,11 +309,9 @@ public class ListonicAds extends CordovaPlugin {
             public void run() {
                 Thread.currentThread().setUncaughtExceptionHandler(new Thread.UncaughtExceptionHandler() {
                     public void uncaughtException(Thread t, Throwable e) {
-                        StringWriter sw = new StringWriter();
-                        e.printStackTrace(new PrintWriter(sw));
-                        String stacktrace = sw.toString();
+
                         System.out.println("HERE ERROR UITHREAD");
-                        System.out.println(stacktrace);
+
 
                     }
                 });
