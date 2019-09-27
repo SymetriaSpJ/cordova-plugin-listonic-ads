@@ -278,19 +278,19 @@ public class ListonicAds extends CordovaPlugin {
             AdCompanion.INSTANCE.stopLogging(cordovaInstance.getActivity().getApplication());
         }
 
-        cordovaInstance.getActivity().runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                Thread.currentThread().setUncaughtExceptionHandler(new Thread.UncaughtExceptionHandler() {
-                    public void uncaughtException(Thread t, Throwable e) {
-
-                        System.out.println("HERE ERROR UITHREAD");
-
-
-                    }
-                });
-            }
-        });
+        //cordovaInstance.getActivity().runOnUiThread(new Runnable() {
+        //    @Override
+        //    public void run() {
+        //        Thread.currentThread().setUncaughtExceptionHandler(new Thread.UncaughtExceptionHandler() {
+        //            public void uncaughtException(Thread t, Throwable e) {
+        //
+        //                System.out.println("HERE ERROR UITHREAD");
+        //
+        //
+        //            }
+        //        });
+        //    }
+        //});
 
         callbackContext.success("Success!");
     }
