@@ -275,7 +275,7 @@ public class ListonicAds extends CordovaPlugin {
 
         Thread.currentThread().setUncaughtExceptionHandler(new Thread.UncaughtExceptionHandler() {
             public void uncaughtException(Thread t, Throwable e) {
-                System.out.println("HERE ERROR");
+                System.out.println("HERE ERROR listonic1");
             }
         });
 
