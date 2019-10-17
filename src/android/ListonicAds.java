@@ -207,8 +207,8 @@ public class ListonicAds extends CordovaPlugin {
                 parentView.addView(listonicAd);
 
                 if (presenter != null) {
-                    presenter.onStop();
-                    presenter.onDestroy();
+                    presenter.stop();
+                    presenter.destroy();
                     presenter = null;
                 }
 
@@ -220,8 +220,8 @@ public class ListonicAds extends CordovaPlugin {
                         null
                     );
 
-                    presenter.onCreate();
-                    presenter.onStart();
+                    presenter.create();
+                    presenter.start();
                 } catch (Throwable error) {
                     System.out.println("#debug ListonicAds LegacyDisplayAdPresenter error");
                 }
@@ -247,8 +247,8 @@ public class ListonicAds extends CordovaPlugin {
                 }
 
                 if (presenter != null) {
-                    presenter.onStop();
-                    presenter.onDestroy();
+                    presenter.stop();
+                    presenter.destroy();
                     presenter = null;
                 }
 
@@ -319,7 +319,7 @@ public class ListonicAds extends CordovaPlugin {
         super.onResume(multitasking);
 
         if (presenter != null) {
-            presenter.onStart();
+            presenter.start();
         }
     }
 
@@ -328,7 +328,7 @@ public class ListonicAds extends CordovaPlugin {
         super.onPause(multitasking);
 
         if (presenter != null) {
-            presenter.onStop();
+            presenter.stop();
         }
     }
 }
