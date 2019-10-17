@@ -23,6 +23,7 @@ import com.listonic.ad.companion.base.AdCompanion;
 import com.listonic.ad.companion.display.DisplayAdContainer;
 import com.listonic.ad.companion.display.LegacyDisplayAdPresenter;
 import com.listonic.ad.companion.base.InterceptedUrlCallback;
+import com.listonic.ad.companion.display.InterstitialDisplayAdPresenter;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -72,7 +73,9 @@ public class ListonicAds extends CordovaPlugin {
             return true;
         } else if ("updateGdprConsentsData".equals(action)) {
              updateGdprConsentsData(options, callbackContext);
-         }
+        } else if ("showInterstitial".equals(action)) {
+            showInterstitial(options, callbackContext);
+        }
 
         return false;
     }
@@ -257,6 +260,19 @@ public class ListonicAds extends CordovaPlugin {
                 callbackContext.success("Success!");
             }
         });
+    }
+
+    private void showInterstitial(JSONObject options, CallbackContext callbackContext) {
+        InterstitialDisplayAdPresenter interstitialPresenter = new InterstitialDisplayAdPresenter(
+            "zone",
+             cordovaInstance.getActivity().getApplication(),
+             cordovaInstance.getActivity().getApplication(),
+             null
+        );
+
+        interstitialPresenter.show();
+
+        callbackContext.success("Success!");
     }
 
     private void setDebugMode(JSONObject options, CallbackContext callbackContext) {
