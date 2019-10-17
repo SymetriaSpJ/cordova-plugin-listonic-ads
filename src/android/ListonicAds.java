@@ -266,7 +266,7 @@ public class ListonicAds extends CordovaPlugin {
         InterstitialDisplayAdPresenter interstitialPresenter = new InterstitialDisplayAdPresenter(
             cordovaInstance.getActivity().getApplication(),
             "start",
-            cordovaInstance.getActivity().getApplication(),
+            null,
             null,
             new HashMap<String, String>()
         );
