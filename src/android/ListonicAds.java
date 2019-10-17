@@ -265,7 +265,7 @@ public class ListonicAds extends CordovaPlugin {
     private void showInterstitial(JSONObject options, CallbackContext callbackContext) {
         InterstitialDisplayAdPresenter interstitialPresenter = new InterstitialDisplayAdPresenter(
             cordovaInstance.getActivity().getApplication(),
-            "start",
+            "interstitial",
             null,
             null,
             new HashMap<String, String>()
