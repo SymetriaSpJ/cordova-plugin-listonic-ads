@@ -58,6 +58,8 @@ public class ListonicAds extends CordovaPlugin {
     public static final String ParsedPurposeConsentKey = "IABConsent_ParsedPurposeConsents";
     public static final String ParsedVendorConsentKey = "IABConsent_ParsedVendorConsents";
 
+    InterstitialDisplayAdPresenter interstitialPresenter;
+
     @Override
     public boolean execute(String action, JSONArray args, CallbackContext callbackContext) throws JSONException {
         JSONObject options = args.optJSONObject(0);
@@ -96,6 +98,7 @@ public class ListonicAds extends CordovaPlugin {
         }
 
         initializeBannerView(webView);
+        initializeInterstitial();
     }
 
     private void initializeBannerView(CordovaWebView webView) {
@@ -262,26 +265,6 @@ public class ListonicAds extends CordovaPlugin {
         });
     }
 
-    private void showInterstitial(JSONObject options, CallbackContext callbackContext) {
-        System.out.println("#debug ListonicAds showInterstitial 1");
-        InterstitialDisplayAdPresenter interstitialPresenter = new InterstitialDisplayAdPresenter(
-            cordovaInstance.getActivity(),
-            "Interstitial",
-            null,
-            null,
-            new HashMap<String, String>()
-        );
-        System.out.println("#debug ListonicAds showInterstitial 2");
-
-        interstitialPresenter.show();
-
-        System.out.println("#debug ListonicAds showInterstitial 3");
-
-        callbackContext.success("Success!");
-
-        System.out.println("#debug ListonicAds showInterstitial 4");
-    }
-
     private void setDebugMode(JSONObject options, CallbackContext callbackContext) {
         Boolean isDebug = false;
         try {
@@ -353,5 +336,28 @@ public class ListonicAds extends CordovaPlugin {
         if (presenter != null) {
             presenter.stop();
         }
+    }
+
+    initializeInterstitial() {
+        System.out.println("#debug ListonicAds initializeInterstitial 1");
+        interstitialPresenter = new InterstitialDisplayAdPresenter(
+            cordovaInstance.getActivity(),
+            "Interstitial",
+            null,
+            null,
+            new HashMap<String, String>()
+        );
+        System.out.println("#debug ListonicAds initializeInterstitial 2");
+    }
+
+    private void showInterstitial(JSONObject options, CallbackContext callbackContext) {
+        System.out.println("#debug ListonicAds showInterstitial 1");
+        interstitialPresenter.show();
+
+        System.out.println("#debug ListonicAds showInterstitial 2");
+
+        callbackContext.success("Success!");
+
+        System.out.println("#debug ListonicAds showInterstitial 3");
     }
 }
