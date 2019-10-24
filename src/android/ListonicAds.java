@@ -338,7 +338,7 @@ public class ListonicAds extends CordovaPlugin {
         }
     }
 
-    initializeInterstitial() {
+    private void initializeInterstitial() {
         System.out.println("#debug ListonicAds initializeInterstitial 1");
         interstitialPresenter = new InterstitialDisplayAdPresenter(
             cordovaInstance.getActivity(),
