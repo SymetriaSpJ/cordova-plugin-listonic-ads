@@ -347,14 +347,17 @@ public class ListonicAds extends CordovaPlugin {
             null,
             new HashMap<String, String>()
         );
+
+        interstitialPresenter.create();
+        interstitialPresenter.start();
         System.out.println("#debug ListonicAds initializeInterstitial 2");
     }
 
     private void showInterstitial(JSONObject options, CallbackContext callbackContext) {
         System.out.println("#debug ListonicAds showInterstitial 1");
-        interstitialPresenter.show();
+        Boolean isInterstitialShown = interstitialPresenter.show();
 
-        System.out.println("#debug ListonicAds showInterstitial 2");
+        System.out.println("#debug ListonicAds showInterstitial 2", isInterstitialShown);
 
         callbackContext.success("Success!");
 
