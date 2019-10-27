@@ -327,6 +327,10 @@ public class ListonicAds extends CordovaPlugin {
         if (presenter != null) {
             presenter.start();
         }
+
+        if (interstitialPresenter != null) {
+            interstitialPresenter.start();
+        }
     }
 
     @Override
@@ -335,6 +339,10 @@ public class ListonicAds extends CordovaPlugin {
 
         if (presenter != null) {
             presenter.stop();
+        }
+
+        if (interstitialPresenter != null) {
+            interstitialPresenter.stop();
         }
     }
 
