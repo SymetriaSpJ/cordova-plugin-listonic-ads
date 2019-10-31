@@ -347,16 +347,21 @@ public class ListonicAds extends CordovaPlugin {
     }
 
     private void initializeInterstitial() {
-        interstitialPresenter = new InterstitialDisplayAdPresenter(
-            cordovaInstance.getActivity(),
-            "Interstitial",
-            null,
-            null,
-            new HashMap<String, String>()
-        );
+        cordovaInstance.getActivity().runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                interstitialPresenter = new InterstitialDisplayAdPresenter(
+                    cordovaInstance.getActivity(),
+                    "Interstitial",
+                    null,
+                    null,
+                    new HashMap<String, String>()
+                );
 
-        interstitialPresenter.create();
-        interstitialPresenter.start();
+                interstitialPresenter.create();
+                interstitialPresenter.start();
+             }
+        });
     }
 
     private void showInterstitial(JSONObject options, CallbackContext callbackContext) {
