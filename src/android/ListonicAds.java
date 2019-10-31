@@ -365,12 +365,17 @@ public class ListonicAds extends CordovaPlugin {
     }
 
     private void showInterstitial(JSONObject options, CallbackContext callbackContext) {
-        Boolean isInterstitialShown = interstitialPresenter.show();
+        cordovaInstance.getActivity().runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                Boolean isInterstitialShown = interstitialPresenter.show();
 
-        if (isInterstitialShown) {
-            callbackContext.success("Success!");
-        } else {
-            callbackContext.error("Failed to show interstitial!");
-        }
+                if (isInterstitialShown) {
+                    callbackContext.success("Success!");
+                } else {
+                    callbackContext.error("Failed to show interstitial!");
+                }
+            }
+        });
     }
 }
