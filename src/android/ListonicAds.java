@@ -350,6 +350,7 @@ public class ListonicAds extends CordovaPlugin {
         cordovaInstance.getActivity().runOnUiThread(new Runnable() {
             @Override
             public void run() {
+                System.out.println("#debug ListonicAds initializeInterstitial 1");
                 interstitialPresenter = new InterstitialDisplayAdPresenter(
                     cordovaInstance.getActivity(),
                     "Interstitial",
@@ -357,9 +358,11 @@ public class ListonicAds extends CordovaPlugin {
                     null,
                     new HashMap<String, String>()
                 );
-
+                System.out.println("#debug ListonicAds initializeInterstitial 2");
                 interstitialPresenter.create();
+                System.out.println("#debug ListonicAds initializeInterstitial 3");
                 interstitialPresenter.start();
+                System.out.println("#debug ListonicAds initializeInterstitial 4");
              }
         });
     }
@@ -368,11 +371,15 @@ public class ListonicAds extends CordovaPlugin {
         cordovaInstance.getActivity().runOnUiThread(new Runnable() {
             @Override
             public void run() {
+                System.out.println("#debug ListonicAds showInterstitial 1");
                 Boolean isInterstitialShown = interstitialPresenter.show();
+                System.out.println("#debug ListonicAds showInterstitial 2");
 
                 if (isInterstitialShown) {
+                    System.out.println("#debug ListonicAds showInterstitial 3 success");
                     callbackContext.success("Success!");
                 } else {
+                    System.out.println("#debug ListonicAds showInterstitial 3 failed");
                     callbackContext.error("Failed to show interstitial!");
                 }
             }
