@@ -375,7 +375,7 @@ public class ListonicAds extends CordovaPlugin {
                 Boolean isInterstitialShown = interstitialPresenter.show();
                 System.out.println("#debug ListonicAds showInterstitial 2");
 
-                if (isInterstitialShown) {
+                if (isInterstitialShown == true) {
                     System.out.println("#debug ListonicAds showInterstitial 3 success");
                     callbackContext.success("Success!");
                 } else {
