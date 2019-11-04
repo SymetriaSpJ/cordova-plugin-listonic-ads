@@ -380,7 +380,7 @@ public class ListonicAds extends CordovaPlugin {
                     callbackContext.error("Failed to show interstitial! isInterstitialShown" + isInterstitialShown);
                 } else {
                     System.out.println("#debug ListonicAds showInterstitial 3 success");
-                    callbackContext.success("Success! isInterstitialShown" + isInterstitialShown);
+                    callbackContext.error("Success! isInterstitialShown" + isInterstitialShown);
                 }
             }
         });
