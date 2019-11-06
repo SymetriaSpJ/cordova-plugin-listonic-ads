@@ -23,6 +23,7 @@ import com.listonic.ad.companion.base.AdCompanion;
 import com.listonic.ad.companion.display.DisplayAdContainer;
 import com.listonic.ad.companion.display.LegacyDisplayAdPresenter;
 import com.listonic.ad.companion.base.InterceptedUrlCallback;
+import com.listonic.ad.companion.display.InterstitialDisplayAdPresenter;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -57,6 +58,8 @@ public class ListonicAds extends CordovaPlugin {
     public static final String ParsedPurposeConsentKey = "IABConsent_ParsedPurposeConsents";
     public static final String ParsedVendorConsentKey = "IABConsent_ParsedVendorConsents";
 
+    InterstitialDisplayAdPresenter interstitialPresenter;
+
     @Override
     public boolean execute(String action, JSONArray args, CallbackContext callbackContext) throws JSONException {
         JSONObject options = args.optJSONObject(0);
@@ -72,7 +75,9 @@ public class ListonicAds extends CordovaPlugin {
             return true;
         } else if ("updateGdprConsentsData".equals(action)) {
              updateGdprConsentsData(options, callbackContext);
-         }
+        } else if ("showInterstitial".equals(action)) {
+            showInterstitial(options, callbackContext);
+        }
 
         return false;
     }
@@ -93,6 +98,7 @@ public class ListonicAds extends CordovaPlugin {
         }
 
         initializeBannerView(webView);
+        initializeInterstitial();
     }
 
     private void initializeBannerView(CordovaWebView webView) {
@@ -207,8 +213,8 @@ public class ListonicAds extends CordovaPlugin {
                 parentView.addView(listonicAd);
 
                 if (presenter != null) {
-                    presenter.onStop();
-                    presenter.onDestroy();
+                    presenter.stop();
+                    presenter.destroy();
                     presenter = null;
                 }
 
@@ -220,8 +226,8 @@ public class ListonicAds extends CordovaPlugin {
                         null
                     );
 
-                    presenter.onCreate();
-                    presenter.onStart();
+                    presenter.create();
+                    presenter.start();
                 } catch (Throwable error) {
                     System.out.println("#debug ListonicAds LegacyDisplayAdPresenter error");
                 }
@@ -247,8 +253,8 @@ public class ListonicAds extends CordovaPlugin {
                 }
 
                 if (presenter != null) {
-                    presenter.onStop();
-                    presenter.onDestroy();
+                    presenter.stop();
+                    presenter.destroy();
                     presenter = null;
                 }
 
@@ -319,7 +325,11 @@ public class ListonicAds extends CordovaPlugin {
         super.onResume(multitasking);
 
         if (presenter != null) {
-            presenter.onStart();
+            presenter.start();
+        }
+
+        if (interstitialPresenter != null) {
+            interstitialPresenter.start();
         }
     }
 
@@ -328,7 +338,44 @@ public class ListonicAds extends CordovaPlugin {
         super.onPause(multitasking);
 
         if (presenter != null) {
-            presenter.onStop();
+            presenter.stop();
         }
+
+        if (interstitialPresenter != null) {
+            interstitialPresenter.stop();
+        }
+    }
+
+    private void initializeInterstitial() {
+        cordovaInstance.getActivity().runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                interstitialPresenter = new InterstitialDisplayAdPresenter(
+                    cordovaInstance.getActivity(),
+                    "Interstitial",
+                    null,
+                    null,
+                    new HashMap<String, String>()
+                );
+
+                interstitialPresenter.create();
+                interstitialPresenter.start();
+             }
+        });
+    }
+
+    private void showInterstitial(JSONObject options, CallbackContext callbackContext) {
+        cordovaInstance.getActivity().runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                Boolean isInterstitialShown = interstitialPresenter.show();
+
+                if (isInterstitialShown == false) {
+                    callbackContext.error("Failed to show interstitial! isInterstitialShown" + isInterstitialShown);
+                } else {
+                    callbackContext.success("Success! isInterstitialShown" + isInterstitialShown);
+                }
+            }
+        });
     }
 }

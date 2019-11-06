@@ -34,12 +34,11 @@ repositories{
     }
 }
 
-
 dependencies {
     implementation 'com.google.firebase:firebase-core:16.0.1'
     implementation 'com.google.firebase:firebase-config:16.0.0'
     implementation ('com.android.support.constraint:constraint-layout:1.0.2')
-    implementation ('com.listonic.ad:companion:2.7.3')
+    implementation ('com.listonic.ad:companion:2.10.2')
     {
         exclude group: 'com.android.support'
     }
