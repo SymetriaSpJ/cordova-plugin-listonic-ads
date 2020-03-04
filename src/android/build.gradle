@@ -20,7 +20,7 @@ android {
     }
     defaultConfig {
         multiDexEnabled true
-        compileSdkVersion 26
+        compileSdkVersion 28
     }
     compileOptions {
         sourceCompatibility 1.8
