@@ -8,3 +8,4 @@
  */
 
 rootProject.name = 'android'
+android.enableD8.desugaring=true
