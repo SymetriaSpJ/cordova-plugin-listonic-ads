@@ -36,7 +36,7 @@ repositories{
 
 dependencies {
     implementation ('com.android.support.constraint:constraint-layout:1.0.2')
-    implementation ('com.listonic.ad:companion:2.10.3')
+    implementation ('com.listonic.ad:companion:2.15.0')
     {
         exclude group: 'com.android.support'
     }
