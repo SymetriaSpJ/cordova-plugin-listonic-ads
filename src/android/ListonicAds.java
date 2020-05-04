@@ -202,7 +202,7 @@ public class ListonicAds extends CordovaPlugin {
                     listonicAd.setLayoutParams(
                         new LinearLayout.LayoutParams(
                                 ViewGroup.LayoutParams.MATCH_PARENT,
-                                100
+                                300
                         )
                     );
                 } catch (Throwable error) {
@@ -210,7 +210,7 @@ public class ListonicAds extends CordovaPlugin {
                 }
 
                 listonicAd.setVisibility(View.VISIBLE);
-                parentView.addView(listonicAd);
+                parentView.addView(listonicAd, 0);
 
                 if (presenter != null) {
                     presenter.stop();
