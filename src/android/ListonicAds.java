@@ -210,7 +210,7 @@ public class ListonicAds extends CordovaPlugin {
                 }
 
                 listonicAd.setVisibility(View.VISIBLE);
-                parentView.addView(listonicAd);
+                parentView.addView(listonicAd, 0);
 
                 if (presenter != null) {
                     presenter.stop();
