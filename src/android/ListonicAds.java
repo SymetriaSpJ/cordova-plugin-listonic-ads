@@ -121,7 +121,7 @@ public class ListonicAds extends CordovaPlugin {
                         new LinearLayout.LayoutParams(
                             ViewGroup.LayoutParams.MATCH_PARENT,
                             ViewGroup.LayoutParams.MATCH_PARENT,
-                            1.0F
+                            0.0F
                         )
                     );
                     ((LinearLayout) parentView).setOrientation(LinearLayout.VERTICAL);
@@ -129,7 +129,7 @@ public class ListonicAds extends CordovaPlugin {
                         new LinearLayout.LayoutParams(
                             LinearLayout.LayoutParams.MATCH_PARENT,
                             LinearLayout.LayoutParams.MATCH_PARENT,
-                            0.0F
+                            1.0F
                         )
                     );
 
@@ -143,7 +143,6 @@ public class ListonicAds extends CordovaPlugin {
                     rootView.addView(parentView);
                 }
 
-                parentView.setGravity(Gravity.TOP);
                 parentView.bringToFront();
                 parentView.requestLayout();
                 parentView.requestFocus();
