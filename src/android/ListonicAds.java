@@ -143,7 +143,7 @@ public class ListonicAds extends CordovaPlugin {
                     rootView.addView(parentView);
                 }
 
-                parentView.setGravity(Gravity.TOP)
+                parentView.setGravity(Gravity.TOP);
                 parentView.bringToFront();
                 parentView.requestLayout();
                 parentView.requestFocus();
