@@ -98,7 +98,7 @@ public class ListonicAds extends CordovaPlugin {
         }
 
         initializeBannerView(webView);
-        initializeInterstitial();
+        //initializeInterstitial();
     }
 
     private void initializeBannerView(CordovaWebView webView) {
@@ -368,7 +368,7 @@ public class ListonicAds extends CordovaPlugin {
         cordovaInstance.getActivity().runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                Boolean isInterstitialShown = interstitialPresenter.show();
+                // Boolean isInterstitialShown = interstitialPresenter.show();
 
                 if (isInterstitialShown == false) {
                     callbackContext.error("Failed to show interstitial! isInterstitialShown" + isInterstitialShown);
