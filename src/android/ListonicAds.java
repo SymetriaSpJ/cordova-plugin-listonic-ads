@@ -70,9 +70,9 @@ public class ListonicAds extends CordovaPlugin {
 
         try {
             AdCompanion.INSTANCE.initialize(
-                    cordova.getActivity().getApplication(),
-                    null,
-                    false
+                cordova.getActivity().getApplication(),
+                null,
+                false
             );
         } catch (Throwable error) {
             System.out.println("#debug ListonicAds creation error");
@@ -99,19 +99,19 @@ public class ListonicAds extends CordovaPlugin {
                     wvParentView.removeView(getWebView(webView));
 
                     getWebView(webView).setLayoutParams(
-                            new LinearLayout.LayoutParams(
-                                    ViewGroup.LayoutParams.MATCH_PARENT,
-                                    ViewGroup.LayoutParams.MATCH_PARENT,
-                                    1.0F
-                            )
+                        new LinearLayout.LayoutParams(
+                            ViewGroup.LayoutParams.MATCH_PARENT,
+                            ViewGroup.LayoutParams.MATCH_PARENT,
+                            1.0F
+                        )
                     );
                     ((LinearLayout) parentView).setOrientation(LinearLayout.VERTICAL);
                     parentView.setLayoutParams(
-                            new LinearLayout.LayoutParams(
-                                    LinearLayout.LayoutParams.MATCH_PARENT,
-                                    LinearLayout.LayoutParams.MATCH_PARENT,
-                                    0.0F
-                            )
+                        new LinearLayout.LayoutParams(
+                            LinearLayout.LayoutParams.MATCH_PARENT,
+                            LinearLayout.LayoutParams.MATCH_PARENT,
+                            0.0F
+                        )
                     );
 
                     parentView.setBackgroundColor(Color.parseColor("#F7F8F9"));
@@ -181,10 +181,10 @@ public class ListonicAds extends CordovaPlugin {
                     listonicAd = new DisplayAdContainer(webView.getContext());
                     listonicAd.setBackgroundColor(Color.parseColor("#F7F8F9"));
                     listonicAd.setLayoutParams(
-                            new LinearLayout.LayoutParams(
-                                    ViewGroup.LayoutParams.MATCH_PARENT,
-                                    ViewGroup.LayoutParams.WRAP_CONTENT
-                            )
+                        new LinearLayout.LayoutParams(
+                            ViewGroup.LayoutParams.MATCH_PARENT,
+                            ViewGroup.LayoutParams.WRAP_CONTENT
+                        )
                     );
                 } catch (Throwable error) {
                     System.out.println("#debug ListonicAds DisplayAdContainer error");
@@ -201,10 +201,10 @@ public class ListonicAds extends CordovaPlugin {
 
                 try {
                     presenter = new LegacyDisplayAdPresenter(
-                            zone,
-                            listonicAd,
-                            map,
-                            null
+                        zone,
+                        listonicAd,
+                        map,
+                        null
                     );
 
                     presenter.create();
@@ -293,7 +293,7 @@ public class ListonicAds extends CordovaPlugin {
 
     private void saveStringInSharedPreferences(String key, String string) {
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(
-                cordova.getActivity().getApplication().getBaseContext()
+            cordova.getActivity().getApplication().getBaseContext()
         );
 
         SharedPreferences.Editor editor = prefs.edit();
@@ -334,11 +334,11 @@ public class ListonicAds extends CordovaPlugin {
                 Looper.prepare();
 
                 interstitialPresenter = new InterstitialDisplayAdPresenter(
-                        cordova.getActivity(),
-                        "Interstitial",
-                        null,
-                        null,
-                        new HashMap<String, String>()
+                    cordova.getActivity(),
+                    "Interstitial",
+                    null,
+                    null,
+                    new HashMap<String, String>()
                 );
 
                 interstitialPresenter.create();
