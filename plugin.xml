@@ -21,6 +21,7 @@
             </feature>
         </config-file>
         <source-file src="src/android/ListonicAds.java" target-dir="src/com/fitatu/ponegap/plugin/ListonicAds" />
+        <source-file src="src/android/Interstitial.java" target-dir="src/com/fitatu/ponegap/plugin/ListonicAds" />
         <framework src="com.android.support:support-v4:24.1.1+" />
         <framework src="com.android.support.constraint:constraint-layout:1.0.2" />
 

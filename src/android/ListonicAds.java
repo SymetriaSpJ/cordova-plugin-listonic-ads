@@ -1,4 +1,4 @@
-package com.fitatu.phonegap.plugin;
+package com.fitatu.ponegap.plugin.ListonicAds;
 
 import org.apache.cordova.CordovaPlugin;
 import org.apache.cordova.CallbackContext;
@@ -57,8 +57,10 @@ public class ListonicAds extends CordovaPlugin {
             return true;
         } else if ("updateGdprConsentsData".equals(action)) {
             updateGdprConsentsData(options, callbackContext);
+            return true;
         } else if ("showInterstitial".equals(action)) {
             showInterstitial(options, callbackContext);
+            return true;
         }
 
         return false;
@@ -70,15 +72,15 @@ public class ListonicAds extends CordovaPlugin {
 
         try {
             AdCompanion.INSTANCE.initialize(
-                cordova.getActivity().getApplication(),
-                null,
-                false
+                    cordova.getActivity().getApplication(),
+                    null,
+                    false
             );
         } catch (Throwable error) {
             System.out.println("#debug ListonicAds creation error");
         }
 
-        initializeBannerView(webView);
+//        initializeBannerView(webView);
         initializeInterstitial();
     }
 
@@ -99,19 +101,19 @@ public class ListonicAds extends CordovaPlugin {
                     wvParentView.removeView(getWebView(webView));
 
                     getWebView(webView).setLayoutParams(
-                        new LinearLayout.LayoutParams(
-                            ViewGroup.LayoutParams.MATCH_PARENT,
-                            ViewGroup.LayoutParams.MATCH_PARENT,
-                            1.0F
-                        )
+                            new LinearLayout.LayoutParams(
+                                    ViewGroup.LayoutParams.MATCH_PARENT,
+                                    ViewGroup.LayoutParams.MATCH_PARENT,
+                                    1.0F
+                            )
                     );
                     ((LinearLayout) parentView).setOrientation(LinearLayout.VERTICAL);
                     parentView.setLayoutParams(
-                        new LinearLayout.LayoutParams(
-                            LinearLayout.LayoutParams.MATCH_PARENT,
-                            LinearLayout.LayoutParams.MATCH_PARENT,
-                            0.0F
-                        )
+                            new LinearLayout.LayoutParams(
+                                    LinearLayout.LayoutParams.MATCH_PARENT,
+                                    LinearLayout.LayoutParams.MATCH_PARENT,
+                                    0.0F
+                            )
                     );
 
                     parentView.setBackgroundColor(Color.parseColor("#F7F8F9"));
@@ -149,101 +151,101 @@ public class ListonicAds extends CordovaPlugin {
     }
 
     private void show(JSONObject options, CallbackContext callbackContext) {
-        cordova.getActivity().runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                String zone = "";
-                String sex = "";
-                String age = "";
-                HashMap<String, String> map = new HashMap<>();
-
-                try {
-                    zone = options.getString("zone");
-                    sex = options.getString("sex");
-                    age = options.getString("age");
-                    map.put("sex", sex);
-                    map.put("age", age);
-                } catch(JSONException e) {
-                    throw new IOError(e);
-                }
-
-                if (isAdVisible == true && currentZone.equals(zone)) {
-                    return;
-                }
-
-                if (listonicAd != null) {
-                    listonicAd.setVisibility(View.GONE);
-                    parentView.removeView(listonicAd);
-                    listonicAd = null;
-                }
-
-                try {
-                    listonicAd = new DisplayAdContainer(webView.getContext());
-                    listonicAd.setBackgroundColor(Color.parseColor("#F7F8F9"));
-                    listonicAd.setLayoutParams(
-                        new LinearLayout.LayoutParams(
-                            ViewGroup.LayoutParams.MATCH_PARENT,
-                            ViewGroup.LayoutParams.WRAP_CONTENT
-                        )
-                    );
-                } catch (Throwable error) {
-                    System.out.println("#debug ListonicAds DisplayAdContainer error");
-                }
-
-                listonicAd.setVisibility(View.VISIBLE);
-                parentView.addView(listonicAd, 0);
-
-                if (presenter != null) {
-                    presenter.stop();
-                    presenter.destroy();
-                    presenter = null;
-                }
-
-                try {
-                    presenter = new LegacyDisplayAdPresenter(
-                        zone,
-                        listonicAd,
-                        map,
-                        null
-                    );
-
-                    presenter.create();
-                    presenter.start();
-                } catch (Throwable error) {
-                    System.out.println("#debug ListonicAds LegacyDisplayAdPresenter error");
-                }
-
-                isAdVisible = true;
-                currentZone = zone;
-
-                callbackContext.success("Success!");
-            }
-        });
+//        cordova.getActivity().runOnUiThread(new Runnable() {
+//            @Override
+//            public void run() {
+//                String zone = "";
+//                String sex = "";
+//                String age = "";
+//                HashMap<String, String> map = new HashMap<>();
+//
+//                try {
+//                    zone = options.getString("zone");
+//                    sex = options.getString("sex");
+//                    age = options.getString("age");
+//                    map.put("sex", sex);
+//                    map.put("age", age);
+//                } catch(JSONException e) {
+//                    throw new IOError(e);
+//                }
+//
+//                if (isAdVisible == true && currentZone.equals(zone)) {
+//                    return;
+//                }
+//
+//                if (listonicAd != null) {
+//                    listonicAd.setVisibility(View.GONE);
+//                    parentView.removeView(listonicAd);
+//                    listonicAd = null;
+//                }
+//
+//                try {
+//                    listonicAd = new DisplayAdContainer(webView.getContext());
+//                    listonicAd.setBackgroundColor(Color.parseColor("#F7F8F9"));
+//                    listonicAd.setLayoutParams(
+//                            new LinearLayout.LayoutParams(
+//                                    ViewGroup.LayoutParams.MATCH_PARENT,
+//                                    ViewGroup.LayoutParams.WRAP_CONTENT
+//                            )
+//                    );
+//                } catch (Throwable error) {
+//                    System.out.println("#debug ListonicAds DisplayAdContainer error");
+//                }
+//
+//                listonicAd.setVisibility(View.VISIBLE);
+//                parentView.addView(listonicAd, 0);
+//
+//                if (presenter != null) {
+//                    presenter.stop();
+//                    presenter.destroy();
+//                    presenter = null;
+//                }
+//
+//                try {
+//                    presenter = new LegacyDisplayAdPresenter(
+//                            zone,
+//                            listonicAd,
+//                            map,
+//                            null
+//                    );
+//
+//                    presenter.create();
+//                    presenter.start();
+//                } catch (Throwable error) {
+//                    System.out.println("#debug ListonicAds LegacyDisplayAdPresenter error");
+//                }
+//
+//                isAdVisible = true;
+//                currentZone = zone;
+//
+//                callbackContext.success("Success!");
+//            }
+//        });
     }
 
     private void hide(JSONObject options, CallbackContext callbackContext) {
-        cordova.getActivity().runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                if (isAdVisible == false) {
-                    return;
-                }
-
-                if (listonicAd != null) {
-                    listonicAd.setVisibility(View.GONE);
-                }
-
-                if (presenter != null) {
-                    presenter.stop();
-                    presenter.destroy();
-                    presenter = null;
-                }
-
-                isAdVisible = false;
-
-                callbackContext.success("Success!");
-            }
-        });
+//        cordova.getActivity().runOnUiThread(new Runnable() {
+//            @Override
+//            public void run() {
+//                if (isAdVisible == false) {
+//                    return;
+//                }
+//
+//                if (listonicAd != null) {
+//                    listonicAd.setVisibility(View.GONE);
+//                }
+//
+//                if (presenter != null) {
+//                    presenter.stop();
+//                    presenter.destroy();
+//                    presenter = null;
+//                }
+//
+//                isAdVisible = false;
+//
+//                callbackContext.success("Success!");
+//            }
+//        });
     }
 
     private void setDebugMode(JSONObject options, CallbackContext callbackContext) {
@@ -285,7 +287,7 @@ public class ListonicAds extends CordovaPlugin {
 
     private String readStringFromSharedPreferences(String key, String defaultValue) {
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(
-            cordova.getActivity().getApplication().getBaseContext()
+                cordova.getActivity().getApplication().getBaseContext()
         );
 
         return prefs.getString(key, defaultValue);
@@ -293,7 +295,7 @@ public class ListonicAds extends CordovaPlugin {
 
     private void saveStringInSharedPreferences(String key, String string) {
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(
-            cordova.getActivity().getApplication().getBaseContext()
+                cordova.getActivity().getApplication().getBaseContext()
         );
 
         SharedPreferences.Editor editor = prefs.edit();
@@ -328,17 +330,17 @@ public class ListonicAds extends CordovaPlugin {
     }
 
     private void initializeInterstitial() {
-        cordova.getThreadPool().execute(new Runnable() {
+        cordova.getActivity().runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                Looper.prepare();
+//                Looper.prepare();
 
                 interstitialPresenter = new InterstitialDisplayAdPresenter(
-                    cordova.getActivity(),
-                    "Interstitial",
-                    null,
-                    null,
-                    new HashMap<String, String>()
+                        cordova.getActivity(),
+                        "Interstitial",
+                        null,
+                        null,
+                        new HashMap<String, String>()
                 );
 
                 interstitialPresenter.create();
@@ -348,17 +350,6 @@ public class ListonicAds extends CordovaPlugin {
     }
 
     private void showInterstitial(JSONObject options, CallbackContext callbackContext) {
-        cordova.getThreadPool().execute(new Runnable() {
-            @Override
-            public void run() {
-                Boolean isInterstitialShown = interstitialPresenter.show();
-
-                if (isInterstitialShown == false) {
-                    callbackContext.error("Failed to show interstitial! isInterstitialShown" + isInterstitialShown);
-                } else {
-                    callbackContext.success("Success! isInterstitialShown" + isInterstitialShown);
-                }
-            }
-        });
+        cordova.getActivity().runOnUiThread(new Interstitial(interstitialPresenter, options, callbackContext));
     }
 }
