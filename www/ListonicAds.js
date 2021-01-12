@@ -3,6 +3,10 @@ cordova.define("cordova-plugin-listonic-ads.ListonicAds", function(require, expo
 
     var ListonicAds = function() {};
 
+    ListonicAds.prototype.prepare = function(options, successCallback, errorCallback) {
+        exec(successCallback, errorCallback, 'ListonicAds', 'prepare', [options]);
+    };
+
     ListonicAds.prototype.show = function(options, onSuccess, onError) {
         var errorCallback = function(obj) {
             onError(obj);
@@ -16,14 +20,6 @@ cordova.define("cordova-plugin-listonic-ads.ListonicAds", function(require, expo
     };
 
     ListonicAds.prototype.showInterstitial = function(options, successCallback, errorCallback) {
-//    var errorCallback = function(obj) {
-//        onError(obj);
-//    };
-//
-//    var successCallback = function(obj) {
-//        onSuccess(obj);
-//    };
-
         console.log('########## options', options);
 
         exec(successCallback, errorCallback, 'ListonicAds', 'showInterstitial', [options]);
