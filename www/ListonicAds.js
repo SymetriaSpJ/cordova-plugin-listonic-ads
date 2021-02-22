@@ -2,7 +2,7 @@ var exec = cordova.require('cordova/exec');
 
 var ListonicAds = function() {};
 
-ListonicAds.prototype.prepare = function(options, onSuccess, onError) {
+ListonicAds.prototype.initBanner = function(onSuccess, onError) {
     var errorCallback = function(obj) {
         onError(obj);
     };
@@ -11,9 +11,20 @@ ListonicAds.prototype.prepare = function(options, onSuccess, onError) {
         onSuccess(obj);
     };
 
-    exec(successCallback, errorCallback, 'ListonicAds', 'prepare', [options]);
+    exec(successCallback, errorCallback, 'ListonicAds', 'initBanner', []);
 };
 
+ListonicAds.prototype.initInterstitial = function(onSuccess, onError) {
+    var errorCallback = function(obj) {
+        onError(obj);
+    };
+
+    var successCallback = function(obj) {
+        onSuccess(obj);
+    };
+
+    exec(successCallback, errorCallback, 'ListonicAds', 'initInterstitial', []);
+};
 
 ListonicAds.prototype.show = function(options, onSuccess, onError) {
     var errorCallback = function(obj) {
