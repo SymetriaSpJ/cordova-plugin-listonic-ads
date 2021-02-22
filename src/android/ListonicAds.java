@@ -111,7 +111,6 @@ public class ListonicAds extends CordovaPlugin {
         cordovaInstance.getActivity().runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                //final CordovaWebView wv = webViewInstance;
                 ViewGroup wvParentView = (ViewGroup) getWebView(webViewInstance).getParent();
 
                 if (parentView == null) {
