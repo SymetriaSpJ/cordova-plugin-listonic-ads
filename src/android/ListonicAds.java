@@ -46,6 +46,8 @@ public class ListonicAds extends CordovaPlugin {
 
     CordovaInterface cordovaInstance;
 
+    CordovaWebView webViewInstance;
+
     DisplayAdContainer listonicAd;
 
     boolean isAdVisible = false;
@@ -64,7 +66,13 @@ public class ListonicAds extends CordovaPlugin {
     public boolean execute(String action, JSONArray args, CallbackContext callbackContext) throws JSONException {
         JSONObject options = args.optJSONObject(0);
 
-        if ("show".equals(action)) {
+        if ("initBanner".equals(action)) {
+            initBanner(options, callbackContext);
+            return true;
+        } else if ("initInterstitial".equals(action)) {
+            initInterstitial(options, callbackContext);
+            return true;
+        } else if ("show".equals(action)) {
             show(options, callbackContext);
             return true;
         } else if ("hide".equals(action)) {
@@ -74,9 +82,11 @@ public class ListonicAds extends CordovaPlugin {
             setDebugMode(options, callbackContext);
             return true;
         } else if ("updateGdprConsentsData".equals(action)) {
-             updateGdprConsentsData(options, callbackContext);
+            updateGdprConsentsData(options, callbackContext);
+            return true;
         } else if ("showInterstitial".equals(action)) {
             showInterstitial(options, callbackContext);
+            return true;
         }
 
         return false;
@@ -86,6 +96,7 @@ public class ListonicAds extends CordovaPlugin {
     public void initialize(CordovaInterface cordova, final CordovaWebView webView) {
         super.initialize(cordova, webView);
         cordovaInstance = cordova;
+        webViewInstance = webView;
 
         try {
             AdCompanion.INSTANCE.initialize(
@@ -96,28 +107,24 @@ public class ListonicAds extends CordovaPlugin {
         } catch (Throwable error) {
             System.out.println("#debug ListonicAds creation error");
         }
-
-        initializeBannerView(webView);
-        initializeInterstitial();
     }
 
-    private void initializeBannerView(CordovaWebView webView) {
+    private void initBanner(JSONObject options, CallbackContext callbackContext) {
         cordovaInstance.getActivity().runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                final CordovaWebView wv = webView;
-                ViewGroup wvParentView = (ViewGroup) getWebView(wv).getParent();
+                ViewGroup wvParentView = (ViewGroup) getWebView(webViewInstance).getParent();
 
                 if (parentView == null) {
-                    parentView = new LinearLayout(webView.getContext());
+                    parentView = new LinearLayout(webViewInstance.getContext());
                 }
 
                 if (wvParentView != null && wvParentView != parentView) {
-                    ViewGroup rootView = (ViewGroup)(getWebView(webView).getParent());
+                    ViewGroup rootView = (ViewGroup)(getWebView(webViewInstance).getParent());
 
-                    wvParentView.removeView(getWebView(webView));
+                    wvParentView.removeView(getWebView(webViewInstance));
 
-                    getWebView(webView).setLayoutParams(
+                    getWebView(webViewInstance).setLayoutParams(
                         new LinearLayout.LayoutParams(
                             ViewGroup.LayoutParams.MATCH_PARENT,
                             ViewGroup.LayoutParams.MATCH_PARENT,
@@ -136,7 +143,7 @@ public class ListonicAds extends CordovaPlugin {
                     parentView.setBackgroundColor(Color.parseColor("#F7F8F9"));
                     parentView.setClipChildren(false);
                     parentView.setClipToPadding(false);
-                    parentView.addView(getWebView(webView));
+                    parentView.addView(getWebView(webViewInstance));
                     rootView.setClipChildren(false);
                     rootView.setClipToPadding(false);
                     setAllParentsClip(parentView, false);
@@ -146,6 +153,8 @@ public class ListonicAds extends CordovaPlugin {
                 parentView.bringToFront();
                 parentView.requestLayout();
                 parentView.requestFocus();
+
+                callbackContext.success("Success!");
             }
         });
     }
@@ -346,7 +355,7 @@ public class ListonicAds extends CordovaPlugin {
         }
     }
 
-    private void initializeInterstitial() {
+    private void initInterstitial(JSONObject options, CallbackContext callbackContext) {
         cordovaInstance.getActivity().runOnUiThread(new Runnable() {
             @Override
             public void run() {
@@ -360,6 +369,8 @@ public class ListonicAds extends CordovaPlugin {
 
                 interstitialPresenter.create();
                 interstitialPresenter.start();
+
+                callbackContext.success("Success!");
              }
         });
     }
