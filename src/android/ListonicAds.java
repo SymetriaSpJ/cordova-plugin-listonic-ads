@@ -82,9 +82,11 @@ public class ListonicAds extends CordovaPlugin {
             setDebugMode(options, callbackContext);
             return true;
         } else if ("updateGdprConsentsData".equals(action)) {
-             updateGdprConsentsData(options, callbackContext);
+            updateGdprConsentsData(options, callbackContext);
+            return true;
         } else if ("showInterstitial".equals(action)) {
             showInterstitial(options, callbackContext);
+            return true;
         }
 
         return false;
