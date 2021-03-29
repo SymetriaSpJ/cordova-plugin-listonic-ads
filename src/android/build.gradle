@@ -41,5 +41,6 @@ dependencies {
     implementation ('com.listonic.ad:companion:2.20.6')
     {
         exclude group: 'com.android.support'
+        exclude group: 'com.appodeal.ads'
     }
 }
