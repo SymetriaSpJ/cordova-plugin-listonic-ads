@@ -35,10 +35,10 @@ repositories{
 }
 
 dependencies {
-    implementation 'com.google.firebase:firebase-core:17.0.0'
-    implementation 'com.google.firebase:firebase-config:17.0.0'
+    implementation 'com.google.firebase:firebase-core:18.0.0'
+    implementation 'com.google.firebase:firebase-config:20.0.0'
     implementation ('com.android.support.constraint:constraint-layout:1.0.2')
-    implementation ('com.listonic.ad:companion:2.20.6')
+    implementation ('com.listonic.ad:companion:2.20.7')
     {
         exclude group: 'com.android.support'
         exclude group: 'com.appodeal.ads'
