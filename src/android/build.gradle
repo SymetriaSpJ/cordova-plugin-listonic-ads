@@ -32,6 +32,9 @@ repositories{
             password = mavenPassword
         }
     }
+    maven {
+        url "https://artifactory.appodeal.com/appodeal"
+    }
 }
 
 dependencies {
