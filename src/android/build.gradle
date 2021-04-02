@@ -22,6 +22,9 @@ android {
         multiDexEnabled true
         compileSdkVersion 29
     }
+    dexOptions {
+       javaMaxHeapSize "4g"
+    }
 }
 
 repositories{
