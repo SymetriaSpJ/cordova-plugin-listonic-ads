@@ -23,7 +23,8 @@ android {
         compileSdkVersion 29
     }
     dexOptions {
-       javaMaxHeapSize "4g"
+       javaMaxHeapSize "8g"
+       jumboMode true
     }
 }
 
