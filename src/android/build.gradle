@@ -9,7 +9,6 @@ buildscript {
     dependencies {
         classpath 'com.android.tools.build:gradle:3.6.4'
         classpath 'com.google.gms:google-services:4.0.1'
-        classpath 'com.android.support.constraint:constraint-layout:1.0.2'
     }
 }
 
@@ -21,10 +20,6 @@ android {
     defaultConfig {
         multiDexEnabled true
         compileSdkVersion 29
-    }
-    dexOptions {
-       javaMaxHeapSize "8g"
-       jumboMode true
     }
 }
 
@@ -44,6 +39,5 @@ repositories{
 dependencies {
     implementation 'com.google.firebase:firebase-core:18.0.0'
     implementation 'com.google.firebase:firebase-config:20.0.0'
-    implementation ('com.android.support.constraint:constraint-layout:1.0.2')
     implementation ('com.listonic.ad:companion:2.20.7')
 }
