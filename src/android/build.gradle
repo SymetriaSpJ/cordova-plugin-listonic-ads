@@ -39,7 +39,7 @@ repositories{
 dependencies {
     implementation 'com.google.firebase:firebase-core:18.0.0'
     implementation 'com.google.firebase:firebase-config:20.0.0'
-    implementation ('com.listonic.ad:companion:2.17.0')
+    implementation ('com.listonic.ad:companion:2.11.0')
 }
 
 println ("#debug Running gradle version: $gradle.gradleVersion")
