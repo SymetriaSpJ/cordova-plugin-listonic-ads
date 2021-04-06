@@ -29,8 +29,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import java.io.IOError;
 
-import android.support.constraint.ConstraintLayout;
-
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 
