@@ -103,7 +103,7 @@ public class ListonicAds extends CordovaPlugin {
                 false
             );
         } catch (Throwable error) {
-            System.out.println("#debug ListonicAds creation error: " + error.getMessage();
+            System.out.println("#debug ListonicAds creation error: " + error.getMessage());
         }
     }
 
