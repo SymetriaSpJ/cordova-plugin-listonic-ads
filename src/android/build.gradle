@@ -41,5 +41,3 @@ dependencies {
     implementation 'com.google.firebase:firebase-config:20.0.0'
     implementation ('com.listonic.ad:companion:2.20.7')
 }
-
-println ("#debug Running gradle version: $gradle.gradleVersion")
