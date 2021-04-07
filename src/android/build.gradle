@@ -21,10 +21,6 @@ android {
         multiDexEnabled true
         compileSdkVersion 29
     }
-    dexOptions {
-       javaMaxHeapSize "2g"
-       jumboMode true
-    }
 }
 
 repositories{
