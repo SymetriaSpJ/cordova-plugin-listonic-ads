@@ -4,6 +4,7 @@ import org.apache.cordova.CordovaPlugin;
 import org.apache.cordova.CallbackContext;
 import org.apache.cordova.CordovaInterface;
 import org.apache.cordova.CordovaWebView;
+import org.jetbrains.annotations.Nullable;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.json.JSONException;
@@ -20,6 +21,7 @@ import android.content.ContextWrapper;
 import java.util.HashMap;
 
 import com.listonic.ad.companion.base.AdCompanion;
+import com.listonic.ad.companion.base.AdCompanionCallback;
 import com.listonic.ad.companion.display.DisplayAdContainer;
 import com.listonic.ad.companion.display.LegacyDisplayAdPresenter;
 import com.listonic.ad.companion.base.InterceptedUrlCallback;
@@ -98,12 +100,22 @@ public class ListonicAds extends CordovaPlugin {
 
         try {
             AdCompanion.INSTANCE.initialize(
-                cordovaInstance.getActivity().getApplication(),
-                null,
-                false
+                    cordovaInstance.getActivity().getApplication(),
+                    new AdCompanionCallback() {
+                        @Override
+                        public boolean onUrlIntercepted(@Nullable String s) {
+                            return false;
+                        }
+
+                        @Override
+                        public boolean hasConsentForAdvertising() {
+                            return false;
+                        }
+                    },
+                    false
             );
         } catch (Throwable error) {
-            System.out.println("#debug ListonicAds creation error: " + error.getMessage());
+             System.out.println("#debug ListonicAds creation error: " + error.getMessage());
         }
     }
 
