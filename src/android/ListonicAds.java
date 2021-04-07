@@ -109,7 +109,7 @@ public class ListonicAds extends CordovaPlugin {
 
                         @Override
                         public boolean hasConsentForAdvertising() {
-                            return false;
+                            return true;
                         }
                     },
                     false
